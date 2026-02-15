@@ -138,8 +138,8 @@ export default function BlogShow({ meta, post }: BlogShowProps) {
                     {/* Featured Image */}
                     {post.featured_image && (
                         <AnimatedSection variant="fade-in" delay={100}>
-                            <figure className="mb-16 -mx-4 sm:-mx-8 lg:-mx-16">
-                                <div className="rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-black/40 ring-1 ring-white/5">
+                            <figure className="mb-12">
+                                <div className="rounded-2xl overflow-hidden border border-white/10 shadow-xl shadow-black/30">
                                     <img
                                         src={
                                             post.featured_image.startsWith(
@@ -149,7 +149,7 @@ export default function BlogShow({ meta, post }: BlogShowProps) {
                                                 : `/storage/${post.featured_image}`
                                         }
                                         alt={post.title}
-                                        className="w-full h-auto"
+                                        className="w-full h-auto max-h-[400px] object-cover"
                                     />
                                 </div>
                             </figure>
