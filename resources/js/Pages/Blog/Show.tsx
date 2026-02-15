@@ -141,7 +141,13 @@ export default function BlogShow({ meta, post }: BlogShowProps) {
                             <figure className="mb-16 -mx-4 sm:-mx-8 lg:-mx-16">
                                 <div className="rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-black/40 ring-1 ring-white/5">
                                     <img
-                                        src={`/storage/${post.featured_image}`}
+                                        src={
+                                            post.featured_image.startsWith(
+                                                "http",
+                                            )
+                                                ? post.featured_image
+                                                : `/storage/${post.featured_image}`
+                                        }
                                         alt={post.title}
                                         className="w-full h-auto"
                                     />

@@ -36,6 +36,7 @@ class PostSeeder extends Seeder
                 <p>Contact us today for a free consultation on your upcoming build.</p>',
                 'is_published' => true,
                 'published_at' => Carbon::now()->subDays(45),
+'featured_image' => 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80',
             ],
             [
                 'title' => '5 Common Mistakes to Avoid When Building Your Dream Home',
@@ -54,6 +55,7 @@ class PostSeeder extends Seeder
                 <p>Building smart from the start saves time, money, and stress. Reach out to us for expert guidance on your home construction journey.</p>',
                 'is_published' => true,
                 'published_at' => Carbon::now()->subDays(38),
+'featured_image' => 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80',
             ],
             [
                 'title' => 'The Rise of Green Building in Africa: Trends and Opportunities',
@@ -74,6 +76,7 @@ class PostSeeder extends Seeder
                 <p>At Civicon Nexus Engineering, we incorporate sustainable design principles into every project. Contact us to learn how green building can benefit your next development.</p>',
                 'is_published' => true,
                 'published_at' => Carbon::now()->subDays(30),
+'featured_image' => 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=800&q=80',
             ],
             [
                 'title' => 'A Complete Guide to Building Permits and Approvals',
@@ -105,6 +108,7 @@ class PostSeeder extends Seeder
                 <p>Need help with your building permits? Civicon Nexus Engineering handles the entire approval process for our clients.</p>',
                 'is_published' => true,
                 'published_at' => Carbon::now()->subDays(22),
+'featured_image' => 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80',
             ],
             [
                 'title' => 'Concrete vs. Steel: Choosing the Right Structural System',
@@ -147,6 +151,7 @@ class PostSeeder extends Seeder
                 <p>Our structural engineers at Civicon Nexus can analyze your project requirements and recommend the most efficient structural system. Get in touch for expert advice.</p>',
                 'is_published' => true,
                 'published_at' => Carbon::now()->subDays(15),
+'featured_image' => 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80',
             ],
             [
                 'title' => 'How to Read and Understand Architectural Drawings',
@@ -174,6 +179,7 @@ class PostSeeder extends Seeder
                 <p>Still confused by your building plans? Our team is happy to walk you through your project drawings and answer any questions.</p>',
                 'is_published' => true,
                 'published_at' => Carbon::now()->subDays(10),
+'featured_image' => 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80',
             ],
             [
                 'title' => 'The Importance of Waterproofing in Construction',
@@ -201,6 +207,7 @@ class PostSeeder extends Seeder
                 <p>Civicon Nexus Engineering specifies and supervises waterproofing installation on all our projects. Contact us for waterproofing advise on your build.</p>',
                 'is_published' => true,
                 'published_at' => Carbon::now()->subDays(5),
+'featured_image' => 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
             ],
             [
                 'title' => 'Renovating vs. Rebuilding: Which Makes More Financial Sense?',
@@ -226,6 +233,7 @@ class PostSeeder extends Seeder
                 <p>Our engineers can evaluate your existing structure and provide honest recommendations. Book a site assessment with Civicon Nexus Engineering today.</p>',
                 'is_published' => true,
                 'published_at' => Carbon::now()->subDays(2),
+'featured_image' => 'https://images.unsplash.com/photo-1585128903994-9788298932a6?w=800&q=80',
             ],
             [
                 'title' => 'Understanding Load-Bearing Walls: What Every Homeowner Should Know',
@@ -253,6 +261,7 @@ class PostSeeder extends Seeder
                 <p>Planning a renovation that involves wall removal? Contact Civicon Nexus Engineering for a structural assessment.</p>',
                 'is_published' => true,
                 'published_at' => Carbon::now()->subDays(1),
+'featured_image' => 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80',
             ],
             [
                 'title' => 'Top 8 Construction Trends to Watch in 2026',
@@ -277,6 +286,7 @@ class PostSeeder extends Seeder
                 <p>At Civicon Nexus Engineering, we stay at the forefront of industry innovation. Talk to us about incorporating these technologies into your next project.</p>',
                 'is_published' => true,
                 'published_at' => Carbon::now(),
+'featured_image' => 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80',
             ],
         ];
 

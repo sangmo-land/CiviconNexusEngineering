@@ -65,7 +65,13 @@ export default function BlogIndex({ meta, posts }: BlogIndexProps) {
                                     <div className="aspect-[16/10] bg-brand-900 relative overflow-hidden">
                                         {post.featured_image ? (
                                             <img
-                                                src={`/storage/${post.featured_image}`}
+                                                src={
+                                                    post.featured_image.startsWith(
+                                                        "http",
+                                                    )
+                                                        ? post.featured_image
+                                                        : `/storage/${post.featured_image}`
+                                                }
                                                 alt={post.title}
                                                 className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
                                             />
