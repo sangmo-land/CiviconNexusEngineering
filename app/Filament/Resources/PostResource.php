@@ -6,6 +6,7 @@ use App\Filament\Resources\PostResource\Pages;
 use App\Models\Post;
 use Filament\Forms\Components;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Actions;
 use Filament\Tables;
@@ -32,7 +33,7 @@ class PostResource extends Resource
     {
         return $schema
             ->components([
-                Components\Section::make('Post Details')
+                Section::make('Post Details')
                     ->schema([
                         Components\TextInput::make('title')
                             ->required()
@@ -56,14 +57,14 @@ class PostResource extends Resource
                     ])
                     ->columns(2),
                 
-                Components\Section::make('Content')
+                Section::make('Content')
                     ->schema([
                         Components\RichEditor::make('content')
                             ->required()
                             ->columnSpanFull(),
                     ]),
                 
-                Components\Section::make('Publishing')
+                Section::make('Publishing')
                     ->schema([
                         Components\Toggle::make('is_published')
                             ->label('Published')

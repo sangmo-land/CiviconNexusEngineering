@@ -7,6 +7,7 @@ use App\Filament\Resources\ProjectResource\RelationManagers;
 use App\Models\Project;
 use Filament\Forms\Components;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Actions;
 use Filament\Tables;
@@ -31,7 +32,7 @@ class ProjectResource extends Resource
     {
         return $schema
             ->components([
-                Components\Section::make('Project Details')
+                Section::make('Project Details')
                     ->schema([
                         Components\TextInput::make('title')
                             ->required()
@@ -79,14 +80,14 @@ class ProjectResource extends Resource
                     ])
                     ->columns(2),
                 
-                Components\Section::make('Description')
+                Section::make('Description')
                     ->schema([
                         Components\RichEditor::make('description')
                             ->required()
                             ->columnSpanFull(),
                     ]),
                 
-                Components\Section::make('Project Images')
+                Section::make('Project Images')
                     ->schema([
                         Components\Repeater::make('images')
                             ->relationship()

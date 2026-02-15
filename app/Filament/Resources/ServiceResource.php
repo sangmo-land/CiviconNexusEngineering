@@ -6,6 +6,7 @@ use App\Filament\Resources\ServiceResource\Pages;
 use App\Models\Service;
 use Filament\Forms\Components;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Actions;
 use Filament\Tables;
@@ -30,7 +31,7 @@ class ServiceResource extends Resource
     {
         return $schema
             ->components([
-                Components\Section::make()
+                Section::make()
                     ->schema([
                         Components\TextInput::make('title')
                             ->required()

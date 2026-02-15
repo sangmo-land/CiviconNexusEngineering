@@ -6,6 +6,7 @@ use App\Filament\Resources\HousePlanResource\Pages;
 use App\Models\HousePlan;
 use Filament\Forms\Components;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Actions;
 use Filament\Tables;
@@ -30,7 +31,7 @@ class HousePlanResource extends Resource
     {
         return $schema
             ->components([
-                Components\Section::make('Plan Details')
+                Section::make('Plan Details')
                     ->schema([
                         Components\TextInput::make('title')
                             ->required()
@@ -55,7 +56,7 @@ class HousePlanResource extends Resource
                     ])
                     ->columns(2),
                 
-                Components\Section::make('Specifications')
+                Section::make('Specifications')
                     ->schema([
                         Components\TextInput::make('bedrooms')
                             ->required()
@@ -80,7 +81,7 @@ class HousePlanResource extends Resource
                     ])
                     ->columns(4),
                 
-                Components\Section::make('Files')
+                Section::make('Files')
                     ->schema([
                         Components\FileUpload::make('preview_image')
                             ->image()
@@ -96,7 +97,7 @@ class HousePlanResource extends Resource
                     ])
                     ->columns(2),
                 
-                Components\Section::make('Description')
+                Section::make('Description')
                     ->schema([
                         Components\RichEditor::make('description')
                             ->required()
