@@ -29,6 +29,8 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->brandName('Civicon Nexus Admin')
+            ->brandLogo(asset('images/logo.jpeg'))
+            ->brandLogoHeight('3rem')
             ->colors([
                 'primary' => Color::Blue,
             ])
