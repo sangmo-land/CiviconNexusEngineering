@@ -16,8 +16,8 @@
         <meta name="format-detection" content="telephone=yes">
 
         <!-- Favicon -->
-<link rel="icon" type="image/png" href="/images/logo.png">
-        <link rel="apple-touch-icon" href="/images/logo.png">
+<link rel="icon" type="image/jpeg" href="/images/logo.jpeg">
+        <link rel="apple-touch-icon" href="/images/logo.jpeg">
 
         <!-- Web App Manifest -->
         <link rel="manifest" href="/manifest.json">

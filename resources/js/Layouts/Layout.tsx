@@ -45,7 +45,7 @@ export default function Layout({ children }: LayoutProps) {
                             className="flex items-center gap-3 group"
                         >
                             <img
-                                src="/images/logo.png"
+                                src="/images/logo.jpeg"
                                 alt="Civicon Nexus Engineering"
                                 className="h-10 w-auto rounded-lg group-hover:scale-105 transition-transform duration-300"
                             />
@@ -155,7 +155,7 @@ export default function Layout({ children }: LayoutProps) {
                                 className="flex items-center gap-3 mb-6"
                             >
                                 <img
-                                    src="/images/logo.png"
+                                    src="/images/logo.jpeg"
                                     alt="Civicon Nexus Engineering"
                                     className="h-10 w-auto rounded-lg"
                                 />

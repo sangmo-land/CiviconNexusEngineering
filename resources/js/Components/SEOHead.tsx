@@ -25,7 +25,7 @@ export default function SEOHead({ meta }: SEOHeadProps) {
         "@type": "Organization",
         name: SITE_NAME,
         url: SITE_URL,
-        logo: `${SITE_URL}/images/logo.png`,
+        logo: `${SITE_URL}/images/logo.jpeg`,
         description:
             "Professional civil engineering and construction company in Cameroon. Structural design, project management, house plans, and building construction.",
         address: {
@@ -57,7 +57,7 @@ export default function SEOHead({ meta }: SEOHeadProps) {
         "@type": "ProfessionalService",
         "@id": `${SITE_URL}/#business`,
         name: SITE_NAME,
-        image: `${SITE_URL}/images/logo.png`,
+        image: `${SITE_URL}/images/logo.jpeg`,
         url: SITE_URL,
         telephone: "+237-XXX-XXX-XXX",
         priceRange: "$$",

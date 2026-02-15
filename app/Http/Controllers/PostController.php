@@ -57,7 +57,7 @@ class PostController extends Controller
                         'name' => 'Civicon Nexus Engineering',
                         'logo' => [
                             '@type' => 'ImageObject',
-'url' => asset('images/logo.png'),
+'url' => asset('images/logo.jpeg'),
                         ],
                     ],
                     'mainEntityOfPage' => [
