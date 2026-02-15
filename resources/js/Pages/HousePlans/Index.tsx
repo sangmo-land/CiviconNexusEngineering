@@ -1,4 +1,5 @@
-import { Head, Link } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
+import SEOHead from '@/Components/SEOHead';
 import Layout from '@/Layouts/Layout';
 import AnimatedSection from "@/Components/AnimatedSection";
 import { HousePlan, Meta, PaginatedData } from "@/types";
@@ -22,9 +23,7 @@ export default function HousePlansIndex({
 
     return (
         <Layout>
-            <Head title={meta.title}>
-                <meta name="description" content={meta.description} />
-            </Head>
+            <SEOHead meta={meta} />
 
             {/* Hero Section */}
             <section className="relative pt-40 pb-20 overflow-hidden">

@@ -14,8 +14,10 @@ class ServiceController extends Controller
 
         return Inertia::render('Services/Index', [
             'meta' => [
-                'title' => 'Our Services',
-                'description' => 'Explore our comprehensive civil engineering and construction services including structural design, project management, and more.',
+                'title' => 'Our Civil Engineering Services in Cameroon',
+                'description' => 'Comprehensive civil engineering services in Cameroon: structural design, construction management, renovations, project supervision & more. Get expert engineering solutions from Civicon Nexus.',
+                'keywords' => 'civil engineering services Cameroon, structural design Douala, construction management Yaoundé, renovation services Cameroon, building services, génie civil services Cameroun',
+                'canonical' => '/services',
             ],
             'services' => $services,
         ]);
@@ -27,8 +29,25 @@ class ServiceController extends Controller
 
         return Inertia::render('Services/Show', [
             'meta' => [
-                'title' => $service->title,
-                'description' => $service->short_description,
+                'title' => $service->title . ' | Civil Engineering Service',
+                'description' => $service->short_description ?: 'Professional ' . $service->title . ' services by Civicon Nexus Engineering in Cameroon. Quality workmanship and expert civil engineering solutions.',
+                'keywords' => $service->title . ', civil engineering, Cameroon, construction, ' . $service->slug,
+                'canonical' => '/services/' . $service->slug,
+                'jsonLd' => [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'Service',
+                    'name' => $service->title,
+                    'description' => $service->short_description,
+                    'provider' => [
+                        '@type' => 'ProfessionalService',
+                        'name' => 'Civicon Nexus Engineering',
+                        'url' => config('app.url'),
+                    ],
+                    'areaServed' => [
+                        '@type' => 'Country',
+                        'name' => 'Cameroon',
+                    ],
+                ],
             ],
             'service' => $service,
         ]);

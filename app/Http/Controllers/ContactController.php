@@ -14,8 +14,10 @@ class ContactController extends Controller
     {
         return Inertia::render('Contact', [
             'meta' => [
-                'title' => 'Contact Us',
-                'description' => 'Get in touch with Civicon Nexus Engineering. We\'re here to answer your questions and discuss your project needs.',
+                'title' => 'Contact Us | Civicon Nexus Engineering Cameroon',
+                'description' => 'Contact Civicon Nexus Engineering in Cameroon. Get in touch for civil engineering consultations, construction inquiries & project discussions. Based in Douala, serving all of Cameroon.',
+                'keywords' => 'contact civil engineer Cameroon, engineering consultation Douala, construction inquiry Yaoundé, contactez ingénieur civil Cameroun',
+                'canonical' => '/contact',
             ],
         ]);
     }

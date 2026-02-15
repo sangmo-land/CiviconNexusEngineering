@@ -1,4 +1,5 @@
-import { Head, useForm } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react';
+import SEOHead from '@/Components/SEOHead';
 import Layout from '@/Layouts/Layout';
 import AnimatedSection from "@/Components/AnimatedSection";
 import { Meta, PageProps } from "@/types";
@@ -23,9 +24,7 @@ export default function Contact({ meta, flash }: ContactProps) {
 
     return (
         <Layout>
-            <Head title={meta.title}>
-                <meta name="description" content={meta.description} />
-            </Head>
+            <SEOHead meta={meta} />
 
             {/* Hero Section */}
             <section className="relative pt-40 pb-20 overflow-hidden">
@@ -251,10 +250,10 @@ export default function Contact({ meta, flash }: ContactProps) {
                                             </h3>
                                             <p className="text-gray-400 mt-1">
                                                 <a
-                                                    href="mailto:info@civiconnexus.com"
+                                                    href="mailto:info@civiconnexusengineering.com"
                                                     className="hover:text-accent transition"
                                                 >
-                                                    info@civiconnexus.com
+                                                    info@civiconnexusengineering.com
                                                 </a>
                                             </p>
                                         </div>

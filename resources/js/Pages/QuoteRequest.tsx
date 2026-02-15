@@ -1,4 +1,5 @@
-import { Head, useForm } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react';
+import SEOHead from '@/Components/SEOHead';
 import Layout from '@/Layouts/Layout';
 import AnimatedSection from "@/Components/AnimatedSection";
 import { Meta, PageProps } from "@/types";
@@ -52,9 +53,7 @@ export default function QuoteRequest({ meta, flash }: QuoteRequestProps) {
 
     return (
         <Layout>
-            <Head title={meta.title}>
-                <meta name="description" content={meta.description} />
-            </Head>
+            <SEOHead meta={meta} />
 
             {/* Hero Section */}
             <section className="relative pt-40 pb-20 overflow-hidden">

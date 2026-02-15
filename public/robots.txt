@@ -1,2 +1,16 @@
+# Civicon Nexus Engineering - Civil Engineering & Construction, Cameroon
+# https://civiconnexusengineering.com
+
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /site-work
+Disallow: /site-work/*
+Disallow: /storage/quote-attachments/
+
+# Sitemap
+Sitemap: https://civiconnexusengineering.com/sitemap.xml
+
+# Crawl-delay (be gentle on the server)
+Crawl-delay: 10

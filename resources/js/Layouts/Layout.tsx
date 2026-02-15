@@ -45,7 +45,7 @@ export default function Layout({ children }: LayoutProps) {
                             className="flex items-center gap-3 group"
                         >
                             <img
-                                src="/images/logo.jpeg"
+                                src="/images/logo.png"
                                 alt="Civicon Nexus Engineering"
                                 className="h-10 w-auto rounded-lg group-hover:scale-105 transition-transform duration-300"
                             />
@@ -155,7 +155,7 @@ export default function Layout({ children }: LayoutProps) {
                                 className="flex items-center gap-3 mb-6"
                             >
                                 <img
-                                    src="/images/logo.jpeg"
+                                    src="/images/logo.png"
                                     alt="Civicon Nexus Engineering"
                                     className="h-10 w-auto rounded-lg"
                                 />
@@ -266,11 +266,7 @@ export default function Layout({ children }: LayoutProps) {
                                             d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                                         />
                                     </svg>
-                                    <span>
-                                        123 Engineering Street
-                                        <br />
-                                        Construction City, ST 12345
-                                    </span>
+                                    <span>Douala, Cameroon</span>
                                 </li>
                                 <li className="flex items-center gap-3">
                                     <svg
@@ -287,10 +283,10 @@ export default function Layout({ children }: LayoutProps) {
                                         />
                                     </svg>
                                     <a
-                                        href="tel:+1234567890"
+                                        href="tel:+237XXXXXXXXX"
                                         className="hover:text-accent transition-colors"
                                     >
-                                        +1 (234) 567-890
+                                        +237 XXX XXX XXX
                                     </a>
                                 </li>
                                 <li className="flex items-center gap-3">
@@ -308,10 +304,10 @@ export default function Layout({ children }: LayoutProps) {
                                         />
                                     </svg>
                                     <a
-                                        href="mailto:info@civiconnexus.com"
+                                        href="mailto:info@civiconnexusengineering.com"
                                         className="hover:text-accent transition-colors"
                                     >
-                                        info@civiconnexus.com
+                                        info@civiconnexusengineering.com
                                     </a>
                                 </li>
                             </ul>
@@ -343,7 +339,7 @@ export default function Layout({ children }: LayoutProps) {
 
             {/* WhatsApp Floating Button */}
             <a
-                href="https://wa.me/1234567890"
+                href="https://wa.me/237XXXXXXXXX"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="fixed bottom-6 right-6 w-14 h-14 bg-green-500 hover:bg-green-400 text-white rounded-2xl shadow-2xl shadow-green-500/30 transition-all duration-300 hover:scale-110 hover:-translate-y-1 z-50 flex items-center justify-center group"

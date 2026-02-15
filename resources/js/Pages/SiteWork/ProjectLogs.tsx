@@ -1,4 +1,5 @@
-import { Head, Link } from "@inertiajs/react";
+import { Link } from "@inertiajs/react";
+import SEOHead from '@/Components/SEOHead';
 import Layout from "@/Layouts/Layout";
 import AnimatedSection from "@/Components/AnimatedSection";
 import { Meta, PaginatedData } from "@/types";
@@ -64,9 +65,7 @@ export default function ProjectLogs({ meta, project, logs }: ProjectLogsProps) {
 
     return (
         <Layout>
-            <Head title={meta.title}>
-                <meta name="description" content={meta.description} />
-            </Head>
+            <SEOHead meta={meta} />
 
             {/* Hero Section */}
             <section className="relative pt-36 pb-20 md:pt-44 md:pb-28 overflow-hidden">

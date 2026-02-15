@@ -1,4 +1,5 @@
-import { Head, Link } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
+import SEOHead from '@/Components/SEOHead';
 import { useState } from 'react';
 import Layout from '@/Layouts/Layout';
 import AnimatedSection from "@/Components/AnimatedSection";
@@ -14,9 +15,7 @@ export default function ProjectShow({ meta, project }: ProjectShowProps) {
 
     return (
         <Layout>
-            <Head title={meta.title}>
-                <meta name="description" content={meta.description} />
-            </Head>
+            <SEOHead meta={meta} />
 
             {/* Breadcrumb */}
             <div className="pt-24 border-b border-white/5">

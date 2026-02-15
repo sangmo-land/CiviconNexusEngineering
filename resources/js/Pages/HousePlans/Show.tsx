@@ -1,4 +1,6 @@
-import { Head, Link, useForm } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
+import SEOHead from '@/Components/SEOHead';
 import { useState } from 'react';
 import Layout from '@/Layouts/Layout';
 import AnimatedSection from "@/Components/AnimatedSection";
@@ -37,9 +39,7 @@ export default function HousePlanShow({ meta, housePlan }: HousePlanShowProps) {
 
     return (
         <Layout>
-            <Head title={meta.title}>
-                <meta name="description" content={meta.description} />
-            </Head>
+            <SEOHead meta={meta} />
 
             {/* Breadcrumb */}
             <div className="pt-24 border-b border-white/5 bg-brand-950">

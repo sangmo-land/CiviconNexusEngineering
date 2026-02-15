@@ -1,4 +1,5 @@
-import { Head, Link } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
+import SEOHead from '@/Components/SEOHead';
 import Layout from '@/Layouts/Layout';
 import AnimatedSection from "@/Components/AnimatedSection";
 import { Service, Meta } from "@/types";
@@ -11,9 +12,7 @@ interface ServiceShowProps {
 export default function ServiceShow({ meta, service }: ServiceShowProps) {
     return (
         <Layout>
-            <Head title={meta.title}>
-                <meta name="description" content={meta.description} />
-            </Head>
+            <SEOHead meta={meta} />
 
             {/* Breadcrumb */}
             <div className="pt-24 border-b border-white/5">

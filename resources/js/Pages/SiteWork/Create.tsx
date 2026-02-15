@@ -1,4 +1,5 @@
-import { Head, Link, useForm, router } from "@inertiajs/react";
+import { Link, useForm, router } from "@inertiajs/react";
+import SEOHead from '@/Components/SEOHead';
 import Layout from "@/Layouts/Layout";
 import AnimatedSection from "@/Components/AnimatedSection";
 import { Meta } from "@/types";
@@ -246,9 +247,7 @@ export default function Create({ meta, project }: CreateProps) {
 
     return (
         <Layout>
-            <Head title={meta.title}>
-                <meta name="description" content={meta.description} />
-            </Head>
+            <SEOHead meta={meta} />
 
             {/* Hero Section */}
             <section className="relative pt-36 pb-12 md:pt-44 md:pb-16 overflow-hidden">

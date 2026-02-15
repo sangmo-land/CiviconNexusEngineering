@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         // Create Admin User
         User::create([
             'name' => 'Admin',
-            'email' => 'admin@civiconnexus.com',
+            'email' => 'admin@civiconnexusengineering.com',
             'password' => Hash::make('password'),
             'role' => 'admin',
         ]);

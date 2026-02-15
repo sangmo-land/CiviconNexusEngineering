@@ -8,7 +8,11 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\QuoteRequestController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SiteWorkController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
+
+// Sitemap
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 // Home
 Route::get('/', HomeController::class)->name('home');

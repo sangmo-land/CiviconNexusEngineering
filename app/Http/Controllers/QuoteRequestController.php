@@ -14,8 +14,10 @@ class QuoteRequestController extends Controller
     {
         return Inertia::render('QuoteRequest', [
             'meta' => [
-                'title' => 'Request a Quote',
-                'description' => 'Get a free quote for your civil engineering or construction project. Fill out our form and we\'ll get back to you promptly.',
+                'title' => 'Get a Free Construction Quote | Cameroon',
+                'description' => 'Request a free quote for your construction or civil engineering project in Cameroon. Residential, commercial or infrastructure — Civicon Nexus Engineering delivers quality results on budget.',
+                'keywords' => 'free construction quote Cameroon, devis construction Cameroun, engineering quote Douala, building estimate Yaoundé, project cost Cameroon',
+                'canonical' => '/quote-request',
             ],
         ]);
     }

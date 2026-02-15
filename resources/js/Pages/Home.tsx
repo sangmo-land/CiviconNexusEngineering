@@ -1,4 +1,5 @@
-import { Head, Link } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
+import SEOHead from '@/Components/SEOHead';
 import Layout from '@/Layouts/Layout';
 import AnimatedSection from "@/Components/AnimatedSection";
 import { Service, Project, Meta } from "@/types";
@@ -16,9 +17,7 @@ export default function Home({
 }: HomeProps) {
     return (
         <Layout>
-            <Head title={meta.title}>
-                <meta name="description" content={meta.description} />
-            </Head>
+            <SEOHead meta={meta} />
 
             {/* Hero Section */}
             <section className="relative min-h-screen flex items-center overflow-hidden">

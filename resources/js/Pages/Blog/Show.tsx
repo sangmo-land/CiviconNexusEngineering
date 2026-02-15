@@ -1,4 +1,5 @@
-import { Head, Link } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
+import SEOHead from '@/Components/SEOHead';
 import Layout from '@/Layouts/Layout';
 import AnimatedSection from "@/Components/AnimatedSection";
 import { Post, Meta } from "@/types";
@@ -24,9 +25,7 @@ export default function BlogShow({ meta, post }: BlogShowProps) {
 
     return (
         <Layout>
-            <Head title={meta.title}>
-                <meta name="description" content={meta.description} />
-            </Head>
+            <SEOHead meta={meta} />
 
             {/* Hero Header */}
             <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">

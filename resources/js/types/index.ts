@@ -68,6 +68,16 @@ export interface HousePlan {
 export interface Meta {
     title: string;
     description: string;
+    keywords?: string;
+    canonical?: string;
+    ogImage?: string;
+    ogType?: 'website' | 'article' | 'product';
+    article?: {
+        publishedTime?: string;
+        modifiedTime?: string;
+        author?: string;
+    };
+    jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 export interface PaginatedData<T> {
