@@ -41,13 +41,15 @@ export default function Layout({ children }: LayoutProps) {
                         {/* Logo */}
                         <Link
                             href="/"
-                            className="flex items-center gap-2 group"
+                            className="flex items-center gap-3 group"
                         >
-                            <div className="w-10 h-10 bg-gradient-to-br from-accent to-accent-dark rounded-xl flex items-center justify-center font-display font-bold text-brand-950 text-lg group-hover:scale-110 transition-transform duration-300">
-                                CN
-                            </div>
+                            <img
+                                src="/images/logo.jpeg"
+                                alt="Civicon Nexus Engineering"
+                                className="h-16 w-auto rounded-xl group-hover:scale-105 transition-transform duration-300"
+                            />
                             <div className="hidden sm:block">
-                                <span className="font-display font-bold text-white text-lg tracking-tight">
+                                <span className="font-display font-bold text-white text-xl tracking-tight">
                                     Civicon Nexus
                                 </span>
                                 <span className="text-gray-400 text-sm block -mt-1 tracking-widest uppercase">
@@ -149,11 +151,13 @@ export default function Layout({ children }: LayoutProps) {
                         <div className="lg:col-span-1">
                             <Link
                                 href="/"
-                                className="flex items-center gap-2 mb-6"
+                                className="flex items-center gap-3 mb-6"
                             >
-                                <div className="w-10 h-10 bg-gradient-to-br from-accent to-accent-dark rounded-xl flex items-center justify-center font-display font-bold text-brand-950 text-lg">
-                                    CN
-                                </div>
+                                <img
+                                    src="/images/logo.jpeg"
+                                    alt="Civicon Nexus Engineering"
+                                    className="h-16 w-auto rounded-xl"
+                                />
                                 <div>
                                     <span className="font-display font-bold text-white text-lg tracking-tight">
                                         Civicon Nexus
