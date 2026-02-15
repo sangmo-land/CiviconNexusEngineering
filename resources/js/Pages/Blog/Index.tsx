@@ -24,26 +24,34 @@ export default function BlogIndex({ meta, posts }: BlogIndexProps) {
             </Head>
 
             {/* Hero Section */}
-            <section className="relative pt-40 pb-20 overflow-hidden">
+            <section className="relative pt-36 pb-20 md:pt-44 md:pb-28 overflow-hidden">
                 <div className="absolute inset-0 bg-brand-950" />
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(245,158,11,0.08),transparent_60%)]" />
                 <div className="relative container-custom">
                     <AnimatedSection variant="fade-up">
-                        <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">
-                            <span className="gradient-text">Blog</span>
+                        <div className="flex items-center gap-3 mb-6">
+                            <div className="w-8 h-0.5 bg-accent rounded-full" />
+                            <span className="text-accent font-medium text-sm tracking-wide uppercase">
+                                Our Blog
+                            </span>
+                        </div>
+                        <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold mb-6 text-white">
+                            Insights &{" "}
+                            <span className="gradient-text">Articles</span>
                         </h1>
-                        <p className="text-xl text-gray-400 max-w-2xl">
-                            Insights, tips, and updates from the world of civil
-                            engineering and construction.
+                        <p className="text-lg sm:text-xl text-gray-400 max-w-2xl leading-relaxed">
+                            Expert tips, industry knowledge, and the latest
+                            updates from the world of civil engineering and
+                            construction.
                         </p>
                     </AnimatedSection>
                 </div>
             </section>
 
             {/* Blog Posts */}
-            <section className="section-padding bg-brand-950">
+            <section className="py-16 md:py-24 bg-brand-950">
                 <div className="container-custom">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
                         {posts.data.map((post, index) => (
                             <AnimatedSection
                                 key={post.id}
@@ -52,19 +60,19 @@ export default function BlogIndex({ meta, posts }: BlogIndexProps) {
                             >
                                 <Link
                                     href={`/blog/${post.slug}`}
-                                    className="group card-modern rounded-2xl overflow-hidden block h-full"
+                                    className="group card-modern rounded-2xl overflow-hidden block h-full hover:border-white/20 transition-all duration-300"
                                 >
-                                    <div className="aspect-video bg-brand-900 relative overflow-hidden">
+                                    <div className="aspect-[16/10] bg-brand-900 relative overflow-hidden">
                                         {post.featured_image ? (
                                             <img
                                                 src={`/storage/${post.featured_image}`}
                                                 alt={post.title}
-                                                className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                                                className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
                                             />
                                         ) : (
-                                            <div className="w-full h-full flex items-center justify-center text-gray-600 bg-gradient-to-br from-brand-900 to-brand-800">
+                                            <div className="w-full h-full flex items-center justify-center text-gray-700 bg-gradient-to-br from-brand-900 to-brand-800">
                                                 <svg
-                                                    className="w-12 h-12"
+                                                    className="w-14 h-14 opacity-50"
                                                     fill="none"
                                                     viewBox="0 0 24 24"
                                                     stroke="currentColor"
@@ -79,24 +87,24 @@ export default function BlogIndex({ meta, posts }: BlogIndexProps) {
                                             </div>
                                         )}
                                     </div>
-                                    <div className="p-6">
+                                    <div className="p-7">
                                         {post.published_at && (
-                                            <span className="text-sm text-accent">
+                                            <span className="text-xs text-accent font-medium tracking-wide uppercase">
                                                 {formatDate(post.published_at)}
                                             </span>
                                         )}
-                                        <h2 className="text-lg font-display font-semibold text-white mt-2 mb-3 group-hover:text-accent transition">
+                                        <h2 className="text-xl font-display font-semibold text-white mt-3 mb-4 leading-snug group-hover:text-accent transition-colors duration-200">
                                             {post.title}
                                         </h2>
                                         {post.excerpt && (
-                                            <p className="text-gray-400 text-sm line-clamp-3">
+                                            <p className="text-gray-400 text-[0.9375rem] leading-relaxed line-clamp-3 mb-6">
                                                 {post.excerpt}
                                             </p>
                                         )}
-                                        <span className="inline-flex items-center text-accent text-sm font-medium mt-4 group-hover:gap-2 transition-all">
-                                            Read More
+                                        <span className="inline-flex items-center text-accent text-sm font-semibold group-hover:gap-3 gap-1.5 transition-all duration-300">
+                                            Read Article
                                             <svg
-                                                className="w-4 h-4 ml-1"
+                                                className="w-4 h-4"
                                                 fill="none"
                                                 viewBox="0 0 24 24"
                                                 stroke="currentColor"
@@ -105,7 +113,7 @@ export default function BlogIndex({ meta, posts }: BlogIndexProps) {
                                                     strokeLinecap="round"
                                                     strokeLinejoin="round"
                                                     strokeWidth={2}
-                                                    d="M9 5l7 7-7 7"
+                                                    d="M17 8l4 4m0 0l-4 4m4-4H3"
                                                 />
                                             </svg>
                                         </span>

@@ -10,7 +10,15 @@
     }
 
     body {
-        @apply bg-brand-950 text-gray-100;
+        @apply bg-brand-950 text-gray-100 leading-relaxed tracking-wide;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-display tracking-tight leading-tight;
+    }
+
+    p {
+        @apply leading-relaxed;
     }
 
     ::selection {
@@ -74,6 +82,96 @@
 
     .label-modern {
         @apply block text-sm font-medium text-gray-300 mb-2 tracking-wide uppercase;
+    }
+
+    /* ─── Article Typography ─── */
+    .article-content {
+        @apply text-gray-300;
+        font-size: 1.1875rem;
+        line-height: 2.1;
+    }
+
+    .article-content > * + * {
+        margin-top: 2rem;
+    }
+
+    .article-content h2 {
+        @apply font-display font-bold text-white tracking-tight;
+        font-size: 1.875rem;
+        line-height: 1.3;
+        margin-top: 3.5rem;
+        margin-bottom: 1.5rem;
+        padding-top: 2.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .article-content h3 {
+        @apply font-display font-semibold text-white tracking-tight;
+        font-size: 1.5rem;
+        line-height: 1.35;
+        margin-top: 2.75rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .article-content p {
+        margin-bottom: 1.75rem;
+    }
+
+    .article-content a {
+        @apply text-accent font-medium no-underline;
+    }
+    .article-content a:hover {
+        @apply underline;
+    }
+
+    .article-content strong {
+        @apply text-white font-semibold;
+    }
+
+    .article-content ul,
+    .article-content ol {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        padding-left: 1.75rem;
+    }
+
+    .article-content ul {
+        list-style-type: disc;
+    }
+
+    .article-content ol {
+        list-style-type: decimal;
+    }
+
+    .article-content li {
+        padding-left: 0.75rem;
+        margin-bottom: 1rem;
+        line-height: 2;
+    }
+
+    .article-content li::marker {
+        @apply text-accent/60;
+    }
+
+    .article-content li strong {
+        display: inline;
+    }
+
+    .article-content blockquote {
+        @apply rounded-r-2xl;
+        border-left: 3px solid rgba(245, 158, 11, 0.5);
+        background: rgba(255, 255, 255, 0.02);
+        padding: 1.5rem 2rem;
+        margin: 2.5rem 0;
+    }
+
+    .article-content blockquote p {
+        margin-bottom: 0;
+        font-style: normal;
+    }
+
+    .article-content img {
+        @apply rounded-xl border border-white/10;
     }
 }
 

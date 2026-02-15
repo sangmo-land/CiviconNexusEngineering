@@ -108,14 +108,8 @@ class DatabaseSeeder extends Seeder
             Project::create($projectData);
         }
 
-        // Create Sample Blog Post
-        Post::create([
-            'title' => 'Understanding Foundation Types for Your Construction Project',
-            'excerpt' => 'Learn about different foundation types and how to choose the right one for your building project.',
-            'content' => '<p>Choosing the right foundation is crucial for the long-term stability and durability of any structure. In this article, we explore the various foundation types available and help you understand which might be best suited for your project.</p><h2>Types of Foundations</h2><p>There are several main types of foundations used in construction:</p><ul><li><strong>Strip Foundations</strong> - Ideal for load-bearing walls</li><li><strong>Raft Foundations</strong> - Used when soil conditions are weak</li><li><strong>Pile Foundations</strong> - For buildings on very soft soil or with heavy loads</li><li><strong>Pad Foundations</strong> - Support individual points of load</li></ul><p>Contact us to discuss which foundation type is right for your project.</p>',
-            'is_published' => true,
-            'published_at' => now(),
-        ]);
+// Create Sample Blog Posts
+        $this->call(PostSeeder::class);
 
         // Create Sample House Plan
         HousePlan::create([
