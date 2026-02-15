@@ -42,6 +42,10 @@ class Project extends Model
         return $this->hasMany(ProjectImage::class);
     }
 
+public function siteWorkLogs(): HasMany
+    {
+    return $this->hasMany(SiteWorkLog::class);
+    }
     public function scopeFeatured($query)
     {
         return $query->where('is_featured', true);

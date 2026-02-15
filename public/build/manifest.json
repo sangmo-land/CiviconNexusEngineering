@@ -1,128 +1,178 @@
 {
-  "_AnimatedSection-BsOwPVGq.js": {
-    "file": "assets/AnimatedSection-BsOwPVGq.js",
+  "_AnimatedSection-Zn4jFLBL.js": {
+    "file": "assets/AnimatedSection-Zn4jFLBL.js",
     "name": "AnimatedSection",
     "imports": [
       "resources/js/app.tsx"
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app-CEgomHXu.css",
+    "file": "assets/app-CRPiWTau.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/Pages/Blog/Index.tsx": {
-    "file": "assets/Index-aZZHV9DT.js",
+    "file": "assets/Index-hFlCrkxe.js",
     "name": "Index",
     "src": "resources/js/Pages/Blog/Index.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-BsOwPVGq.js"
+      "_AnimatedSection-Zn4jFLBL.js"
     ]
   },
   "resources/js/Pages/Blog/Show.tsx": {
-    "file": "assets/Show-DeOfEzc3.js",
+    "file": "assets/Show-xwuv9Tjn.js",
     "name": "Show",
     "src": "resources/js/Pages/Blog/Show.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-BsOwPVGq.js"
+      "_AnimatedSection-Zn4jFLBL.js"
     ]
   },
   "resources/js/Pages/Contact.tsx": {
-    "file": "assets/Contact-e3kDM48f.js",
+    "file": "assets/Contact-CVngZ3Qi.js",
     "name": "Contact",
     "src": "resources/js/Pages/Contact.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-BsOwPVGq.js"
+      "_AnimatedSection-Zn4jFLBL.js"
     ]
   },
   "resources/js/Pages/Home.tsx": {
-    "file": "assets/Home-DkSyNseJ.js",
+    "file": "assets/Home-B5uc-Qu4.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-BsOwPVGq.js"
+      "_AnimatedSection-Zn4jFLBL.js"
     ]
   },
   "resources/js/Pages/HousePlans/Index.tsx": {
-    "file": "assets/Index-B9XXn-ua.js",
+    "file": "assets/Index-DQ-08a92.js",
     "name": "Index",
     "src": "resources/js/Pages/HousePlans/Index.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-BsOwPVGq.js"
+      "_AnimatedSection-Zn4jFLBL.js"
     ]
   },
   "resources/js/Pages/HousePlans/Show.tsx": {
-    "file": "assets/Show-BEGBtp-s.js",
+    "file": "assets/Show-DbULIBdL.js",
     "name": "Show",
     "src": "resources/js/Pages/HousePlans/Show.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-BsOwPVGq.js"
+      "_AnimatedSection-Zn4jFLBL.js"
     ]
   },
   "resources/js/Pages/Projects/Index.tsx": {
-    "file": "assets/Index-GJRY-i4U.js",
+    "file": "assets/Index-DKkiHHDM.js",
     "name": "Index",
     "src": "resources/js/Pages/Projects/Index.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-BsOwPVGq.js"
+      "_AnimatedSection-Zn4jFLBL.js"
     ]
   },
   "resources/js/Pages/Projects/Show.tsx": {
-    "file": "assets/Show-DukjM1Ik.js",
+    "file": "assets/Show-D4rk31Sw.js",
     "name": "Show",
     "src": "resources/js/Pages/Projects/Show.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-BsOwPVGq.js"
+      "_AnimatedSection-Zn4jFLBL.js"
     ]
   },
   "resources/js/Pages/QuoteRequest.tsx": {
-    "file": "assets/QuoteRequest-Ck9lXt5v.js",
+    "file": "assets/QuoteRequest-DogfMpjn.js",
     "name": "QuoteRequest",
     "src": "resources/js/Pages/QuoteRequest.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-BsOwPVGq.js"
+      "_AnimatedSection-Zn4jFLBL.js"
     ]
   },
   "resources/js/Pages/Services/Index.tsx": {
-    "file": "assets/Index-B2iCZwHJ.js",
+    "file": "assets/Index-BWjESwBC.js",
     "name": "Index",
     "src": "resources/js/Pages/Services/Index.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-BsOwPVGq.js"
+      "_AnimatedSection-Zn4jFLBL.js"
     ]
   },
   "resources/js/Pages/Services/Show.tsx": {
-    "file": "assets/Show-FFewvkPd.js",
+    "file": "assets/Show-BFeAAac9.js",
     "name": "Show",
     "src": "resources/js/Pages/Services/Show.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-BsOwPVGq.js"
+      "_AnimatedSection-Zn4jFLBL.js"
+    ]
+  },
+  "resources/js/Pages/SiteWork/Create.tsx": {
+    "file": "assets/Create-DUTpobD9.js",
+    "name": "Create",
+    "src": "resources/js/Pages/SiteWork/Create.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx",
+      "_AnimatedSection-Zn4jFLBL.js"
+    ]
+  },
+  "resources/js/Pages/SiteWork/Edit.tsx": {
+    "file": "assets/Edit-CT3siVPX.js",
+    "name": "Edit",
+    "src": "resources/js/Pages/SiteWork/Edit.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx",
+      "_AnimatedSection-Zn4jFLBL.js"
+    ]
+  },
+  "resources/js/Pages/SiteWork/Index.tsx": {
+    "file": "assets/Index-Yo2C70V1.js",
+    "name": "Index",
+    "src": "resources/js/Pages/SiteWork/Index.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx",
+      "_AnimatedSection-Zn4jFLBL.js"
+    ]
+  },
+  "resources/js/Pages/SiteWork/ProjectLogs.tsx": {
+    "file": "assets/ProjectLogs-DNU5Jcyq.js",
+    "name": "ProjectLogs",
+    "src": "resources/js/Pages/SiteWork/ProjectLogs.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx",
+      "_AnimatedSection-Zn4jFLBL.js"
+    ]
+  },
+  "resources/js/Pages/SiteWork/Show.tsx": {
+    "file": "assets/Show-CXG-5Kiv.js",
+    "name": "Show",
+    "src": "resources/js/Pages/SiteWork/Show.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx",
+      "_AnimatedSection-Zn4jFLBL.js"
     ]
   },
   "resources/js/app.tsx": {
-    "file": "assets/app-GwAu3IZN.js",
+    "file": "assets/app-Bcy8VyDd.js",
     "name": "app",
     "src": "resources/js/app.tsx",
     "isEntry": true,
@@ -137,10 +187,15 @@
       "resources/js/Pages/Projects/Show.tsx",
       "resources/js/Pages/QuoteRequest.tsx",
       "resources/js/Pages/Services/Index.tsx",
-      "resources/js/Pages/Services/Show.tsx"
+      "resources/js/Pages/Services/Show.tsx",
+      "resources/js/Pages/SiteWork/Create.tsx",
+      "resources/js/Pages/SiteWork/Edit.tsx",
+      "resources/js/Pages/SiteWork/Index.tsx",
+      "resources/js/Pages/SiteWork/ProjectLogs.tsx",
+      "resources/js/Pages/SiteWork/Show.tsx"
     ],
     "css": [
-      "assets/app-CEgomHXu.css"
+      "assets/app-CRPiWTau.css"
     ]
   }
 }
