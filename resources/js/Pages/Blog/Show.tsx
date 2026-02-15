@@ -1,6 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import Layout from '@/Layouts/Layout';
-import { Post, Meta } from '@/types';
+import AnimatedSection from "@/Components/AnimatedSection";
+import { Post, Meta } from "@/types";
 
 interface BlogShowProps {
     meta: Meta;
@@ -9,10 +10,10 @@ interface BlogShowProps {
 
 export default function BlogShow({ meta, post }: BlogShowProps) {
     const formatDate = (dateString: string) => {
-        return new Date(dateString).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
+        return new Date(dateString).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
         });
     };
 
@@ -23,76 +24,96 @@ export default function BlogShow({ meta, post }: BlogShowProps) {
             </Head>
 
             {/* Breadcrumb */}
-            <div className="bg-gray-50 border-b">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div className="pt-24 border-b border-white/5 bg-brand-950">
+                <div className="container-custom py-4">
                     <nav className="flex text-sm">
-                        <Link href="/" className="text-gray-500 hover:text-gray-700">Home</Link>
-                        <span className="mx-2 text-gray-400">/</span>
-                        <Link href="/blog" className="text-gray-500 hover:text-gray-700">Blog</Link>
-                        <span className="mx-2 text-gray-400">/</span>
-                        <span className="text-gray-900 truncate max-w-xs">{post.title}</span>
+                        <Link
+                            href="/"
+                            className="text-gray-500 hover:text-accent transition"
+                        >
+                            Home
+                        </Link>
+                        <span className="mx-2 text-gray-600">/</span>
+                        <Link
+                            href="/blog"
+                            className="text-gray-500 hover:text-accent transition"
+                        >
+                            Blog
+                        </Link>
+                        <span className="mx-2 text-gray-600">/</span>
+                        <span className="text-white truncate max-w-xs">
+                            {post.title}
+                        </span>
                     </nav>
                 </div>
             </div>
 
             {/* Article */}
-            <article className="py-12">
+            <article className="section-padding bg-brand-950">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                     {/* Header */}
-                    <header className="mb-8">
-                        {post.published_at && (
-                            <p className="text-gray-500 text-sm mb-4">
-                                Published on {formatDate(post.published_at)}
-                            </p>
-                        )}
-                        <h1 className="text-4xl font-bold text-gray-900 mb-4">{post.title}</h1>
-                        {post.excerpt && (
-                            <p className="text-xl text-gray-600">{post.excerpt}</p>
-                        )}
-                    </header>
+                    <AnimatedSection variant="fade-up">
+                        <header className="mb-8">
+                            {post.published_at && (
+                                <p className="text-accent text-sm mb-4">
+                                    Published on {formatDate(post.published_at)}
+                                </p>
+                            )}
+                            <h1 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
+                                {post.title}
+                            </h1>
+                            {post.excerpt && (
+                                <p className="text-xl text-gray-400">
+                                    {post.excerpt}
+                                </p>
+                            )}
+                        </header>
+                    </AnimatedSection>
 
                     {/* Featured Image */}
                     {post.featured_image && (
-                        <div className="mb-8 rounded-lg overflow-hidden">
-                            <img
-                                src={`/storage/${post.featured_image}`}
-                                alt={post.title}
-                                className="w-full h-auto"
-                            />
-                        </div>
+                        <AnimatedSection variant="fade-in" delay={200}>
+                            <div className="mb-10 rounded-2xl overflow-hidden border border-white/10">
+                                <img
+                                    src={`/storage/${post.featured_image}`}
+                                    alt={post.title}
+                                    className="w-full h-auto"
+                                />
+                            </div>
+                        </AnimatedSection>
                     )}
 
                     {/* Content */}
-                    <div 
-                        className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-600 prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline"
-                        dangerouslySetInnerHTML={{ __html: post.content }}
-                    />
+                    <AnimatedSection variant="fade-up" delay={300}>
+                        <div
+                            className="prose prose-lg prose-invert max-w-none prose-headings:font-display prose-headings:text-white prose-p:text-gray-400 prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-blockquote:border-accent/50 prose-blockquote:text-gray-400"
+                            dangerouslySetInnerHTML={{ __html: post.content }}
+                        />
+                    </AnimatedSection>
                 </div>
             </article>
 
             {/* CTA Section */}
-            <section className="py-12 bg-gray-50">
+            <section className="section-padding bg-brand-900">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                        Ready to Start Your Project?
-                    </h2>
-                    <p className="text-gray-600 mb-6">
-                        Contact our team of experts to discuss your civil engineering and construction needs.
-                    </p>
-                    <div className="flex flex-wrap justify-center gap-4">
-                        <Link
-                            href="/quote-request"
-                            className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
-                        >
-                            Get a Quote
-                        </Link>
-                        <Link
-                            href="/blog"
-                            className="bg-gray-200 text-gray-800 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition"
-                        >
-                            More Articles
-                        </Link>
-                    </div>
+                    <AnimatedSection variant="fade-up">
+                        <h2 className="text-3xl font-display font-bold text-white mb-4">
+                            Ready to Start Your{" "}
+                            <span className="gradient-text">Project?</span>
+                        </h2>
+                        <p className="text-gray-400 mb-8">
+                            Contact our team of experts to discuss your civil
+                            engineering and construction needs.
+                        </p>
+                        <div className="flex flex-wrap justify-center gap-4">
+                            <Link href="/quote-request" className="btn-accent">
+                                Get a Quote
+                            </Link>
+                            <Link href="/blog" className="btn-secondary">
+                                More Articles
+                            </Link>
+                        </div>
+                    </AnimatedSection>
                 </div>
             </section>
         </Layout>

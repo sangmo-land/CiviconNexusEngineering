@@ -1,6 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import Layout from '@/Layouts/Layout';
-import { Service, Meta } from '@/types';
+import AnimatedSection from "@/Components/AnimatedSection";
+import { Service, Meta } from "@/types";
 
 interface ServiceShowProps {
     meta: Meta;
@@ -15,47 +16,85 @@ export default function ServiceShow({ meta, service }: ServiceShowProps) {
             </Head>
 
             {/* Breadcrumb */}
-            <div className="bg-gray-50 border-b">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-                    <nav className="flex text-sm">
-                        <Link href="/" className="text-gray-500 hover:text-gray-700">Home</Link>
-                        <span className="mx-2 text-gray-400">/</span>
-                        <Link href="/services" className="text-gray-500 hover:text-gray-700">Services</Link>
-                        <span className="mx-2 text-gray-400">/</span>
-                        <span className="text-gray-900">{service.title}</span>
+            <div className="pt-24 border-b border-white/5">
+                <div className="container-custom py-4">
+                    <nav className="flex text-sm gap-2">
+                        <Link
+                            href="/"
+                            className="text-gray-500 hover:text-accent transition-colors"
+                        >
+                            Home
+                        </Link>
+                        <span className="text-gray-600">/</span>
+                        <Link
+                            href="/services"
+                            className="text-gray-500 hover:text-accent transition-colors"
+                        >
+                            Services
+                        </Link>
+                        <span className="text-gray-600">/</span>
+                        <span className="text-white">{service.title}</span>
                     </nav>
                 </div>
             </div>
 
             {/* Service Content */}
-            <section className="py-16">
-                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                    {service.icon && (
-                        <div className="text-6xl mb-6">{service.icon}</div>
-                    )}
-                    <h1 className="text-4xl font-bold text-gray-900 mb-6">{service.title}</h1>
-                    <div 
-                        className="prose prose-lg max-w-none text-gray-600"
-                        dangerouslySetInnerHTML={{ __html: service.description }}
-                    />
+            <section className="section-padding">
+                <div className="max-w-4xl mx-auto px-6 sm:px-8">
+                    <AnimatedSection variant="fade-up">
+                        {service.icon && (
+                            <div className="text-6xl mb-6">{service.icon}</div>
+                        )}
+                        <h1 className="font-display text-4xl md:text-6xl font-bold text-white mb-8">
+                            {service.title}
+                        </h1>
+                    </AnimatedSection>
+                    <AnimatedSection variant="fade-up" delay={150}>
+                        <div
+                            className="prose prose-lg prose-invert max-w-none text-gray-300 leading-relaxed
+                                       prose-headings:font-display prose-headings:text-white
+                                       prose-a:text-accent prose-a:no-underline hover:prose-a:underline
+                                       prose-strong:text-white"
+                            dangerouslySetInnerHTML={{
+                                __html: service.description,
+                            }}
+                        />
+                    </AnimatedSection>
                 </div>
             </section>
 
             {/* CTA Section */}
-            <section className="py-16 bg-blue-600">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-3xl font-bold text-white mb-4">
-                        Interested in this service?
-                    </h2>
-                    <p className="text-blue-100 text-lg mb-8 max-w-2xl mx-auto">
-                        Contact us today to discuss your project requirements and get a customized quote.
-                    </p>
-                    <Link
-                        href="/quote-request"
-                        className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
-                    >
-                        Request a Quote
-                    </Link>
+            <section className="section-padding relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-brand-700 via-brand-600 to-brand-700" />
+                <div className="container-custom relative z-10 text-center">
+                    <AnimatedSection variant="scale">
+                        <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">
+                            Interested in this service?
+                        </h2>
+                        <p className="text-blue-100/80 text-lg mb-10 max-w-2xl mx-auto">
+                            Contact us today to discuss your project
+                            requirements and get a customized quote.
+                        </p>
+                        <Link
+                            href="/quote-request"
+                            className="btn-accent text-lg"
+                        >
+                            Request a Quote
+                            <svg
+                                className="w-5 h-5 ml-2"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                />
+                            </svg>
+                        </Link>
+                    </AnimatedSection>
                 </div>
             </section>
         </Layout>
