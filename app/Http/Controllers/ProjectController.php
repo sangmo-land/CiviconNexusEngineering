@@ -14,10 +14,14 @@ class ProjectController extends Controller
 
         return Inertia::render('Projects/Index', [
             'meta' => [
-                'title' => 'Our Construction & Engineering Projects in Cameroon',
-                'description' => 'View our portfolio of completed civil engineering and construction projects across Cameroon. Residential, commercial & infrastructure builds by Civicon Nexus Engineering.',
-                'keywords' => 'construction projects Cameroon, engineering portfolio, completed buildings Douala, civil engineering projects Yaoundé, building projects Cameroon',
+                'title' => 'Construction & Engineering Projects in Cameroon | Projets de Construction',
+                'description' => 'View our portfolio of completed civil engineering and construction projects across Cameroon. Residential, commercial & infrastructure builds in Douala, Yaoundé, and all regions. Découvrez notre portefeuille de projets de génie civil et de construction réalisés au Cameroun. Bâtiments résidentiels, commerciaux et infrastructures.',
+                'keywords' => 'construction projects Cameroon, engineering portfolio Cameroon, completed buildings Douala, civil engineering projects Yaoundé, building projects Cameroon, residential construction Cameroon, commercial construction Cameroon, infrastructure projects Cameroon, construction portfolio Cameroon, projets de construction Cameroun, réalisations génie civil Cameroun, bâtiments construits Douala, projets ingénierie Yaoundé, projets BTP Cameroun, construction résidentielle Cameroun, construction commerciale Cameroun, projets infrastructure Cameroun, portefeuille construction Cameroun, chantier Cameroun, ouvrage Cameroun',
                 'canonical' => '/projects',
+                'breadcrumbs' => [
+                    ['name' => 'Home', 'url' => '/'],
+                    ['name' => 'Projects', 'url' => '/projects'],
+                ],
             ],
             'projects' => $projects,
         ]);
@@ -30,11 +34,16 @@ class ProjectController extends Controller
 
         return Inertia::render('Projects/Show', [
             'meta' => [
-                'title' => $project->title . ' | Project Portfolio',
-                'description' => substr(strip_tags($project->description), 0, 160) ?: 'View the ' . $project->title . ' project by Civicon Nexus Engineering in ' . ($project->location ?? 'Cameroon') . '.',
-                'keywords' => $project->title . ', ' . ($project->project_type ?? 'construction') . ', ' . ($project->location ?? 'Cameroon') . ', civil engineering project',
+                'title' => $project->title . ' | Construction Project in ' . ($project->location ?? 'Cameroon'),
+                'description' => substr(strip_tags($project->description), 0, 160) ?: 'View the ' . $project->title . ' construction project by Civicon Nexus Engineering in ' . ($project->location ?? 'Cameroon') . '. Expert civil engineering and building construction. Découvrez le projet ' . $project->title . ' réalisé par Civicon Nexus Engineering.',
+                'keywords' => $project->title . ', ' . ($project->project_type ?? 'construction') . ', ' . ($project->location ?? 'Cameroon') . ', civil engineering project, construction project Cameroon, ' . ($project->project_type ?? 'construction') . ' Douala, projet de construction, projet génie civil, chantier ' . ($project->location ?? 'Cameroun') . ', BTP Cameroun',
                 'canonical' => '/projects/' . $project->slug,
                 'ogImage' => $firstImage ? $firstImage->image_path : null,
+                'breadcrumbs' => [
+                    ['name' => 'Home', 'url' => '/'],
+                    ['name' => 'Projects', 'url' => '/projects'],
+                    ['name' => $project->title, 'url' => '/projects/' . $project->slug],
+                ],
                 'jsonLd' => [
                     '@context' => 'https://schema.org',
                     '@type' => 'ConstructionProject',
@@ -53,6 +62,11 @@ class ProjectController extends Controller
                         '@type' => 'ProfessionalService',
                         'name' => 'Civicon Nexus Engineering',
                         'url' => config('app.url'),
+                        'address' => [
+                            '@type' => 'PostalAddress',
+                            'addressLocality' => 'Douala',
+                            'addressCountry' => 'CM',
+                        ],
                     ],
                     'image' => $firstImage ? asset('storage/' . $firstImage->image_path) : null,
                 ],

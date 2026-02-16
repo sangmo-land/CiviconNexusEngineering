@@ -14,10 +14,14 @@ class QuoteRequestController extends Controller
     {
         return Inertia::render('QuoteRequest', [
             'meta' => [
-                'title' => 'Get a Free Construction Quote | Cameroon',
-                'description' => 'Request a free quote for your construction or civil engineering project in Cameroon. Residential, commercial or infrastructure — Civicon Nexus Engineering delivers quality results on budget.',
-                'keywords' => 'free construction quote Cameroon, devis construction Cameroun, engineering quote Douala, building estimate Yaoundé, project cost Cameroon',
+                'title' => 'Get a Free Construction Quote Cameroon | Devis Gratuit Construction',
+                'description' => 'Request a free quote for your construction or civil engineering project in Cameroon. Residential, commercial or infrastructure — Civicon Nexus Engineering delivers quality results on budget. Demandez un devis gratuit pour votre projet de construction ou de génie civil au Cameroun. Résidentiel, commercial ou infrastructure.',
+                'keywords' => 'free construction quote Cameroon, engineering quote Douala, building estimate Yaoundé, project cost Cameroon, construction cost estimate, building quote Cameroon, free estimate construction, house building cost Cameroon, construction price Cameroon, building project quote, devis construction Cameroun, devis gratuit construction, estimation coût bâtiment Cameroun, prix construction maison Cameroun, devis génie civil Douala, estimation travaux Yaoundé, coût projet construction Cameroun, devis BTP Cameroun, tarif construction maison, budget construction Cameroun',
                 'canonical' => '/quote-request',
+                'breadcrumbs' => [
+                    ['name' => 'Home', 'url' => '/'],
+                    ['name' => 'Get a Quote', 'url' => '/quote-request'],
+                ],
             ],
         ]);
     }

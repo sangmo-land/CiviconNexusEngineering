@@ -14,10 +14,14 @@ class PostController extends Controller
 
         return Inertia::render('Blog/Index', [
             'meta' => [
-                'title' => 'Blog | Civil Engineering Tips & Insights',
-                'description' => 'Read expert articles on civil engineering, construction best practices, building tips, and industry insights from Cameroon\'s trusted engineering firm.',
-                'keywords' => 'civil engineering blog, construction tips Cameroon, building advice, engineering articles, construction industry Cameroon',
+                'title' => 'Blog | Civil Engineering Tips & Construction Insights Cameroon',
+                'description' => 'Read expert articles on civil engineering, construction best practices, building tips, house design ideas, and industry insights from Cameroon\'s trusted engineering firm. Articles et conseils d\'experts en génie civil, construction et bâtiment au Cameroun.',
+                'keywords' => 'civil engineering blog, construction tips Cameroon, building advice Cameroon, engineering articles, construction industry Cameroon, building tips Douala, construction guide Cameroon, house building tips, structural engineering articles, blog génie civil, conseils construction Cameroun, articles BTP Cameroun, guide construction maison Cameroun, astuces bâtiment, conseils ingénierie Cameroun, blog construction Douala',
                 'canonical' => '/blog',
+                'breadcrumbs' => [
+                    ['name' => 'Home', 'url' => '/'],
+                    ['name' => 'Blog', 'url' => '/blog'],
+                ],
             ],
             'posts' => $posts,
         ]);
@@ -31,9 +35,15 @@ class PostController extends Controller
             'meta' => [
                 'title' => $post->title,
                 'description' => $post->excerpt ?? substr(strip_tags($post->content), 0, 160),
+                'keywords' => 'civil engineering, construction Cameroon, building, génie civil, construction Cameroun, BTP, ' . str_replace('-', ', ', $post->slug),
                 'canonical' => '/blog/' . $post->slug,
                 'ogType' => 'article',
                 'ogImage' => $post->featured_image,
+                'breadcrumbs' => [
+                    ['name' => 'Home', 'url' => '/'],
+                    ['name' => 'Blog', 'url' => '/blog'],
+                    ['name' => $post->title, 'url' => '/blog/' . $post->slug],
+                ],
                 'article' => [
                     'publishedTime' => $post->published_at?->toIso8601String(),
                     'modifiedTime' => $post->updated_at?->toIso8601String(),
@@ -47,6 +57,7 @@ class PostController extends Controller
                     'image' => $post->featured_image ? asset('storage/' . $post->featured_image) : null,
                     'datePublished' => $post->published_at?->toIso8601String(),
                     'dateModified' => $post->updated_at?->toIso8601String(),
+                    'inLanguage' => ['en', 'fr'],
                     'author' => [
                         '@type' => 'Organization',
                         'name' => 'Civicon Nexus Engineering',
@@ -57,12 +68,16 @@ class PostController extends Controller
                         'name' => 'Civicon Nexus Engineering',
                         'logo' => [
                             '@type' => 'ImageObject',
-'url' => asset('images/logo.jpeg'),
+                            'url' => asset('images/logo.jpeg'),
                         ],
                     ],
                     'mainEntityOfPage' => [
                         '@type' => 'WebPage',
                         '@id' => config('app.url') . '/blog/' . $post->slug,
+                    ],
+                    'about' => [
+                        '@type' => 'Thing',
+                        'name' => 'Civil Engineering in Cameroon',
                     ],
                 ],
             ],

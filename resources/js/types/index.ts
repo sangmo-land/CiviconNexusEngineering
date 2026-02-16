@@ -65,6 +65,11 @@ export interface HousePlan {
     updated_at: string;
 }
 
+export interface Breadcrumb {
+    name: string;
+    url: string;
+}
+
 export interface Meta {
     title: string;
     description: string;
@@ -78,6 +83,8 @@ export interface Meta {
         author?: string;
     };
     jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+    breadcrumbs?: Breadcrumb[];
+    faq?: { question: string; answer: string }[];
 }
 
 export interface PaginatedData<T> {

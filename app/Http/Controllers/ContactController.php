@@ -14,10 +14,14 @@ class ContactController extends Controller
     {
         return Inertia::render('Contact', [
             'meta' => [
-                'title' => 'Contact Us | Civicon Nexus Engineering Cameroon',
-                'description' => 'Contact Civicon Nexus Engineering in Cameroon. Get in touch for civil engineering consultations, construction inquiries & project discussions. Based in Douala, serving all of Cameroon.',
-                'keywords' => 'contact civil engineer Cameroon, engineering consultation Douala, construction inquiry Yaoundé, contactez ingénieur civil Cameroun',
+                'title' => 'Contact Us | Civil Engineer Cameroon | Contactez-Nous',
+                'description' => 'Contact Civicon Nexus Engineering in Cameroon. Get in touch for civil engineering consultations, construction inquiries, project discussions & free quotes. Based in Douala, serving all of Cameroon. Contactez Civicon Nexus Engineering au Cameroun pour des consultations en génie civil, demandes de construction et devis gratuits.',
+                'keywords' => 'contact civil engineer Cameroon, engineering consultation Douala, construction inquiry Yaoundé, contact construction company Cameroon, civil engineer near me, construction consultation Cameroon, building contractor contact, contactez ingénieur civil Cameroun, consultation génie civil Douala, demande construction Yaoundé, contacter entreprise construction Cameroun, ingénieur civil près de moi, consultation construction Cameroun, contacter entrepreneur bâtiment, devis gratuit construction Cameroun',
                 'canonical' => '/contact',
+                'breadcrumbs' => [
+                    ['name' => 'Home', 'url' => '/'],
+                    ['name' => 'Contact', 'url' => '/contact'],
+                ],
             ],
         ]);
     }
