@@ -113,6 +113,7 @@ Components\TextInput::make('completion_year')
                                     ->label('Image')
                                     ->image()
                                     ->required()
+->disk('public')
                                     ->directory('projects')
                                     ->visibility('public'),
                                 Components\TextInput::make('caption')

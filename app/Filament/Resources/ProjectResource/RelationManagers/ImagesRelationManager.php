@@ -21,6 +21,7 @@ class ImagesRelationManager extends RelationManager
                     ->label('Image')
                     ->image()
                     ->required()
+->disk('public')
                     ->directory('projects')
                     ->visibility('public')
                     ->columnSpanFull(),
