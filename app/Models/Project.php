@@ -19,13 +19,17 @@ class Project extends Model
         'description',
         'client',
         'completion_year',
+        'start_year',
+        'is_ongoing',
         'role',
         'is_featured',
     ];
 
     protected $casts = [
         'is_featured' => 'boolean',
+        'is_ongoing' => 'boolean',
         'completion_year' => 'integer',
+        'start_year' => 'integer',
     ];
 
     protected static function booted(): void

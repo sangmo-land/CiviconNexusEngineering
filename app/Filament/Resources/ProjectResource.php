@@ -69,6 +69,16 @@ class ProjectResource extends Resource
                             ->minValue(1900)
                             ->maxValue(2100),
                         
+                        Components\TextInput::make('start_year')
+                            ->label('Start Year')
+                            ->numeric()
+                            ->minValue(1900)
+                            ->maxValue(2100),
+                        
+                        Components\Toggle::make('is_ongoing')
+                            ->label('Ongoing Project')
+                            ->helperText('Mark this project as currently ongoing'),
+                        
                         Components\TextInput::make('role')
                             ->required()
                             ->maxLength(255)
@@ -129,6 +139,12 @@ class ProjectResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('completion_year')
                     ->sortable(),
+                Tables\Columns\TextColumn::make('start_year')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\IconColumn::make('is_ongoing')
+                    ->boolean()
+                    ->label('Ongoing'),
                 Tables\Columns\IconColumn::make('is_featured')
                     ->boolean()
                     ->label('Featured'),
