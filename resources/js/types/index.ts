@@ -28,6 +28,8 @@ export interface Project {
     description: string;
     client: string | null;
     completion_year: number | null;
+    start_year: number | null;
+    is_ongoing: boolean;
     role: string;
     is_featured: boolean;
     images: ProjectImage[];
