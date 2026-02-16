@@ -62,13 +62,7 @@ class ProjectResource extends Resource
                         
                         Components\TextInput::make('client')
                             ->maxLength(255),
-                        
-                        Components\TextInput::make('completion_year')
-                            ->label('Completion Year')
-                            ->numeric()
-                            ->minValue(1900)
-                            ->maxValue(2100),
-                        
+
                         Components\TextInput::make('start_year')
                             ->label('Start Year')
                             ->numeric()
@@ -77,8 +71,21 @@ class ProjectResource extends Resource
                         
                         Components\Toggle::make('is_ongoing')
                             ->label('Ongoing Project')
+->live()
+                            ->afterStateUpdated(function (bool $state, callable $set) {
+                            if ($state) {
+                            $set('completion_year', null);
+                            }
+                            })
                             ->helperText('Mark this project as currently ongoing'),
                         
+Components\TextInput::make('completion_year')
+                        ->label('Completion Year')
+                        ->numeric()
+                        ->minValue(1900)
+                        ->maxValue(2100)
+                        ->disabled(fn (callable $get) => $get('is_ongoing'))
+                        ->dehydrated(),
                         Components\TextInput::make('role')
                             ->required()
                             ->maxLength(255)
