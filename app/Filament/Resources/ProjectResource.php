@@ -103,28 +103,6 @@ Components\TextInput::make('completion_year')
                             ->required()
                             ->columnSpanFull(),
                     ]),
-                
-                Section::make('Project Images')
-                    ->schema([
-                        Components\Repeater::make('images')
-                            ->relationship()
-                            ->schema([
-                                Components\FileUpload::make('image_path')
-                                    ->label('Image')
-                                    ->image()
-                                    ->required()
-->disk('public')
-                                    ->directory('projects')
-                                    ->visibility('public'),
-                                Components\TextInput::make('caption')
-                                    ->maxLength(255),
-                            ])
-                            ->columns(2)
-                            ->defaultItems(0)
-                            ->addActionLabel('Add Image')
-                            ->collapsible()
-                            ->itemLabel(fn (array $state): ?string => $state['caption'] ?? 'Image'),
-                    ]),
             ]);
     }
 
