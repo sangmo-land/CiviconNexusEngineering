@@ -339,7 +339,7 @@ export default function Layout({ children }: LayoutProps) {
 
             {/* WhatsApp Floating Button */}
             <a
-                href="https://wa.me/237678626645"
+                href={`https://wa.me/237678626645?text=${encodeURIComponent("Hello Civicon Nexus Engineering! I'm interested in your services. Could you please provide more information?\n\nBonjour Civicon Nexus Engineering ! Je suis intéressé(e) par vos services. Pourriez-vous me fournir plus d'informations ?")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="fixed bottom-6 right-6 w-14 h-14 bg-green-500 hover:bg-green-400 text-white rounded-2xl shadow-2xl shadow-green-500/30 transition-all duration-300 hover:scale-110 hover:-translate-y-1 z-50 flex items-center justify-center group"

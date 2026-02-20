@@ -293,7 +293,7 @@ export default function Contact({ meta, flash }: ContactProps) {
 
                                 {/* WhatsApp Button */}
                                 <a
-                                    href="https://wa.me/237678626645"
+                                    href={`https://wa.me/237678626645?text=${encodeURIComponent("Hello Civicon Nexus Engineering! I'm interested in your services. Could you please provide more information?\n\nBonjour Civicon Nexus Engineering ! Je suis intéressé(e) par vos services. Pourriez-vous me fournir plus d'informations ?")}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="mt-8 flex items-center justify-center glass rounded-2xl px-6 py-4 font-semibold text-green-400 border border-green-500/20 hover:border-green-500/40 hover:bg-green-500/10 transition-all duration-300"
