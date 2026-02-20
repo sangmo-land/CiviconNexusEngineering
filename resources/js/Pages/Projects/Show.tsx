@@ -1,8 +1,9 @@
 import { Link } from '@inertiajs/react';
 import SEOHead from '@/Components/SEOHead';
-import { useState, useCallback, useEffect } from 'react';
+import { useState } from 'react';
 import Layout from '@/Layouts/Layout';
 import AnimatedSection from "@/Components/AnimatedSection";
+import ImageLightbox from "@/Components/ImageLightbox";
 import { Project, Meta } from "@/types";
 
 interface ProjectShowProps {
@@ -16,17 +17,12 @@ export default function ProjectShow({ meta, project }: ProjectShowProps) {
 
     const heroImage = project.images?.[0];
 
-    const handleKeyDown = useCallback((e: KeyboardEvent) => {
-        if (selectedImage === null || !project.images) return;
-        if (e.key === 'Escape') setSelectedImage(null);
-        if (e.key === 'ArrowLeft') setSelectedImage(selectedImage > 0 ? selectedImage - 1 : project.images.length - 1);
-        if (e.key === 'ArrowRight') setSelectedImage(selectedImage < project.images.length - 1 ? selectedImage + 1 : 0);
-    }, [selectedImage, project.images]);
-
-    useEffect(() => {
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [handleKeyDown]);
+    // Prepare images for lightbox
+    const lightboxImages = (project.images || []).map((img, i) => ({
+        src: `/storage/${img.image_path}`,
+        alt: img.caption || `${project.title} - Image ${i + 1}`,
+        caption: img.caption,
+    }));
 
     const statusLabel = project.is_ongoing ? 'Ongoing' : (project.completion_year ? 'Completed' : null);
     const timelineLabel = (() => {
@@ -323,68 +319,12 @@ export default function ProjectShow({ meta, project }: ProjectShowProps) {
             </section>
 
             {/* ─── Lightbox ─── */}
-            {selectedImage !== null && project.images && (
-                <div
-                    className="fixed inset-0 bg-brand-950/98 backdrop-blur-2xl z-50 flex items-center justify-center"
-                    onClick={() => setSelectedImage(null)}
-                >
-                    {/* Counter */}
-                    <div className="absolute top-6 left-1/2 -translate-x-1/2 glass px-4 py-2 rounded-full text-white/60 text-sm font-medium z-10">
-                        {selectedImage + 1} / {project.images.length}
-                    </div>
-
-                    {/* Close */}
-                    <button
-                        className="absolute top-6 right-6 text-white/40 hover:text-white transition p-3 glass rounded-xl z-10 group"
-                        onClick={() => setSelectedImage(null)}
-                    >
-                        <svg className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-
-                    {/* Previous */}
-                    <button
-                        className="absolute left-4 md:left-8 text-white/40 hover:text-white transition p-3 glass rounded-xl z-10"
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            setSelectedImage(selectedImage > 0 ? selectedImage - 1 : project.images!.length - 1);
-                        }}
-                    >
-                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-
-                    {/* Image */}
-                    <img
-                        src={`/storage/${project.images[selectedImage].image_path}`}
-                        alt={project.images[selectedImage].caption || `Project image ${selectedImage + 1}`}
-                        className="max-h-[82vh] max-w-[90vw] md:max-w-[82vw] object-contain rounded-2xl shadow-2xl"
-                        onClick={(e) => e.stopPropagation()}
-                    />
-
-                    {/* Next */}
-                    <button
-                        className="absolute right-4 md:right-8 text-white/40 hover:text-white transition p-3 glass rounded-xl z-10"
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            setSelectedImage(selectedImage < project.images!.length - 1 ? selectedImage + 1 : 0);
-                        }}
-                    >
-                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
-
-                    {/* Caption */}
-                    {project.images[selectedImage].caption && (
-                        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 glass px-6 py-3 rounded-xl text-white text-center text-sm max-w-md">
-                            {project.images[selectedImage].caption}
-                        </div>
-                    )}
-                </div>
-            )}
+            <ImageLightbox
+                images={lightboxImages}
+                selectedIndex={selectedImage}
+                onClose={() => setSelectedImage(null)}
+                onNavigate={(i) => setSelectedImage(i)}
+            />
         </Layout>
     );
 }
