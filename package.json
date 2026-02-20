@@ -1,4 +1,5 @@
 {
+    "name": "CiviconNexusEngineering",
     "private": true,
     "type": "module",
     "scripts": {
