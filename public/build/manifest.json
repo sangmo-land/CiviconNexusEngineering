@@ -1,6 +1,6 @@
 {
-  "_AnimatedSection-RL86Xil7.js": {
-    "file": "assets/AnimatedSection-RL86Xil7.js",
+  "_AnimatedSection-DJJoM25u.js": {
+    "file": "assets/AnimatedSection-DJJoM25u.js",
     "name": "AnimatedSection",
     "imports": [
       "resources/js/app.tsx"
@@ -12,167 +12,167 @@
     "isEntry": true
   },
   "resources/js/Pages/Blog/Index.tsx": {
-    "file": "assets/Index-ebiIG1ZE.js",
+    "file": "assets/Index-C-4aPG8r.js",
     "name": "Index",
     "src": "resources/js/Pages/Blog/Index.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-RL86Xil7.js"
+      "_AnimatedSection-DJJoM25u.js"
     ]
   },
   "resources/js/Pages/Blog/Show.tsx": {
-    "file": "assets/Show-Da8lSz-h.js",
+    "file": "assets/Show-C9bjlWIc.js",
     "name": "Show",
     "src": "resources/js/Pages/Blog/Show.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-RL86Xil7.js"
+      "_AnimatedSection-DJJoM25u.js"
     ]
   },
   "resources/js/Pages/Contact.tsx": {
-    "file": "assets/Contact-Ba4YDPwv.js",
+    "file": "assets/Contact-BBVpgiws.js",
     "name": "Contact",
     "src": "resources/js/Pages/Contact.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-RL86Xil7.js"
+      "_AnimatedSection-DJJoM25u.js"
     ]
   },
   "resources/js/Pages/Home.tsx": {
-    "file": "assets/Home-p7W4QDJR.js",
+    "file": "assets/Home-Zg7jRImp.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-RL86Xil7.js"
+      "_AnimatedSection-DJJoM25u.js"
     ]
   },
   "resources/js/Pages/HousePlans/Index.tsx": {
-    "file": "assets/Index--qLN3UWx.js",
+    "file": "assets/Index-8s1lufWN.js",
     "name": "Index",
     "src": "resources/js/Pages/HousePlans/Index.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-RL86Xil7.js"
+      "_AnimatedSection-DJJoM25u.js"
     ]
   },
   "resources/js/Pages/HousePlans/Show.tsx": {
-    "file": "assets/Show-CKDepvdw.js",
+    "file": "assets/Show-DOzoXKxL.js",
     "name": "Show",
     "src": "resources/js/Pages/HousePlans/Show.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-RL86Xil7.js"
+      "_AnimatedSection-DJJoM25u.js"
     ]
   },
   "resources/js/Pages/Projects/Index.tsx": {
-    "file": "assets/Index-BUGwo2eE.js",
+    "file": "assets/Index-CST71jcw.js",
     "name": "Index",
     "src": "resources/js/Pages/Projects/Index.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-RL86Xil7.js"
+      "_AnimatedSection-DJJoM25u.js"
     ]
   },
   "resources/js/Pages/Projects/Show.tsx": {
-    "file": "assets/Show-Cl4bTaD7.js",
+    "file": "assets/Show-DuDvlqk2.js",
     "name": "Show",
     "src": "resources/js/Pages/Projects/Show.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-RL86Xil7.js"
+      "_AnimatedSection-DJJoM25u.js"
     ]
   },
   "resources/js/Pages/QuoteRequest.tsx": {
-    "file": "assets/QuoteRequest-Cq209kc7.js",
+    "file": "assets/QuoteRequest-DjNEFrbI.js",
     "name": "QuoteRequest",
     "src": "resources/js/Pages/QuoteRequest.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-RL86Xil7.js"
+      "_AnimatedSection-DJJoM25u.js"
     ]
   },
   "resources/js/Pages/Services/Index.tsx": {
-    "file": "assets/Index-BfLfmQRc.js",
+    "file": "assets/Index-v9AjYPRK.js",
     "name": "Index",
     "src": "resources/js/Pages/Services/Index.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-RL86Xil7.js"
+      "_AnimatedSection-DJJoM25u.js"
     ]
   },
   "resources/js/Pages/Services/Show.tsx": {
-    "file": "assets/Show-DRfuvivf.js",
+    "file": "assets/Show-vP-MhQ1W.js",
     "name": "Show",
     "src": "resources/js/Pages/Services/Show.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-RL86Xil7.js"
+      "_AnimatedSection-DJJoM25u.js"
     ]
   },
   "resources/js/Pages/SiteWork/Create.tsx": {
-    "file": "assets/Create-BBypYUWy.js",
+    "file": "assets/Create-6Xsqfv3h.js",
     "name": "Create",
     "src": "resources/js/Pages/SiteWork/Create.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-RL86Xil7.js"
+      "_AnimatedSection-DJJoM25u.js"
     ]
   },
   "resources/js/Pages/SiteWork/Edit.tsx": {
-    "file": "assets/Edit-CneWRRdO.js",
+    "file": "assets/Edit-BIwGepSJ.js",
     "name": "Edit",
     "src": "resources/js/Pages/SiteWork/Edit.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-RL86Xil7.js"
+      "_AnimatedSection-DJJoM25u.js"
     ]
   },
   "resources/js/Pages/SiteWork/Index.tsx": {
-    "file": "assets/Index-CXb7WqQ1.js",
+    "file": "assets/Index-BaPIivA_.js",
     "name": "Index",
     "src": "resources/js/Pages/SiteWork/Index.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-RL86Xil7.js"
+      "_AnimatedSection-DJJoM25u.js"
     ]
   },
   "resources/js/Pages/SiteWork/ProjectLogs.tsx": {
-    "file": "assets/ProjectLogs-D4Nk902b.js",
+    "file": "assets/ProjectLogs-y9Mj554i.js",
     "name": "ProjectLogs",
     "src": "resources/js/Pages/SiteWork/ProjectLogs.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-RL86Xil7.js"
+      "_AnimatedSection-DJJoM25u.js"
     ]
   },
   "resources/js/Pages/SiteWork/Show.tsx": {
-    "file": "assets/Show-BkbhAueS.js",
+    "file": "assets/Show-Dz0OMeS3.js",
     "name": "Show",
     "src": "resources/js/Pages/SiteWork/Show.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_AnimatedSection-RL86Xil7.js"
+      "_AnimatedSection-DJJoM25u.js"
     ]
   },
   "resources/js/app.tsx": {
-    "file": "assets/app-CfFC6h8L.js",
+    "file": "assets/app-DH1l40Gs.js",
     "name": "app",
     "src": "resources/js/app.tsx",
     "isEntry": true,

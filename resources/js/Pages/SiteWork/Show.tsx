@@ -433,9 +433,10 @@ export default function Show({ meta, log }: ShowProps) {
                                         >
                                             <div className="aspect-square rounded-lg overflow-hidden bg-brand-800 relative">
                                                 <img
-                                                    src={`/storage/${image.image_path}`}
+                                                    src={`/img/thumb/${image.image_path}`}
                                                     alt={image.caption || "Work image"}
                                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                                    loading="lazy"
                                                 />
                                                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
                                                     <svg

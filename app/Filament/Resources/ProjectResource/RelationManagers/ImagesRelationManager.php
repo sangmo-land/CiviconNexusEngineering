@@ -26,6 +26,9 @@ class ImagesRelationManager extends RelationManager
                     ->directory('projects')
                     ->visibility('public')
                     ->imageEditor()
+                    ->imageResizeMode('cover')
+                    ->imageResizeTargetWidth('2000')
+                    ->imageResizeTargetHeight('2000')
                     ->columnSpanFull(),
                 Components\TextInput::make('caption')
                     ->maxLength(255)
@@ -68,6 +71,9 @@ class ImagesRelationManager extends RelationManager
                             ->disk('public')
                             ->directory('projects')
                             ->visibility('public')
+                            ->imageResizeMode('cover')
+                            ->imageResizeTargetWidth('2000')
+                            ->imageResizeTargetHeight('2000')
                             ->maxFiles(20)
                             ->columnSpanFull()
                             ->helperText('Select up to 20 images at once. You can add captions after uploading.'),

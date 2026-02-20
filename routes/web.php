@@ -3,6 +3,7 @@
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HousePlanController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\QuoteRequestController;
@@ -10,6 +11,11 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SiteWorkController;
 use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
+
+// Optimized images
+Route::get('/img/{preset}/{path}', [ImageController::class, 'show'])
+    ->where('path', '.*')
+    ->name('image.show');
 
 // Sitemap
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');

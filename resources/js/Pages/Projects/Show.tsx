@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Layout from '@/Layouts/Layout';
 import AnimatedSection from "@/Components/AnimatedSection";
 import ImageLightbox from "@/Components/ImageLightbox";
+import { optimizedImageUrl } from "@/utils/image";
 import { Project, Meta } from "@/types";
 
 interface ProjectShowProps {
@@ -17,9 +18,9 @@ export default function ProjectShow({ meta, project }: ProjectShowProps) {
 
     const heroImage = project.images?.[0];
 
-    // Prepare images for lightbox
+    // Prepare images for lightbox (use large preset for full view)
     const lightboxImages = (project.images || []).map((img, i) => ({
-        src: `/storage/${img.image_path}`,
+        src: optimizedImageUrl(img.image_path, 'large'),
         alt: img.caption || `${project.title} - Image ${i + 1}`,
         caption: img.caption,
     }));
@@ -41,7 +42,7 @@ export default function ProjectShow({ meta, project }: ProjectShowProps) {
             <section className="relative h-[70vh] min-h-[500px] max-h-[800px] overflow-hidden">
                 {heroImage ? (
                     <img
-                        src={`/storage/${heroImage.image_path}`}
+                        src={optimizedImageUrl(heroImage.image_path, 'hero')}
                         alt={project.title}
                         className={`absolute inset-0 w-full h-full object-cover transition-transform duration-[1.5s] ${heroLoaded ? 'scale-100' : 'scale-110'}`}
                         onLoad={() => setHeroLoaded(true)}
@@ -261,7 +262,7 @@ export default function ProjectShow({ meta, project }: ProjectShowProps) {
                                         className="w-full break-inside-avoid rounded-2xl overflow-hidden group relative focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-brand-950"
                                     >
                                         <img
-                                            src={`/storage/${image.image_path}`}
+                                            src={optimizedImageUrl(image.image_path, 'thumb')}
                                             alt={image.caption || `${project.title} - Image ${index + 1}`}
                                             className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
                                             loading="lazy"
