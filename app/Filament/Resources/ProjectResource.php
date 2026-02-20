@@ -112,6 +112,7 @@ Components\TextInput::make('completion_year')
             ->columns([
                 Tables\Columns\ImageColumn::make('images.image_path')
                     ->label('Image')
+                    ->disk('public')
                     ->circular()
                     ->stacked()
                     ->limit(3),
