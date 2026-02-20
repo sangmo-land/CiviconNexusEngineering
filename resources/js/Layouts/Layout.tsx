@@ -266,7 +266,7 @@ export default function Layout({ children }: LayoutProps) {
                                             d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                                         />
                                     </svg>
-                                    <span>Douala, Cameroon</span>
+                                    <span>Rond Point Express, Yaoundé</span>
                                 </li>
                                 <li className="flex items-center gap-3">
                                     <svg
@@ -283,10 +283,10 @@ export default function Layout({ children }: LayoutProps) {
                                         />
                                     </svg>
                                     <a
-                                        href="tel:+237XXXXXXXXX"
+                                        href="tel:+237678626645"
                                         className="hover:text-accent transition-colors"
                                     >
-                                        +237 XXX XXX XXX
+                                        +237 678 626 645
                                     </a>
                                 </li>
                                 <li className="flex items-center gap-3">
@@ -304,10 +304,10 @@ export default function Layout({ children }: LayoutProps) {
                                         />
                                     </svg>
                                     <a
-                                        href="mailto:info@civiconnexusengineering.com"
+                                        href="mailto:support@civiconnexusengineering.com"
                                         className="hover:text-accent transition-colors"
                                     >
-                                        info@civiconnexusengineering.com
+                                        support@civiconnexusengineering.com
                                     </a>
                                 </li>
                             </ul>
@@ -339,7 +339,7 @@ export default function Layout({ children }: LayoutProps) {
 
             {/* WhatsApp Floating Button */}
             <a
-                href="https://wa.me/237XXXXXXXXX"
+                href="https://wa.me/237678626645"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="fixed bottom-6 right-6 w-14 h-14 bg-green-500 hover:bg-green-400 text-white rounded-2xl shadow-2xl shadow-green-500/30 transition-all duration-300 hover:scale-110 hover:-translate-y-1 z-50 flex items-center justify-center group"

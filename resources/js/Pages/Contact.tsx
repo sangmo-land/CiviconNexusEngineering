@@ -190,9 +190,9 @@ export default function Contact({ meta, flash }: ContactProps) {
                                                 Office Address
                                             </h3>
                                             <p className="text-gray-400 mt-1">
-                                                123 Engineering Street
+                                                Rond Point Express
                                                 <br />
-                                                Construction City, ST 12345
+                                                Yaoundé, Cameroon
                                             </p>
                                         </div>
                                     </div>
@@ -219,10 +219,10 @@ export default function Contact({ meta, flash }: ContactProps) {
                                             </h3>
                                             <p className="text-gray-400 mt-1">
                                                 <a
-                                                    href="tel:+1234567890"
+                                                    href="tel:+237678626645"
                                                     className="hover:text-accent transition"
                                                 >
-                                                    +1 (234) 567-890
+                                                    +237 678 626 645
                                                 </a>
                                             </p>
                                         </div>
@@ -250,10 +250,10 @@ export default function Contact({ meta, flash }: ContactProps) {
                                             </h3>
                                             <p className="text-gray-400 mt-1">
                                                 <a
-                                                    href="mailto:info@civiconnexusengineering.com"
+                                                    href="mailto:support@civiconnexusengineering.com"
                                                     className="hover:text-accent transition"
                                                 >
-                                                    info@civiconnexusengineering.com
+                                                    support@civiconnexusengineering.com
                                                 </a>
                                             </p>
                                         </div>
@@ -293,7 +293,7 @@ export default function Contact({ meta, flash }: ContactProps) {
 
                                 {/* WhatsApp Button */}
                                 <a
-                                    href="https://wa.me/1234567890"
+                                    href="https://wa.me/237678626645"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="mt-8 flex items-center justify-center glass rounded-2xl px-6 py-4 font-semibold text-green-400 border border-green-500/20 hover:border-green-500/40 hover:bg-green-500/10 transition-all duration-300"

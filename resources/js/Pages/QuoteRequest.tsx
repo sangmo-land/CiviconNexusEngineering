@@ -386,10 +386,10 @@ export default function QuoteRequest({ meta, flash }: QuoteRequestProps) {
                             <p>
                                 Or call us directly at{" "}
                                 <a
-                                    href="tel:+1234567890"
+                                    href="tel:+237678626645"
                                     className="text-accent font-semibold hover:underline"
                                 >
-                                    +1 (234) 567-890
+                                    +237 678 626 645
                                 </a>
                             </p>
                         </div>

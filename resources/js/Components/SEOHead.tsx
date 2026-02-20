@@ -36,18 +36,19 @@ export default function SEOHead({ meta }: SEOHeadProps) {
             "Professional civil engineering and construction company in Cameroon. Expert structural design, project management, house plans, building construction, renovations, and infrastructure development across Douala, Yaoundé, and all regions of Cameroon. | Entreprise professionnelle de génie civil et de construction au Cameroun. Conception structurelle, gestion de projets, plans de maison, construction de bâtiments, rénovations et développement d'infrastructures à Douala, Yaoundé et dans toutes les régions du Cameroun.",
         foundingLocation: {
             "@type": "Place",
-            name: "Douala, Cameroon",
+            name: "Yaoundé, Cameroon",
         },
         address: {
             "@type": "PostalAddress",
-            addressLocality: "Douala",
-            addressRegion: "Littoral",
+            streetAddress: "Rond Point Express",
+            addressLocality: "Yaoundé",
+            addressRegion: "Centre",
             addressCountry: "CM",
         },
         geo: {
             "@type": "GeoCoordinates",
-            latitude: 4.0511,
-            longitude: 9.7679,
+            latitude: 3.8480,
+            longitude: 11.5021,
         },
         contactPoint: {
             "@type": "ContactPoint",
@@ -98,20 +99,21 @@ export default function SEOHead({ meta }: SEOHeadProps) {
         alternateName: "Civicon Nexus Ingénierie",
         image: `${SITE_URL}/images/logo.jpeg`,
         url: SITE_URL,
-        telephone: "+237-XXX-XXX-XXX",
+        telephone: "+237678626645",
         priceRange: "$$",
         description:
             "Expert civil engineering services in Cameroon — structural design, construction management, house plans, building projects, road construction, and infrastructure across Douala, Yaoundé, Bamenda, Bafoussam, Kribi, Limbe, and beyond. | Services experts de génie civil au Cameroun — conception structurelle, gestion de chantier, plans de maison, projets de construction, construction routière et infrastructures à Douala, Yaoundé, Bamenda, Bafoussam, Kribi, Limbé et au-delà.",
         address: {
             "@type": "PostalAddress",
-            addressLocality: "Douala",
-            addressRegion: "Littoral",
+            streetAddress: "Rond Point Express",
+            addressLocality: "Yaoundé",
+            addressRegion: "Centre",
             addressCountry: "CM",
         },
         geo: {
             "@type": "GeoCoordinates",
-            latitude: 4.0511,
-            longitude: 9.7679,
+            latitude: 3.8480,
+            longitude: 11.5021,
         },
         openingHoursSpecification: [
             {
