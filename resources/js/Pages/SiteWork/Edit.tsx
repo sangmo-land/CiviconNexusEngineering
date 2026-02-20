@@ -937,7 +937,7 @@ export default function Edit({ meta, project, log }: EditProps) {
                                                 >
                                                     <div className="aspect-square rounded-lg overflow-hidden bg-brand-800">
                                                         <img
-                                                            src={`/img/thumb/${image.image_path}`}
+                                                            src={`/storage/${image.image_path}`}
                                                             alt={image.caption || "Work image"}
                                                             className="w-full h-full object-cover"
                                                         />

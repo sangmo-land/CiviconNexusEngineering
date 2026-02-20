@@ -433,7 +433,7 @@ export default function Show({ meta, log }: ShowProps) {
                                         >
                                             <div className="aspect-square rounded-lg overflow-hidden bg-brand-800 relative">
                                                 <img
-                                                    src={`/img/thumb/${image.image_path}`}
+                                                    src={`/storage/${image.image_path}`}
                                                     alt={image.caption || "Work image"}
                                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                                     loading="lazy"

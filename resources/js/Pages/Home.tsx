@@ -269,7 +269,7 @@ export default function Home({
                                     <div className="aspect-[4/3] bg-brand-800 relative overflow-hidden">
                                         {project.images[0] ? (
                                             <img
-                                                src={`/img/thumb/${project.images[0].image_path}`}
+                                                src={`/storage/${project.images[0].image_path}`}
                                                 alt={project.title}
                                                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                                 loading="lazy"
