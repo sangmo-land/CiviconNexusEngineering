@@ -53,7 +53,7 @@ export default function AnimatedSection({
     return (
         <Component
             ref={ref as any}
-            className={className}
+            className={`cn-reveal ${className}`}
             style={{
                 ...(isVisible ? styles.visible : styles.hidden),
                 transition: `all ${duration}ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,

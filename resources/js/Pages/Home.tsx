@@ -1,4 +1,4 @@
-﻿import { Link } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import SEOHead from '@/Components/SEOHead';
 import Layout from '@/Layouts/Layout';
 import { optimizedImageUrl } from '@/utils/image';
@@ -27,7 +27,7 @@ export default function Home({ meta, featuredServices, featuredProjects }: HomeP
         : coreServices.map((service) => ({ ...service, href: '/services' }));
 
     return (
-        <Layout home>
+        <Layout>
             <SEOHead meta={meta} />
             <div className="cn-home">
                 <section className="cn-hero" aria-labelledby="hero-title">

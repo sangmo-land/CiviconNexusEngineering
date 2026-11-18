@@ -1,3 +1,4 @@
+import PageHeader from '@/Components/PageHeader';
 import { useForm } from '@inertiajs/react';
 import SEOHead from '@/Components/SEOHead';
 import Layout from '@/Layouts/Layout';
@@ -26,30 +27,19 @@ export default function Contact({ meta, flash }: ContactProps) {
         <Layout>
             <SEOHead meta={meta} />
 
-            {/* Hero Section */}
-            <section className="relative pt-40 pb-20 overflow-hidden">
-                <div className="absolute inset-0 bg-brand-950" />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(245,158,11,0.08),transparent_60%)]" />
-                <div className="relative container-custom">
-                    <AnimatedSection variant="fade-up">
-                        <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">
-                            <span className="gradient-text">Contact Us</span>
-                        </h1>
-                        <p className="text-xl text-gray-400 max-w-2xl">
-                            Have questions or want to discuss your project? We'd
-                            love to hear from you.
-                        </p>
-                    </AnimatedSection>
-                </div>
-            </section>
+            <PageHeader
+                label="Contact"
+                title="Talk to our team"
+                description="Ask about a service, discuss your project or get in touch with our team in Yaoundé."
+            />
 
             {/* Contact Content */}
             <section className="section-padding bg-brand-950">
                 <div className="container-custom">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                         {/* Contact Form */}
-                        <AnimatedSection variant="slide-left">
-                            <div>
+                        <AnimatedSection variant="fade-up">
+                            <div className="card-modern">
                                 <h2 className="text-2xl font-display font-bold text-white mb-6">
                                     Send us a Message
                                 </h2>

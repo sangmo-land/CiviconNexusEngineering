@@ -1,3 +1,4 @@
+import PageHeader from '@/Components/PageHeader';
 import { Link } from '@inertiajs/react';
 import SEOHead from '@/Components/SEOHead';
 import Layout from '@/Layouts/Layout';
@@ -22,30 +23,11 @@ export default function BlogIndex({ meta, posts }: BlogIndexProps) {
         <Layout>
             <SEOHead meta={meta} />
 
-            {/* Hero Section */}
-            <section className="relative pt-36 pb-20 md:pt-44 md:pb-28 overflow-hidden">
-                <div className="absolute inset-0 bg-brand-950" />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(245,158,11,0.08),transparent_60%)]" />
-                <div className="relative container-custom">
-                    <AnimatedSection variant="fade-up">
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className="w-8 h-0.5 bg-accent rounded-full" />
-                            <span className="text-accent font-medium text-sm tracking-wide uppercase">
-                                Our Blog
-                            </span>
-                        </div>
-                        <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold mb-6 text-white">
-                            Insights &{" "}
-                            <span className="gradient-text">Articles</span>
-                        </h1>
-                        <p className="text-lg sm:text-xl text-gray-400 max-w-2xl leading-relaxed">
-                            Expert tips, industry knowledge, and the latest
-                            updates from the world of civil engineering and
-                            construction.
-                        </p>
-                    </AnimatedSection>
-                </div>
-            </section>
+            <PageHeader
+                label="Journal"
+                title="Engineering insights"
+                description="Articles on structural design, construction practice and the built environment in Cameroon."
+            />
 
             {/* Blog Posts */}
             <section className="py-16 md:py-24 bg-brand-950">
@@ -59,7 +41,7 @@ export default function BlogIndex({ meta, posts }: BlogIndexProps) {
                             >
                                 <Link
                                     href={`/blog/${post.slug}`}
-                                    className="group card-modern rounded-2xl overflow-hidden block h-full hover:border-white/20 transition-all duration-300"
+                                    className="group cn-media-card block h-full hover:border-white/20 transition-all duration-300"
                                 >
                                     <div className="aspect-[16/10] bg-brand-900 relative overflow-hidden">
                                         {post.featured_image ? (

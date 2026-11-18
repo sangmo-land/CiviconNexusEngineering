@@ -100,7 +100,7 @@ export default function HousePlanShow({ meta, housePlan }: HousePlanShowProps) {
                         {/* Plan Info */}
                         <AnimatedSection variant="slide-right" delay={200}>
                             <div>
-                                <h1 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
+                                <h1 className="cn-detail-title text-3xl md:text-4xl font-display font-bold text-white mb-4">
                                     {housePlan.title}
                                 </h1>
                                 <p className="text-4xl font-bold gradient-text mb-8">

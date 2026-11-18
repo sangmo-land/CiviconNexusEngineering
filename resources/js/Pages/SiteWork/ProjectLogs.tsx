@@ -68,9 +68,7 @@ export default function ProjectLogs({ meta, project, logs }: ProjectLogsProps) {
             <SEOHead meta={meta} />
 
             {/* Hero Section */}
-            <section className="relative pt-36 pb-20 md:pt-44 md:pb-28 overflow-hidden">
-                <div className="absolute inset-0 bg-brand-950" />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(245,158,11,0.08),transparent_60%)]" />
+            <section className="relative pt-36 pb-20 md:pt-44 md:pb-28 overflow-hidden cn-detail-header">
                 <div className="relative container-custom">
                     <AnimatedSection variant="fade-up">
                         <Link
@@ -98,7 +96,7 @@ export default function ProjectLogs({ meta, project, logs }: ProjectLogsProps) {
                                 {project.location}
                             </span>
                         </div>
-                        <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold mb-6 text-white">
+                        <h1 className="cn-detail-title text-4xl sm:text-5xl md:text-6xl font-display font-bold mb-6 text-white">
                             {project.title}
                         </h1>
                         <div className="flex flex-wrap items-center gap-4">

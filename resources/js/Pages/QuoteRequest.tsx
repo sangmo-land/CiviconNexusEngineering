@@ -1,3 +1,4 @@
+import PageHeader from '@/Components/PageHeader';
 import { useForm } from '@inertiajs/react';
 import SEOHead from '@/Components/SEOHead';
 import Layout from '@/Layouts/Layout';
@@ -55,24 +56,11 @@ export default function QuoteRequest({ meta, flash }: QuoteRequestProps) {
         <Layout>
             <SEOHead meta={meta} />
 
-            {/* Hero Section */}
-            <section className="relative pt-40 pb-20 overflow-hidden">
-                <div className="absolute inset-0 bg-brand-950" />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(245,158,11,0.08),transparent_60%)]" />
-                <div className="relative container-custom">
-                    <AnimatedSection variant="fade-up">
-                        <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">
-                            <span className="gradient-text">
-                                Request a Quote
-                            </span>
-                        </h1>
-                        <p className="text-xl text-gray-400 max-w-2xl">
-                            Fill out the form below and our team will get back
-                            to you with a customized quote for your project.
-                        </p>
-                    </AnimatedSection>
-                </div>
-            </section>
+            <PageHeader
+                label="Project enquiry"
+                title="Request a quote"
+                description="Share your project location, scope and timeline so our team can prepare a quote."
+            />
 
             {/* Quote Form */}
             <section className="section-padding bg-brand-950">
@@ -86,7 +74,7 @@ export default function QuoteRequest({ meta, flash }: QuoteRequestProps) {
                     )}
 
                     <AnimatedSection variant="fade-up" delay={100}>
-                        <div className="card-modern rounded-3xl p-8 md:p-10">
+                        <div className="card-modern md:p-10">
                             <form onSubmit={handleSubmit} className="space-y-8">
                                 {/* Personal Info */}
                                 <div>

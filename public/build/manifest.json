@@ -1,203 +1,217 @@
 {
-  "_AnimatedSection-C-sIqfn7.js": {
-    "file": "assets/AnimatedSection-C-sIqfn7.js",
+  "_AnimatedSection-ZkdtT8CQ.js": {
+    "file": "assets/AnimatedSection-ZkdtT8CQ.js",
     "name": "AnimatedSection",
     "imports": [
       "resources/js/app.tsx"
     ]
   },
-  "_Layout-BAQbJ_16.js": {
-    "file": "assets/Layout-BAQbJ_16.js",
+  "_Layout-Jaq9DzrE.js": {
+    "file": "assets/Layout-Jaq9DzrE.js",
     "name": "Layout",
     "imports": [
       "resources/js/app.tsx"
     ]
   },
+  "_PageHeader-DWGmIobV.js": {
+    "file": "assets/PageHeader-DWGmIobV.js",
+    "name": "PageHeader",
+    "imports": [
+      "resources/js/app.tsx"
+    ]
+  },
   "resources/css/app.css": {
-    "file": "assets/app-B12M-OQ-.css",
+    "file": "assets/app-rGZTwdcY.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/Pages/Blog/Index.tsx": {
-    "file": "assets/Index-CzF8zhVu.js",
+    "file": "assets/Index-B4BEmFIc.js",
     "name": "Index",
     "src": "resources/js/Pages/Blog/Index.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_Layout-BAQbJ_16.js",
-      "_AnimatedSection-C-sIqfn7.js"
+      "_PageHeader-DWGmIobV.js",
+      "_Layout-Jaq9DzrE.js",
+      "_AnimatedSection-ZkdtT8CQ.js"
     ]
   },
   "resources/js/Pages/Blog/Show.tsx": {
-    "file": "assets/Show-c1YslxQ5.js",
+    "file": "assets/Show-nBwEfjHB.js",
     "name": "Show",
     "src": "resources/js/Pages/Blog/Show.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_Layout-BAQbJ_16.js",
-      "_AnimatedSection-C-sIqfn7.js"
+      "_Layout-Jaq9DzrE.js",
+      "_AnimatedSection-ZkdtT8CQ.js"
     ]
   },
   "resources/js/Pages/Contact.tsx": {
-    "file": "assets/Contact-CZFIlIVP.js",
+    "file": "assets/Contact-B2F4w7HY.js",
     "name": "Contact",
     "src": "resources/js/Pages/Contact.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_Layout-BAQbJ_16.js",
-      "_AnimatedSection-C-sIqfn7.js"
+      "_PageHeader-DWGmIobV.js",
+      "_Layout-Jaq9DzrE.js",
+      "_AnimatedSection-ZkdtT8CQ.js"
     ]
   },
   "resources/js/Pages/Home.tsx": {
-    "file": "assets/Home-gezomU8n.js",
+    "file": "assets/Home-BSLdzlJk.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_Layout-BAQbJ_16.js"
+      "_Layout-Jaq9DzrE.js"
     ],
     "css": [
-      "assets/Home-Cw7CiieK.css"
+      "assets/Home-B-mSUfSP.css"
     ]
   },
   "resources/js/Pages/HousePlans/Index.tsx": {
-    "file": "assets/Index-BbxD8v1l.js",
+    "file": "assets/Index-wWBTVOYZ.js",
     "name": "Index",
     "src": "resources/js/Pages/HousePlans/Index.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_Layout-BAQbJ_16.js",
-      "_AnimatedSection-C-sIqfn7.js"
+      "_PageHeader-DWGmIobV.js",
+      "_Layout-Jaq9DzrE.js",
+      "_AnimatedSection-ZkdtT8CQ.js"
     ]
   },
   "resources/js/Pages/HousePlans/Show.tsx": {
-    "file": "assets/Show-DJoLJUwB.js",
+    "file": "assets/Show-Cgt1Am3X.js",
     "name": "Show",
     "src": "resources/js/Pages/HousePlans/Show.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_Layout-BAQbJ_16.js",
-      "_AnimatedSection-C-sIqfn7.js"
+      "_Layout-Jaq9DzrE.js",
+      "_AnimatedSection-ZkdtT8CQ.js"
     ]
   },
   "resources/js/Pages/Projects/Index.tsx": {
-    "file": "assets/Index-DepQdhVR.js",
+    "file": "assets/Index-BYXCdc6Z.js",
     "name": "Index",
     "src": "resources/js/Pages/Projects/Index.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_Layout-BAQbJ_16.js",
-      "_AnimatedSection-C-sIqfn7.js"
+      "_PageHeader-DWGmIobV.js",
+      "_Layout-Jaq9DzrE.js",
+      "_AnimatedSection-ZkdtT8CQ.js"
     ]
   },
   "resources/js/Pages/Projects/Show.tsx": {
-    "file": "assets/Show-DfWpdph3.js",
+    "file": "assets/Show-Co3jfBQn.js",
     "name": "Show",
     "src": "resources/js/Pages/Projects/Show.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_Layout-BAQbJ_16.js",
-      "_AnimatedSection-C-sIqfn7.js"
+      "_Layout-Jaq9DzrE.js",
+      "_AnimatedSection-ZkdtT8CQ.js"
     ]
   },
   "resources/js/Pages/QuoteRequest.tsx": {
-    "file": "assets/QuoteRequest-DkT3x9Gy.js",
+    "file": "assets/QuoteRequest-DiyQwQEI.js",
     "name": "QuoteRequest",
     "src": "resources/js/Pages/QuoteRequest.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_Layout-BAQbJ_16.js",
-      "_AnimatedSection-C-sIqfn7.js"
+      "_PageHeader-DWGmIobV.js",
+      "_Layout-Jaq9DzrE.js",
+      "_AnimatedSection-ZkdtT8CQ.js"
     ]
   },
   "resources/js/Pages/Services/Index.tsx": {
-    "file": "assets/Index-C3XtMajh.js",
+    "file": "assets/Index-DVyk_ksw.js",
     "name": "Index",
     "src": "resources/js/Pages/Services/Index.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_Layout-BAQbJ_16.js",
-      "_AnimatedSection-C-sIqfn7.js"
+      "_PageHeader-DWGmIobV.js",
+      "_Layout-Jaq9DzrE.js",
+      "_AnimatedSection-ZkdtT8CQ.js"
     ]
   },
   "resources/js/Pages/Services/Show.tsx": {
-    "file": "assets/Show-_cxsaU2y.js",
+    "file": "assets/Show-BkzNb3ti.js",
     "name": "Show",
     "src": "resources/js/Pages/Services/Show.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_Layout-BAQbJ_16.js",
-      "_AnimatedSection-C-sIqfn7.js"
+      "_Layout-Jaq9DzrE.js",
+      "_AnimatedSection-ZkdtT8CQ.js"
     ]
   },
   "resources/js/Pages/SiteWork/Create.tsx": {
-    "file": "assets/Create-60qEUbyX.js",
+    "file": "assets/Create-BO_wZOmw.js",
     "name": "Create",
     "src": "resources/js/Pages/SiteWork/Create.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_Layout-BAQbJ_16.js",
-      "_AnimatedSection-C-sIqfn7.js"
+      "_Layout-Jaq9DzrE.js",
+      "_AnimatedSection-ZkdtT8CQ.js"
     ]
   },
   "resources/js/Pages/SiteWork/Edit.tsx": {
-    "file": "assets/Edit-CB9y4abS.js",
+    "file": "assets/Edit-BBgK0M9V.js",
     "name": "Edit",
     "src": "resources/js/Pages/SiteWork/Edit.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_Layout-BAQbJ_16.js",
-      "_AnimatedSection-C-sIqfn7.js"
+      "_Layout-Jaq9DzrE.js",
+      "_AnimatedSection-ZkdtT8CQ.js"
     ]
   },
   "resources/js/Pages/SiteWork/Index.tsx": {
-    "file": "assets/Index-6e6lK-9E.js",
+    "file": "assets/Index-Cf_eaLF_.js",
     "name": "Index",
     "src": "resources/js/Pages/SiteWork/Index.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_Layout-BAQbJ_16.js",
-      "_AnimatedSection-C-sIqfn7.js"
+      "_PageHeader-DWGmIobV.js",
+      "_Layout-Jaq9DzrE.js",
+      "_AnimatedSection-ZkdtT8CQ.js"
     ]
   },
   "resources/js/Pages/SiteWork/ProjectLogs.tsx": {
-    "file": "assets/ProjectLogs-BWNROlCB.js",
+    "file": "assets/ProjectLogs-8moFnEOC.js",
     "name": "ProjectLogs",
     "src": "resources/js/Pages/SiteWork/ProjectLogs.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_Layout-BAQbJ_16.js",
-      "_AnimatedSection-C-sIqfn7.js"
+      "_Layout-Jaq9DzrE.js",
+      "_AnimatedSection-ZkdtT8CQ.js"
     ]
   },
   "resources/js/Pages/SiteWork/Show.tsx": {
-    "file": "assets/Show-DbTbdkwu.js",
+    "file": "assets/Show-78kPEi3E.js",
     "name": "Show",
     "src": "resources/js/Pages/SiteWork/Show.tsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.tsx",
-      "_Layout-BAQbJ_16.js",
-      "_AnimatedSection-C-sIqfn7.js"
+      "_Layout-Jaq9DzrE.js",
+      "_AnimatedSection-ZkdtT8CQ.js"
     ]
   },
   "resources/js/app.tsx": {
-    "file": "assets/app-Cj71hTJy.js",
+    "file": "assets/app-xRXLNU02.js",
     "name": "app",
     "src": "resources/js/app.tsx",
     "isEntry": true,
@@ -220,7 +234,7 @@
       "resources/js/Pages/SiteWork/Show.tsx"
     ],
     "css": [
-      "assets/app-B12M-OQ-.css"
+      "assets/app-rGZTwdcY.css"
     ]
   }
 }

@@ -104,7 +104,7 @@ export default function BlogShow({ meta, post }: BlogShowProps) {
 
                     {/* Title */}
                     <AnimatedSection variant="fade-up" delay={200}>
-                        <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[3.5rem] font-display font-extrabold text-white leading-[1.1] mb-8 max-w-4xl">
+                        <h1 className="cn-detail-title text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[3.5rem] font-display font-extrabold text-white leading-[1.1] mb-8 max-w-4xl">
                             {post.title}
                         </h1>
                     </AnimatedSection>

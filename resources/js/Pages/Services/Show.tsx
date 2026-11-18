@@ -41,19 +41,14 @@ export default function ServiceShow({ meta, service }: ServiceShowProps) {
             <section className="section-padding">
                 <div className="max-w-4xl mx-auto px-6 sm:px-8">
                     <AnimatedSection variant="fade-up">
-                        {service.icon && (
-                            <div className="text-6xl mb-6">{service.icon}</div>
-                        )}
-                        <h1 className="font-display text-4xl md:text-6xl font-bold text-white mb-8">
+                        <p className="cn-kicker mb-4">Engineering services</p>
+                        <h1 className="cn-detail-title font-display text-4xl md:text-6xl font-bold text-white mb-8">
                             {service.title}
                         </h1>
                     </AnimatedSection>
                     <AnimatedSection variant="fade-up" delay={150}>
                         <div
-                            className="prose prose-lg prose-invert max-w-none text-gray-300 leading-relaxed
-                                       prose-headings:font-display prose-headings:text-white
-                                       prose-a:text-accent prose-a:no-underline hover:prose-a:underline
-                                       prose-strong:text-white"
+                            className="article-content"
                             dangerouslySetInnerHTML={{
                                 __html: service.description,
                             }}

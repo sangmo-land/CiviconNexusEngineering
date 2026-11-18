@@ -1,3 +1,4 @@
+import PageHeader from '@/Components/PageHeader';
 import { Link } from '@inertiajs/react';
 import SEOHead from '@/Components/SEOHead';
 import Layout from '@/Layouts/Layout';
@@ -14,25 +15,11 @@ export default function ServicesIndex({ meta, services }: ServicesIndexProps) {
         <Layout>
             <SEOHead meta={meta} />
 
-            {/* Hero Section */}
-            <section className="relative pt-40 pb-20 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-b from-brand-700/20 to-transparent" />
-                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
-                <div className="container-custom relative z-10">
-                    <AnimatedSection variant="fade-up">
-                        <span className="text-accent font-display text-sm tracking-widest uppercase font-semibold">
-                            What We Offer
-                        </span>
-                        <h1 className="font-display text-5xl md:text-7xl font-bold text-white mt-4 mb-6">
-                            Our Services
-                        </h1>
-                        <p className="text-xl text-gray-400 max-w-2xl leading-relaxed">
-                            Comprehensive civil engineering and construction
-                            services tailored to meet your project needs.
-                        </p>
-                    </AnimatedSection>
-                </div>
-            </section>
+            <PageHeader
+                label="Capabilities"
+                title="Engineering services"
+                description="Structural design, civil works and construction management for projects across Cameroon."
+            />
 
             {/* Services Grid */}
             <section className="section-padding">

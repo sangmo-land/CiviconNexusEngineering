@@ -90,7 +90,7 @@ export default function ProjectShow({ meta, project }: ProjectShowProps) {
                                     </span>
                                 )}
                             </div>
-                            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 max-w-4xl leading-[1.1]">
+                            <h1 className="cn-detail-title font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 max-w-4xl leading-[1.1]">
                                 {project.title}
                             </h1>
                             <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-gray-300 text-sm">

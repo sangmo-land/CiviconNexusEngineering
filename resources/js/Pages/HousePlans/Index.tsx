@@ -1,3 +1,4 @@
+import PageHeader from '@/Components/PageHeader';
 import { Link } from '@inertiajs/react';
 import SEOHead from '@/Components/SEOHead';
 import Layout from '@/Layouts/Layout';
@@ -25,23 +26,11 @@ export default function HousePlansIndex({
         <Layout>
             <SEOHead meta={meta} />
 
-            {/* Hero Section */}
-            <section className="relative pt-40 pb-20 overflow-hidden">
-                <div className="absolute inset-0 bg-brand-950" />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(245,158,11,0.08),transparent_60%)]" />
-                <div className="relative container-custom">
-                    <AnimatedSection variant="fade-up">
-                        <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">
-                            <span className="gradient-text">House Plans</span>
-                        </h1>
-                        <p className="text-xl text-gray-400 max-w-2xl">
-                            Browse our collection of professionally designed
-                            house plans. Download and start building your dream
-                            home.
-                        </p>
-                    </AnimatedSection>
-                </div>
-            </section>
+            <PageHeader
+                label="Residential design"
+                title="House plans"
+                description="Compare layouts, floor areas and room counts to find a plan that fits your brief."
+            />
 
             {/* House Plans Grid */}
             <section className="section-padding bg-brand-950">
@@ -55,7 +44,7 @@ export default function HousePlansIndex({
                             >
                                 <Link
                                     href={`/plans/${plan.slug}`}
-                                    className="group card-modern rounded-2xl overflow-hidden block h-full"
+                                    className="group cn-media-card block h-full"
                                 >
                                     <div className="aspect-video bg-brand-900 relative overflow-hidden">
                                         {plan.preview_image ? (

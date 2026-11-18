@@ -368,9 +368,7 @@ export default function Edit({ meta, project, log }: EditProps) {
             <SEOHead meta={meta} />
 
             {/* Hero Section */}
-            <section className="relative pt-36 pb-12 md:pt-44 md:pb-16 overflow-hidden">
-                <div className="absolute inset-0 bg-brand-950" />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(245,158,11,0.08),transparent_60%)]" />
+            <section className="relative pt-36 pb-12 md:pt-44 md:pb-16 overflow-hidden cn-detail-header">
                 <div className="relative container-custom">
                     <AnimatedSection variant="fade-up">
                         <Link
@@ -392,7 +390,7 @@ export default function Edit({ meta, project, log }: EditProps) {
                             </svg>
                             Back to Work Log
                         </Link>
-                        <h1 className="text-3xl sm:text-4xl font-display font-bold text-white">
+                        <h1 className="cn-detail-title text-3xl sm:text-4xl font-display font-bold text-white">
                             Edit Work Log
                         </h1>
                         <p className="text-gray-400 mt-2">

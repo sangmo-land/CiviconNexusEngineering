@@ -1,4 +1,4 @@
-﻿.cn-home {
+.cn-home {
     --cn-ink: #0a1117;
     --cn-panel: #101b23;
     --cn-paper: #f4f3ec;
@@ -182,12 +182,10 @@
     border: 1px solid var(--cn-line);
     background: radial-gradient(ellipse at top right, #f6c36c18, transparent 65%), var(--cn-panel);
 }
-.cn-home a:focus-visible, .cn-home-nav :is(a, button):focus-visible {
+.cn-home a:focus-visible {
     outline: 2px solid #f6c36c;
     outline-offset: 3px;
 }
-.cn-home-nav .cn-nav-quote { background: #f6c36c; color: #0a1117; border-radius: 0; }
-.cn-home-nav .cn-nav-quote:hover { background: #ffdaa0; }
 @media (max-width: 760px) {
     .cn-hero-image img { object-position: 59% center; }
     .cn-hero::after { background: linear-gradient(90deg, #0a1117f0, #0a111770), linear-gradient(0deg, #0a1117d9, transparent 75%); }
@@ -202,6 +200,6 @@
     .cn-service { min-height: auto; }
 }
 @media (prefers-reduced-motion: reduce) {
-    .cn-home *, .cn-home-nav * { transition: none !important; }
+    .cn-home * { transition: none !important; }
     .cn-project:hover img { transform: none; }
 }

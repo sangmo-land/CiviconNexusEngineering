@@ -1,3 +1,4 @@
+import PageHeader from '@/Components/PageHeader';
 import { Link } from '@inertiajs/react';
 import SEOHead from '@/Components/SEOHead';
 import Layout from '@/Layouts/Layout';
@@ -14,25 +15,11 @@ export default function ProjectsIndex({ meta, projects }: ProjectsIndexProps) {
         <Layout>
             <SEOHead meta={meta} />
 
-            {/* Hero Section */}
-            <section className="relative pt-40 pb-20 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-b from-brand-700/20 to-transparent" />
-                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear_gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
-                <div className="container-custom relative z-10">
-                    <AnimatedSection variant="fade-up">
-                        <span className="text-accent font-display text-sm tracking-widest uppercase font-semibold">
-                            Portfolio
-                        </span>
-                        <h1 className="font-display text-5xl md:text-7xl font-bold text-white mt-4 mb-6">
-                            Our Projects
-                        </h1>
-                        <p className="text-xl text-gray-400 max-w-2xl leading-relaxed">
-                            Explore our portfolio of successfully completed
-                            civil engineering and construction projects.
-                        </p>
-                    </AnimatedSection>
-                </div>
-            </section>
+            <PageHeader
+                label="Portfolio"
+                title="Our projects"
+                description="Explore our civil engineering and construction work by project type and location."
+            />
 
             {/* Projects Grid */}
             <section className="section-padding">
@@ -46,7 +33,7 @@ export default function ProjectsIndex({ meta, projects }: ProjectsIndexProps) {
                             >
                                 <Link
                                     href={`/projects/${project.slug}`}
-                                    className="group block rounded-3xl overflow-hidden glass hover:border-white/20 transition-all duration-500"
+                                    className="group cn-media-card block h-full hover:border-white/20 transition-all duration-500"
                                 >
                                     <div className="aspect-[4/3] bg-brand-800 relative overflow-hidden">
                                         {project.images && project.images[0] ? (

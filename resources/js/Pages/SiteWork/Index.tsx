@@ -1,3 +1,4 @@
+import PageHeader from '@/Components/PageHeader';
 import { Link } from "@inertiajs/react";
 import SEOHead from '@/Components/SEOHead';
 import Layout from "@/Layouts/Layout";
@@ -61,29 +62,11 @@ export default function SiteWorkIndex({
         <Layout>
             <SEOHead meta={meta} />
 
-            {/* Hero Section */}
-            <section className="relative pt-36 pb-20 md:pt-44 md:pb-28 overflow-hidden">
-                <div className="absolute inset-0 bg-brand-950" />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(245,158,11,0.08),transparent_60%)]" />
-                <div className="relative container-custom">
-                    <AnimatedSection variant="fade-up">
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className="w-8 h-0.5 bg-accent rounded-full" />
-                            <span className="text-accent font-medium text-sm tracking-wide uppercase">
-                                Site Work Tracking
-                            </span>
-                        </div>
-                        <h1 className="text-4xl sm:text-5xl md:text-6xl font-display font-bold mb-6 text-white">
-                            Site Work{" "}
-                            <span className="gradient-text">Logs</span>
-                        </h1>
-                        <p className="text-lg sm:text-xl text-gray-400 max-w-2xl leading-relaxed">
-                            Track daily work activities, materials used, and
-                            worker hours across all your projects.
-                        </p>
-                    </AnimatedSection>
-                </div>
-            </section>
+            <PageHeader
+                label="Construction records"
+                title="Site work logs"
+                description="Find daily reports on construction activity, materials and worker hours by project."
+            />
 
             {/* Projects Grid */}
             <section className="py-16 md:py-24 bg-brand-950">
