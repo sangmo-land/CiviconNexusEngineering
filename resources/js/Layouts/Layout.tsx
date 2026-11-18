@@ -1,11 +1,14 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import React, { ReactNode, useState, useEffect } from "react";
 
 interface LayoutProps {
     children: ReactNode;
+    home?: boolean;
 }
 
-export default function Layout({ children }: LayoutProps) {
+export default function Layout({ children, home = false }: LayoutProps) {
+    const { url } = usePage();
+    const currentPath = url.split('?')[0];
     const [isScrolled, setIsScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -13,6 +16,7 @@ export default function Layout({ children }: LayoutProps) {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 20);
         };
+        handleScroll();
         window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
@@ -31,13 +35,14 @@ export default function Layout({ children }: LayoutProps) {
         <div className="min-h-screen bg-brand-950 text-gray-100">
             {/* Navigation */}
             <nav
-                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+                aria-label="Main navigation"
+                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${home ? "cn-home-nav border-b border-white/15" : ""} ${
                     isScrolled
                         ? "bg-brand-950/80 backdrop-blur-2xl border-b border-white/5 shadow-2xl shadow-black/20"
-                        : "bg-transparent"
+                        : home ? "bg-[#0a1117]/70 backdrop-blur-md" : "bg-transparent"
                 }`}
             >
-                <div className="container-custom">
+                <div className={home ? "cn-shell" : "container-custom"}>
                     <div className="flex justify-between items-center h-20">
                         {/* Logo */}
                         <Link
@@ -60,11 +65,12 @@ export default function Layout({ children }: LayoutProps) {
                         </Link>
 
                         {/* Desktop Nav */}
-                        <div className="hidden lg:flex items-center gap-1">
+                        <div className="hidden xl:flex items-center gap-1">
                             {navLinks.map((link) => (
                                 <Link
                                     key={link.href}
                                     href={link.href}
+                                    aria-current={currentPath === link.href ? "page" : undefined}
                                     className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white rounded-xl hover:bg-white/5 transition-all duration-300"
                                 >
                                     {link.label}
@@ -72,7 +78,7 @@ export default function Layout({ children }: LayoutProps) {
                             ))}
                             <Link
                                 href="/quote-request"
-                                className="ml-4 px-6 py-2.5 bg-gradient-to-r from-accent to-accent-dark text-brand-950 font-bold text-sm rounded-xl hover:shadow-lg hover:shadow-accent/20 transition-all duration-300 hover:-translate-y-0.5"
+                                className={`ml-4 px-6 py-2.5 text-brand-950 font-bold text-sm transition-all duration-300 ${home ? "cn-nav-quote" : "bg-gradient-to-r from-accent to-accent-dark rounded-xl hover:shadow-lg hover:shadow-accent/20 hover:-translate-y-0.5"}`}
                             >
                                 Get a Quote
                             </Link>
@@ -81,8 +87,10 @@ export default function Layout({ children }: LayoutProps) {
                         {/* Mobile Menu Button */}
                         <button
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                            className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-xl hover:bg-white/5 transition"
+                            className="xl:hidden relative w-10 h-10 flex items-center justify-center rounded-xl hover:bg-white/5 transition"
                             aria-label="Toggle menu"
+                            aria-expanded={mobileMenuOpen}
+                            aria-controls="mobile-navigation"
                         >
                             <div className="flex flex-col gap-1.5">
                                 <span
@@ -111,7 +119,9 @@ export default function Layout({ children }: LayoutProps) {
 
                 {/* Mobile Menu */}
                 <div
-                    className={`lg:hidden transition-all duration-500 overflow-hidden ${
+                    id="mobile-navigation"
+                    inert={!mobileMenuOpen}
+                    className={`xl:hidden transition-all duration-500 overflow-hidden ${
                         mobileMenuOpen
                             ? "max-h-[500px] opacity-100"
                             : "max-h-0 opacity-0"
@@ -122,6 +132,7 @@ export default function Layout({ children }: LayoutProps) {
                             <Link
                                 key={link.href}
                                 href={link.href}
+                                aria-current={currentPath === link.href ? "page" : undefined}
                                 onClick={() => setMobileMenuOpen(false)}
                                 className="block px-4 py-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-xl transition-all duration-300"
                             >
