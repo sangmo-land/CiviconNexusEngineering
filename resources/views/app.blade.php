@@ -7,12 +7,12 @@
         <title inertia>{{ config('app.name', 'Civicon Nexus Engineering') }}</title>
 
         <!-- SEO Base Meta Tags -->
-        <meta name="theme-color" content="#0f172a">
-        <meta name="msapplication-TileColor" content="#0f172a">
+        <meta name="theme-color" content="#f7fbff">
+        <meta name="msapplication-TileColor" content="#f7fbff">
         <meta name="application-name" content="Civicon Nexus Engineering">
         <meta name="apple-mobile-web-app-title" content="Civicon Nexus">
         <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <meta name="apple-mobile-web-app-status-bar-style" content="default">
         <meta name="format-detection" content="telephone=yes">
 
         <!-- Favicon -->

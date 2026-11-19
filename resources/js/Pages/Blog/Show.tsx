@@ -28,26 +28,19 @@ export default function BlogShow({ meta, post }: BlogShowProps) {
             <SEOHead meta={meta} />
 
             {/* Hero Header */}
-            <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
-                {/* Background layers */}
-                <div className="absolute inset-0 bg-brand-950" />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(245,158,11,0.07),transparent_50%)]" />
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(59,130,246,0.05),transparent_50%)]" />
-                {/* Subtle grid */}
-                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:60px_60px]" />
-
+            <section className="cn-detail-header relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
                 <div className="relative max-w-5xl mx-auto px-6 sm:px-10 lg:px-16">
                     {/* Breadcrumb */}
                     <AnimatedSection variant="fade-up">
                         <nav className="flex items-center text-[0.8125rem] mb-12 space-x-2.5 font-medium">
                             <Link
                                 href="/"
-                                className="text-gray-500 hover:text-white transition-colors duration-200"
+                                className="text-muted hover:text-ink transition-colors duration-200"
                             >
                                 Home
                             </Link>
                             <svg
-                                className="w-3 h-3 text-gray-600"
+                                className="w-3 h-3 text-muted"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
@@ -61,12 +54,12 @@ export default function BlogShow({ meta, post }: BlogShowProps) {
                             </svg>
                             <Link
                                 href="/blog"
-                                className="text-gray-500 hover:text-white transition-colors duration-200"
+                                className="text-muted hover:text-ink transition-colors duration-200"
                             >
                                 Blog
                             </Link>
                             <svg
-                                className="w-3 h-3 text-gray-600"
+                                className="w-3 h-3 text-muted"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
@@ -78,7 +71,7 @@ export default function BlogShow({ meta, post }: BlogShowProps) {
                                     d="M9 5l7 7-7 7"
                                 />
                             </svg>
-                            <span className="text-gray-400 truncate max-w-[180px] sm:max-w-sm">
+                            <span className="text-muted truncate max-w-[180px] sm:max-w-sm">
                                 {post.title}
                             </span>
                         </nav>
@@ -90,13 +83,13 @@ export default function BlogShow({ meta, post }: BlogShowProps) {
                             <div className="flex items-center gap-3">
                                 <div className="w-10 h-[2px] bg-gradient-to-r from-accent to-accent/0 rounded-full" />
                                 {post.published_at && (
-                                    <time className="text-accent font-semibold text-xs tracking-[0.15em] uppercase">
+                                    <time className="text-signal font-semibold text-xs tracking-[0.15em] uppercase">
                                         {formatDate(post.published_at)}
                                     </time>
                                 )}
                             </div>
-                            <span className="text-gray-600">•</span>
-                            <span className="text-gray-500 text-xs tracking-[0.1em] uppercase font-medium">
+                            <span className="text-muted">•</span>
+                            <span className="text-muted text-xs tracking-[0.1em] uppercase font-medium">
                                 {readingTime(post.content)} min read
                             </span>
                         </div>
@@ -104,7 +97,7 @@ export default function BlogShow({ meta, post }: BlogShowProps) {
 
                     {/* Title */}
                     <AnimatedSection variant="fade-up" delay={200}>
-                        <h1 className="cn-detail-title text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[3.5rem] font-display font-extrabold text-white leading-[1.1] mb-8 max-w-4xl">
+                        <h1 className="cn-detail-title text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[3.5rem] font-display font-extrabold text-ink leading-[1.1] mb-8 max-w-4xl">
                             {post.title}
                         </h1>
                     </AnimatedSection>
@@ -112,7 +105,7 @@ export default function BlogShow({ meta, post }: BlogShowProps) {
                     {/* Excerpt */}
                     {post.excerpt && (
                         <AnimatedSection variant="fade-up" delay={300}>
-                            <p className="text-[1.125rem] sm:text-[1.25rem] text-gray-400 leading-[1.8] max-w-3xl">
+                            <p className="text-[1.125rem] sm:text-[1.25rem] text-muted leading-[1.8] max-w-3xl">
                                 {post.excerpt}
                             </p>
                         </AnimatedSection>
@@ -124,9 +117,9 @@ export default function BlogShow({ meta, post }: BlogShowProps) {
             <div className="relative">
                 <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16">
                     <div className="flex items-center gap-4">
-                        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+                        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-ink/10 to-transparent" />
                         <div className="w-1.5 h-1.5 rounded-full bg-accent/40" />
-                        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+                        <div className="flex-1 h-px bg-gradient-to-r from-transparent via-ink/10 to-transparent" />
                     </div>
                 </div>
             </div>
@@ -138,7 +131,7 @@ export default function BlogShow({ meta, post }: BlogShowProps) {
                     {post.featured_image && (
                         <AnimatedSection variant="fade-in" delay={100}>
                             <figure className="mb-12">
-                                <div className="rounded-2xl overflow-hidden border border-white/10 shadow-xl shadow-black/30">
+                                <div className="rounded-2xl overflow-hidden border border-ink/10 shadow-xl shadow-black/30">
                                     <img
                                         src={
                                             post.featured_image.startsWith(
@@ -164,11 +157,11 @@ export default function BlogShow({ meta, post }: BlogShowProps) {
                     </AnimatedSection>
 
                     {/* Author / Share Bar */}
-                    <div className="mt-20 pt-10 border-t border-white/10">
+                    <div className="mt-20 pt-10 border-t border-ink/10">
                         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
                             <Link
                                 href="/blog"
-                                className="inline-flex items-center gap-3 text-gray-400 hover:text-accent transition-all duration-300 group"
+                                className="inline-flex items-center gap-3 text-muted hover:text-signal transition-all duration-300 group"
                             >
                                 <div className="w-10 h-10 rounded-xl glass flex items-center justify-center group-hover:bg-accent/10 transition-colors duration-300">
                                     <svg
@@ -186,7 +179,7 @@ export default function BlogShow({ meta, post }: BlogShowProps) {
                                     </svg>
                                 </div>
                                 <div>
-                                    <span className="text-xs text-gray-500 uppercase tracking-wider block">
+                                    <span className="text-xs text-muted uppercase tracking-wider block">
                                         Previous
                                     </span>
                                     <span className="font-semibold text-sm">
@@ -196,7 +189,7 @@ export default function BlogShow({ meta, post }: BlogShowProps) {
                             </Link>
 
                             <div className="flex items-center gap-4">
-                                <span className="text-xs text-gray-600 uppercase tracking-wider">
+                                <span className="text-xs text-muted uppercase tracking-wider">
                                     Share
                                 </span>
                                 <div className="flex gap-2">
@@ -204,7 +197,7 @@ export default function BlogShow({ meta, post }: BlogShowProps) {
                                         href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(window?.location?.href || "")}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="w-9 h-9 rounded-lg glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-200"
+                                        className="w-9 h-9 rounded-lg glass flex items-center justify-center text-muted hover:text-ink hover:bg-ink/10 transition-all duration-200"
                                     >
                                         <svg
                                             className="w-3.5 h-3.5"
@@ -218,7 +211,7 @@ export default function BlogShow({ meta, post }: BlogShowProps) {
                                         href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window?.location?.href || "")}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="w-9 h-9 rounded-lg glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-200"
+                                        className="w-9 h-9 rounded-lg glass flex items-center justify-center text-muted hover:text-ink hover:bg-ink/10 transition-all duration-200"
                                     >
                                         <svg
                                             className="w-3.5 h-3.5"
@@ -232,7 +225,7 @@ export default function BlogShow({ meta, post }: BlogShowProps) {
                                         href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window?.location?.href || "")}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="w-9 h-9 rounded-lg glass flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-200"
+                                        className="w-9 h-9 rounded-lg glass flex items-center justify-center text-muted hover:text-ink hover:bg-ink/10 transition-all duration-200"
                                     >
                                         <svg
                                             className="w-3.5 h-3.5"
@@ -256,18 +249,18 @@ export default function BlogShow({ meta, post }: BlogShowProps) {
 
                 <div className="relative max-w-3xl mx-auto px-6 sm:px-10 lg:px-12 text-center">
                     <AnimatedSection variant="fade-up">
-                        <div className="inline-flex items-center gap-3 text-accent text-xs font-semibold tracking-[0.2em] uppercase mb-8">
+                        <div className="inline-flex items-center gap-3 text-signal text-xs font-semibold tracking-[0.2em] uppercase mb-8">
                             <div className="w-8 h-[2px] bg-gradient-to-r from-transparent to-accent rounded-full" />
                             Let's Build Together
                             <div className="w-8 h-[2px] bg-gradient-to-l from-transparent to-accent rounded-full" />
                         </div>
-                        <h2 className="text-3xl sm:text-4xl md:text-[2.75rem] font-display font-bold text-white mb-6 leading-tight">
+                        <h2 className="text-3xl sm:text-4xl md:text-[2.75rem] font-display font-bold text-ink mb-6 leading-tight">
                             Ready to Start Your{" "}
-                            <span className="gradient-text-accent">
+                            <span className="gradient-text-signal">
                                 Project?
                             </span>
                         </h2>
-                        <p className="text-gray-400 text-lg leading-relaxed mb-12 max-w-lg mx-auto">
+                        <p className="text-muted text-lg leading-relaxed mb-12 max-w-lg mx-auto">
                             Contact our team of experts to discuss your civil
                             engineering and construction needs.
                         </p>

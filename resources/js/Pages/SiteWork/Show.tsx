@@ -102,7 +102,7 @@ export default function Show({ meta, log }: ShowProps) {
                     <AnimatedSection variant="fade-up">
                         <Link
                             href={`/site-work/project/${log.project.id}`}
-                            className="inline-flex items-center gap-2 text-gray-400 hover:text-accent transition-colors mb-6"
+                            className="inline-flex items-center gap-2 text-muted hover:text-signal transition-colors mb-6"
                         >
                             <svg
                                 className="w-4 h-4"
@@ -123,14 +123,14 @@ export default function Show({ meta, log }: ShowProps) {
                             <div>
                                 <div className="flex items-center gap-3 mb-4">
                                     <div className="w-8 h-0.5 bg-accent rounded-full" />
-                                    <span className="text-accent font-medium text-sm tracking-wide uppercase">
+                                    <span className="text-signal font-medium text-sm tracking-wide uppercase">
                                         Work Log
                                     </span>
                                 </div>
-                                <h1 className="cn-detail-title text-3xl sm:text-4xl font-display font-bold text-white mb-2">
+                                <h1 className="cn-detail-title text-3xl sm:text-4xl font-display font-bold text-ink mb-2">
                                     {formatDate(log.work_date)}
                                 </h1>
-                                <p className="text-gray-400">
+                                <p className="text-muted">
                                     {log.project.title} • {log.project.location}
                                 </p>
                             </div>
@@ -143,7 +143,7 @@ export default function Show({ meta, log }: ShowProps) {
                                 </Link>
                                 <button
                                     onClick={handleDelete}
-                                    className="px-4 py-2 rounded-xl bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500/20 transition-colors"
+                                    className="px-4 py-2 rounded-xl bg-red-500/10 text-red-700 border border-red-500/20 hover:bg-red-500/20 transition-colors"
                                 >
                                     Delete
                                 </button>
@@ -160,36 +160,36 @@ export default function Show({ meta, log }: ShowProps) {
                     <AnimatedSection variant="fade-up">
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                             <div className="card-modern rounded-xl p-4 text-center">
-                                <div className="text-2xl font-display font-bold text-accent">
+                                <div className="text-2xl font-display font-bold text-signal">
                                     {log.workers.length}
                                 </div>
-                                <div className="text-sm text-gray-400">
+                                <div className="text-sm text-muted">
                                     Workers
                                 </div>
                             </div>
                             <div className="card-modern rounded-xl p-4 text-center">
-                                <div className="text-2xl font-display font-bold text-accent">
+                                <div className="text-2xl font-display font-bold text-signal">
                                     {totalWorkerHours}
                                 </div>
-                                <div className="text-sm text-gray-400">
+                                <div className="text-sm text-muted">
                                     Total Hours
                                 </div>
                             </div>
                             <div className="card-modern rounded-xl p-4 text-center">
-                                <div className="text-2xl font-display font-bold text-accent">
+                                <div className="text-2xl font-display font-bold text-signal">
                                     {log.materials.length}
                                 </div>
-                                <div className="text-sm text-gray-400">
+                                <div className="text-sm text-muted">
                                     Materials
                                 </div>
                             </div>
                             <div className="card-modern rounded-xl p-4 text-center">
-                                <div className="text-2xl font-display font-bold text-accent">
+                                <div className="text-2xl font-display font-bold text-signal">
                                     {totalMaterialCost > 0
                                         ? `$${totalMaterialCost.toLocaleString()}`
                                         : "-"}
                                 </div>
-                                <div className="text-sm text-gray-400">
+                                <div className="text-sm text-muted">
                                     Material Cost
                                 </div>
                             </div>
@@ -201,7 +201,7 @@ export default function Show({ meta, log }: ShowProps) {
                         <div className="card-modern rounded-2xl p-6 md:p-8 mb-6">
                             <div className="flex flex-wrap items-center gap-4 mb-6">
                                 {(log.start_time || log.end_time) && (
-                                    <div className="flex items-center gap-2 text-gray-400">
+                                    <div className="flex items-center gap-2 text-muted">
                                         <svg
                                             className="w-5 h-5"
                                             fill="none"
@@ -222,12 +222,12 @@ export default function Show({ meta, log }: ShowProps) {
                                     </div>
                                 )}
                                 {log.weather_conditions && (
-                                    <span className="px-3 py-1 bg-brand-800 text-gray-300 rounded-full text-sm">
+                                    <span className="px-3 py-1 bg-brand-800 text-muted rounded-full text-sm">
                                         {log.weather_conditions}
                                     </span>
                                 )}
                                 {log.creator && (
-                                    <div className="flex items-center gap-2 text-gray-400">
+                                    <div className="flex items-center gap-2 text-muted">
                                         <svg
                                             className="w-5 h-5"
                                             fill="none"
@@ -246,10 +246,10 @@ export default function Show({ meta, log }: ShowProps) {
                                 )}
                             </div>
 
-                            <h2 className="text-lg font-display font-semibold text-white mb-3">
+                            <h2 className="text-lg font-display font-semibold text-ink mb-3">
                                 Work Description
                             </h2>
-                            <p className="text-gray-300 whitespace-pre-wrap leading-relaxed">
+                            <p className="text-muted whitespace-pre-wrap leading-relaxed">
                                 {log.work_description}
                             </p>
                         </div>
@@ -259,7 +259,7 @@ export default function Show({ meta, log }: ShowProps) {
                     {log.difficulties && (
                         <AnimatedSection variant="fade-up" delay={100}>
                             <div className="card-modern rounded-2xl p-6 md:p-8 mb-6 border-red-500/20 bg-red-500/5">
-                                <h2 className="text-lg font-display font-semibold text-red-400 mb-3 flex items-center gap-2">
+                                <h2 className="text-lg font-display font-semibold text-red-700 mb-3 flex items-center gap-2">
                                     <svg
                                         className="w-5 h-5"
                                         fill="none"
@@ -275,7 +275,7 @@ export default function Show({ meta, log }: ShowProps) {
                                     </svg>
                                     Difficulties Encountered
                                 </h2>
-                                <p className="text-gray-300 whitespace-pre-wrap">
+                                <p className="text-muted whitespace-pre-wrap">
                                     {log.difficulties}
                                 </p>
                             </div>
@@ -286,23 +286,23 @@ export default function Show({ meta, log }: ShowProps) {
                     {log.workers.length > 0 && (
                         <AnimatedSection variant="fade-up" delay={150}>
                             <div className="card-modern rounded-2xl p-6 md:p-8 mb-6">
-                                <h2 className="text-lg font-display font-semibold text-white mb-4">
+                                <h2 className="text-lg font-display font-semibold text-ink mb-4">
                                     Workers ({log.workers.length})
                                 </h2>
                                 <div className="overflow-x-auto">
                                     <table className="w-full">
                                         <thead>
-                                            <tr className="border-b border-white/10">
-                                                <th className="text-left py-3 px-4 text-sm font-medium text-gray-400">
+                                            <tr className="border-b border-ink/10">
+                                                <th className="text-left py-3 px-4 text-sm font-medium text-muted">
                                                     Name
                                                 </th>
-                                                <th className="text-left py-3 px-4 text-sm font-medium text-gray-400">
+                                                <th className="text-left py-3 px-4 text-sm font-medium text-muted">
                                                     Role
                                                 </th>
-                                                <th className="text-left py-3 px-4 text-sm font-medium text-gray-400">
+                                                <th className="text-left py-3 px-4 text-sm font-medium text-muted">
                                                     Hours
                                                 </th>
-                                                <th className="text-left py-3 px-4 text-sm font-medium text-gray-400">
+                                                <th className="text-left py-3 px-4 text-sm font-medium text-muted">
                                                     Tasks
                                                 </th>
                                             </tr>
@@ -311,19 +311,19 @@ export default function Show({ meta, log }: ShowProps) {
                                             {log.workers.map((worker) => (
                                                 <tr
                                                     key={worker.id}
-                                                    className="border-b border-white/5"
+                                                    className="border-b border-ink/10"
                                                 >
-                                                    <td className="py-3 px-4 text-white">
+                                                    <td className="py-3 px-4 text-ink">
                                                         {worker.worker_name}
                                                     </td>
-                                                    <td className="py-3 px-4 text-gray-400">
+                                                    <td className="py-3 px-4 text-muted">
                                                         {worker.role || "-"}
                                                     </td>
-                                                    <td className="py-3 px-4 text-gray-400">
+                                                    <td className="py-3 px-4 text-muted">
                                                         {worker.hours_worked ||
                                                             "-"}
                                                     </td>
-                                                    <td className="py-3 px-4 text-gray-400">
+                                                    <td className="py-3 px-4 text-muted">
                                                         {worker.tasks_performed ||
                                                             "-"}
                                                     </td>
@@ -340,26 +340,26 @@ export default function Show({ meta, log }: ShowProps) {
                     {log.materials.length > 0 && (
                         <AnimatedSection variant="fade-up" delay={200}>
                             <div className="card-modern rounded-2xl p-6 md:p-8 mb-6">
-                                <h2 className="text-lg font-display font-semibold text-white mb-4">
+                                <h2 className="text-lg font-display font-semibold text-ink mb-4">
                                     Materials Used ({log.materials.length})
                                 </h2>
                                 <div className="overflow-x-auto">
                                     <table className="w-full">
                                         <thead>
-                                            <tr className="border-b border-white/10">
-                                                <th className="text-left py-3 px-4 text-sm font-medium text-gray-400">
+                                            <tr className="border-b border-ink/10">
+                                                <th className="text-left py-3 px-4 text-sm font-medium text-muted">
                                                     Material
                                                 </th>
-                                                <th className="text-left py-3 px-4 text-sm font-medium text-gray-400">
+                                                <th className="text-left py-3 px-4 text-sm font-medium text-muted">
                                                     Quantity
                                                 </th>
-                                                <th className="text-left py-3 px-4 text-sm font-medium text-gray-400">
+                                                <th className="text-left py-3 px-4 text-sm font-medium text-muted">
                                                     Unit Cost
                                                 </th>
-                                                <th className="text-left py-3 px-4 text-sm font-medium text-gray-400">
+                                                <th className="text-left py-3 px-4 text-sm font-medium text-muted">
                                                     Total
                                                 </th>
-                                                <th className="text-left py-3 px-4 text-sm font-medium text-gray-400">
+                                                <th className="text-left py-3 px-4 text-sm font-medium text-muted">
                                                     Supplier
                                                 </th>
                                             </tr>
@@ -368,26 +368,26 @@ export default function Show({ meta, log }: ShowProps) {
                                             {log.materials.map((material) => (
                                                 <tr
                                                     key={material.id}
-                                                    className="border-b border-white/5"
+                                                    className="border-b border-ink/10"
                                                 >
-                                                    <td className="py-3 px-4 text-white">
+                                                    <td className="py-3 px-4 text-ink">
                                                         {material.material_name}
                                                     </td>
-                                                    <td className="py-3 px-4 text-gray-400">
+                                                    <td className="py-3 px-4 text-muted">
                                                         {material.quantity}{" "}
                                                         {material.unit}
                                                     </td>
-                                                    <td className="py-3 px-4 text-gray-400">
+                                                    <td className="py-3 px-4 text-muted">
                                                         {material.unit_cost
                                                             ? `$${material.unit_cost}`
                                                             : "-"}
                                                     </td>
-                                                    <td className="py-3 px-4 text-accent">
+                                                    <td className="py-3 px-4 text-signal">
                                                         {material.unit_cost
                                                             ? `$${(material.quantity * material.unit_cost).toLocaleString()}`
                                                             : "-"}
                                                     </td>
-                                                    <td className="py-3 px-4 text-gray-400">
+                                                    <td className="py-3 px-4 text-muted">
                                                         {material.supplier ||
                                                             "-"}
                                                     </td>
@@ -404,7 +404,7 @@ export default function Show({ meta, log }: ShowProps) {
                     {log.images && log.images.length > 0 && (
                         <AnimatedSection variant="fade-up" delay={225}>
                             <div className="card-modern rounded-2xl p-6 md:p-8 mb-6">
-                                <h2 className="text-lg font-display font-semibold text-white mb-4 flex items-center gap-2">
+                                <h2 className="text-lg font-display font-semibold text-ink mb-4 flex items-center gap-2">
                                     <svg
                                         className="w-5 h-5"
                                         fill="none"
@@ -453,7 +453,7 @@ export default function Show({ meta, log }: ShowProps) {
                                                 </div>
                                             </div>
                                             {image.caption && (
-                                                <p className="text-gray-400 text-sm mt-2 truncate">
+                                                <p className="text-muted text-sm mt-2 truncate">
                                                     {image.caption}
                                                 </p>
                                             )}
@@ -470,7 +470,7 @@ export default function Show({ meta, log }: ShowProps) {
                             <div className="card-modern rounded-2xl p-6 md:p-8">
                                 {log.safety_notes && (
                                     <div className="mb-6">
-                                        <h2 className="text-lg font-display font-semibold text-yellow-400 mb-3 flex items-center gap-2">
+                                        <h2 className="text-lg font-display font-semibold text-yellow-800 mb-3 flex items-center gap-2">
                                             <svg
                                                 className="w-5 h-5"
                                                 fill="none"
@@ -486,17 +486,17 @@ export default function Show({ meta, log }: ShowProps) {
                                             </svg>
                                             Safety Notes
                                         </h2>
-                                        <p className="text-gray-300 whitespace-pre-wrap">
+                                        <p className="text-muted whitespace-pre-wrap">
                                             {log.safety_notes}
                                         </p>
                                     </div>
                                 )}
                                 {log.additional_notes && (
                                     <div>
-                                        <h2 className="text-lg font-display font-semibold text-white mb-3">
+                                        <h2 className="text-lg font-display font-semibold text-ink mb-3">
                                             Additional Notes
                                         </h2>
-                                        <p className="text-gray-300 whitespace-pre-wrap">
+                                        <p className="text-muted whitespace-pre-wrap">
                                             {log.additional_notes}
                                         </p>
                                     </div>

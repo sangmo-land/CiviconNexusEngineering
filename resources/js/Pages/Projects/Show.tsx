@@ -38,7 +38,7 @@ export default function ProjectShow({ meta, project }: ProjectShowProps) {
             <SEOHead meta={meta} />
 
             {/* ─── Cinematic Hero ─── */}
-            <section className="relative h-[70vh] min-h-[500px] max-h-[800px] overflow-hidden">
+            <section className="cn-project-hero relative flex min-h-[clamp(28rem,70svh,46rem)] flex-col overflow-hidden">
                 {heroImage ? (
                     <img
                         src={`/storage/${heroImage.image_path}`}
@@ -47,31 +47,31 @@ export default function ProjectShow({ meta, project }: ProjectShowProps) {
                         onLoad={() => setHeroLoaded(true)}
                     />
                 ) : (
-                    <div className="absolute inset-0 bg-gradient-to-br from-brand-800 to-brand-950" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#215b87] to-[#081e36]" />
                 )}
                 {/* Overlays */}
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-950 via-brand-950/60 to-brand-950/20" />
-                <div className="absolute inset-0 bg-gradient-to-r from-brand-950/80 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#081e36] via-[#081e36]/60 to-[#081e36]/45" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#081e36]/80 via-transparent to-transparent" />
 
                 {/* Breadcrumb - top */}
-                <div className="absolute top-0 left-0 right-0 pt-28 z-10">
+                <div className="relative z-10 pt-28">
                     <div className="container-custom">
                         <nav className="flex items-center text-sm gap-2">
-                            <Link href="/" className="text-white/50 hover:text-accent transition-colors">Home</Link>
-                            <svg className="w-3 h-3 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-                            <Link href="/projects" className="text-white/50 hover:text-accent transition-colors">Projects</Link>
-                            <svg className="w-3 h-3 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                            <Link href="/" className="text-white/85 hover:text-accent transition-colors">Home</Link>
+                            <svg className="w-3 h-3 text-white/70" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                            <Link href="/projects" className="text-white/85 hover:text-accent transition-colors">Projects</Link>
+                            <svg className="w-3 h-3 text-white/70" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                             <span className="text-white/80 truncate max-w-[200px]">{project.title}</span>
                         </nav>
                     </div>
                 </div>
 
                 {/* Hero Content - bottom */}
-                <div className="absolute bottom-0 left-0 right-0 pb-12 z-10">
+                <div className="relative z-10 mt-auto pb-12 pt-16">
                     <div className="container-custom">
                         <AnimatedSection variant="fade-up">
                             <div className="flex flex-wrap items-center gap-3 mb-5">
-                                <span className="inline-flex items-center px-4 py-1.5 bg-accent text-brand-950 text-xs font-bold rounded-full uppercase tracking-wider">
+                                <span className="inline-flex items-center px-4 py-1.5 bg-accent text-[#081e36] text-xs font-bold rounded-full uppercase tracking-wider">
                                     {project.project_type}
                                 </span>
                                 {statusLabel && (
@@ -124,9 +124,9 @@ export default function ProjectShow({ meta, project }: ProjectShowProps) {
             </section>
 
             {/* ─── Quick Stats Bar ─── */}
-            <section className="relative z-10 -mt-1 border-t border-white/5 bg-brand-950/90 backdrop-blur-md">
+            <section className="relative z-10 -mt-1 border-t border-ink/10 bg-brand-950/90 backdrop-blur-md">
                 <div className="container-custom">
-                    <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/5">
+                    <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-ink/10">
                         {[
                             { label: 'Project Type', value: project.project_type },
                             { label: 'Location', value: project.location },
@@ -135,8 +135,8 @@ export default function ProjectShow({ meta, project }: ProjectShowProps) {
                         ].map((stat, i) => (
                             <AnimatedSection key={stat.label} variant="fade-up" delay={i * 100}>
                                 <div className="py-6 px-4 md:px-6 text-center">
-                                    <dt className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-[0.2em] font-medium">{stat.label}</dt>
-                                    <dd className="text-white font-semibold mt-1 text-sm sm:text-base truncate">{stat.value}</dd>
+                                    <dt className="text-[10px] sm:text-xs text-muted uppercase tracking-[0.2em] font-medium">{stat.label}</dt>
+                                    <dd className="text-ink font-semibold mt-1 text-sm sm:text-base truncate">{stat.value}</dd>
                                 </div>
                             </AnimatedSection>
                         ))}
@@ -151,14 +151,14 @@ export default function ProjectShow({ meta, project }: ProjectShowProps) {
                         {/* Description — wider column */}
                         <AnimatedSection variant="slide-left" className="lg:col-span-8">
                             <div className="mb-8">
-                                <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">About This Project</h2>
+                                <h2 className="font-display text-2xl md:text-3xl font-bold text-ink mb-2">About This Project</h2>
                                 <div className="w-16 h-1 bg-gradient-to-r from-accent to-accent-dark rounded-full" />
                             </div>
                             <div
-                                className="prose prose-lg prose-invert max-w-none text-gray-300 leading-relaxed
-                                    prose-headings:font-display prose-headings:text-white
-                                    prose-a:text-accent prose-a:no-underline hover:prose-a:underline
-                                    prose-strong:text-white prose-p:leading-[1.9]"
+                                className="prose prose-lg max-w-none text-muted leading-relaxed
+                                    prose-headings:font-display prose-headings:text-ink
+                                    prose-a:text-signal prose-a:no-underline hover:prose-a:underline
+                                    prose-strong:text-ink prose-p:leading-[1.9]"
                                 dangerouslySetInnerHTML={{ __html: project.description }}
                             />
                         </AnimatedSection>
@@ -167,9 +167,9 @@ export default function ProjectShow({ meta, project }: ProjectShowProps) {
                         <AnimatedSection variant="slide-right" className="lg:col-span-4">
                             <div className="glass-dark rounded-3xl overflow-hidden sticky top-28">
                                 {/* Sidebar Header */}
-                                <div className="bg-gradient-to-r from-accent/10 to-transparent px-8 py-6 border-b border-white/5">
-                                    <h3 className="font-display text-lg font-semibold text-white flex items-center gap-2">
-                                        <svg className="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <div className="bg-gradient-to-r from-accent/10 to-transparent px-8 py-6 border-b border-ink/10">
+                                    <h3 className="font-display text-lg font-semibold text-ink flex items-center gap-2">
+                                        <svg className="w-5 h-5 text-signal" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                                         </svg>
                                         Project Details
@@ -186,15 +186,15 @@ export default function ProjectShow({ meta, project }: ProjectShowProps) {
                                         ...(project.start_year ? [{ icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z', label: 'Start Year', value: String(project.start_year) }] : []),
                                         ...(project.completion_year && !project.is_ongoing ? [{ icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z', label: 'Completion Year', value: String(project.completion_year) }] : []),
                                     ].map((item, i) => (
-                                        <div key={item.label} className={`flex items-start gap-4 ${i > 0 ? 'border-t border-white/5 pt-5 mt-5' : ''}`}>
+                                        <div key={item.label} className={`flex items-start gap-4 ${i > 0 ? 'border-t border-ink/10 pt-5 mt-5' : ''}`}>
                                             <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-accent/10 flex items-center justify-center">
-                                                <svg className="w-4 h-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <svg className="w-4 h-4 text-signal" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={item.icon} />
                                                 </svg>
                                             </div>
                                             <div>
-                                                <dt className="text-[10px] text-gray-500 uppercase tracking-[0.2em]">{item.label}</dt>
-                                                <dd className="text-white font-medium mt-0.5 text-sm">{item.value}</dd>
+                                                <dt className="text-[10px] text-muted uppercase tracking-[0.2em]">{item.label}</dt>
+                                                <dd className="text-ink font-medium mt-0.5 text-sm">{item.value}</dd>
                                             </div>
                                         </div>
                                     ))}
@@ -209,8 +209,8 @@ export default function ProjectShow({ meta, project }: ProjectShowProps) {
                                                 <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
                                             </span>
                                             <div>
-                                                <p className="text-emerald-400 font-semibold text-sm">Currently In Progress</p>
-                                                <p className="text-emerald-400/60 text-xs mt-0.5">This project is actively under construction</p>
+                                                <p className="text-emerald-700 font-semibold text-sm">Currently In Progress</p>
+                                                <p className="text-emerald-800 text-xs mt-0.5">This project is actively under construction</p>
                                             </div>
                                         </div>
                                     </div>
@@ -241,12 +241,12 @@ export default function ProjectShow({ meta, project }: ProjectShowProps) {
                         <AnimatedSection variant="fade-up">
                             <div className="flex items-end justify-between mb-10">
                                 <div>
-                                    <h2 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
+                                    <h2 className="font-display text-2xl md:text-3xl font-bold text-ink mb-2">
                                         Project Gallery
                                     </h2>
                                     <div className="w-16 h-1 bg-gradient-to-r from-accent to-accent-dark rounded-full" />
                                 </div>
-                                <span className="text-gray-500 text-sm font-medium">
+                                <span className="text-muted text-sm font-medium">
                                     {project.images.length} {project.images.length === 1 ? 'image' : 'images'}
                                 </span>
                             </div>
@@ -267,13 +267,13 @@ export default function ProjectShow({ meta, project }: ProjectShowProps) {
                                             loading="lazy"
                                         />
                                         {/* Hover overlay */}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-brand-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
+                                        <div className="absolute inset-0 bg-gradient-to-t from-[#081e36]/85 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
                                             <div className="flex items-center justify-between w-full">
                                                 {image.caption && (
                                                     <span className="text-white text-sm font-medium">{image.caption}</span>
                                                 )}
-                                                <span className="ml-auto flex-shrink-0 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                                                    <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <span className="ml-auto flex-shrink-0 w-10 h-10 rounded-full bg-ink/20 backdrop-blur-sm flex items-center justify-center">
+                                                    <svg className="w-5 h-5 text-ink" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
                                                     </svg>
                                                 </span>
@@ -294,11 +294,11 @@ export default function ProjectShow({ meta, project }: ProjectShowProps) {
                         <div className="relative rounded-3xl overflow-hidden">
                             <div className="absolute inset-0 bg-gradient-to-r from-accent/20 via-brand-700/20 to-accent/10" />
                             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px]" />
-                            <div className="relative glass-dark border-white/10 px-8 md:px-16 py-16 md:py-20 text-center">
-                                <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
+                            <div className="relative glass-dark border-ink/10 px-8 md:px-16 py-16 md:py-20 text-center">
+                                <h2 className="font-display text-3xl md:text-4xl font-bold text-ink mb-4">
                                     Ready to Build Something Remarkable?
                                 </h2>
-                                <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
+                                <p className="text-muted text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
                                     Let's discuss how Civicon Nexus Engineering can bring your vision to life with the same quality and dedication shown in our projects.
                                 </p>
                                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

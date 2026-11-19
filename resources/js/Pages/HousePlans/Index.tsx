@@ -51,10 +51,11 @@ export default function HousePlansIndex({
                                             <img
                                                 src={`/storage/${plan.preview_image}`}
                                                 alt={plan.title}
+                                                loading="lazy"
                                                 className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                                             />
                                         ) : (
-                                            <div className="w-full h-full flex items-center justify-center text-gray-600 bg-gradient-to-br from-brand-900 to-brand-800">
+                                            <div className="w-full h-full flex items-center justify-center text-muted bg-gradient-to-br from-brand-900 to-brand-800">
                                                 <svg
                                                     className="w-16 h-16"
                                                     fill="none"
@@ -70,18 +71,20 @@ export default function HousePlansIndex({
                                                 </svg>
                                             </div>
                                         )}
-                                        <div className="absolute top-4 right-4 bg-accent text-brand-950 px-3 py-1 rounded-full text-sm font-bold">
-                                            {formatPrice(plan.price)}
-                                        </div>
                                     </div>
-                                    <div className="p-6">
-                                        <h2 className="text-lg font-display font-semibold text-white mb-3 group-hover:text-accent transition">
-                                            {plan.title}
-                                        </h2>
-                                        <div className="grid grid-cols-2 gap-4 text-sm text-gray-400">
+                                    <div className="p-5 sm:p-6">
+                                        <div className="mb-4 flex flex-wrap items-start justify-between gap-2">
+                                            <h2 className="min-w-0 flex-1 text-xl font-display font-semibold text-ink group-hover:text-signal transition">
+                                                {plan.title}
+                                            </h2>
+                                            <p className="rounded-md bg-accent/25 px-2.5 py-1 text-sm font-bold text-signal">
+                                                {formatPrice(plan.price)}
+                                            </p>
+                                        </div>
+                                        <div className="grid grid-cols-2 gap-x-3 gap-y-3 border-t border-ink/10 pt-4 text-sm text-muted">
                                             <div className="flex items-center">
                                                 <svg
-                                                    className="w-4 h-4 mr-2 text-accent/60"
+                                                    className="w-4 h-4 mr-2 text-signal/60"
                                                     fill="none"
                                                     viewBox="0 0 24 24"
                                                     stroke="currentColor"
@@ -97,7 +100,7 @@ export default function HousePlansIndex({
                                             </div>
                                             <div className="flex items-center">
                                                 <svg
-                                                    className="w-4 h-4 mr-2 text-accent/60"
+                                                    className="w-4 h-4 mr-2 text-signal/60"
                                                     fill="none"
                                                     viewBox="0 0 24 24"
                                                     stroke="currentColor"
@@ -113,7 +116,7 @@ export default function HousePlansIndex({
                                             </div>
                                             <div className="flex items-center">
                                                 <svg
-                                                    className="w-4 h-4 mr-2 text-accent/60"
+                                                    className="w-4 h-4 mr-2 text-signal/60"
                                                     fill="none"
                                                     viewBox="0 0 24 24"
                                                     stroke="currentColor"
@@ -130,7 +133,7 @@ export default function HousePlansIndex({
                                             </div>
                                             <div className="flex items-center">
                                                 <svg
-                                                    className="w-4 h-4 mr-2 text-accent/60"
+                                                    className="w-4 h-4 mr-2 text-signal/60"
                                                     fill="none"
                                                     viewBox="0 0 24 24"
                                                     stroke="currentColor"
@@ -153,7 +156,7 @@ export default function HousePlansIndex({
 
                     {housePlans.data.length === 0 && (
                         <div className="text-center py-12">
-                            <p className="text-gray-400">
+                            <p className="text-muted">
                                 No house plans available at the moment. Check
                                 back soon!
                             </p>
@@ -170,10 +173,10 @@ export default function HousePlansIndex({
                                         href={link.url || "#"}
                                         className={`px-4 py-2 rounded-xl text-sm font-medium transition ${
                                             link.active
-                                                ? "bg-accent text-brand-950 font-semibold"
+                                                ? "bg-accent text-ink font-semibold"
                                                 : link.url
-                                                  ? "glass text-gray-300 hover:text-white hover:border-white/20"
-                                                  : "glass text-gray-600 cursor-not-allowed"
+                                                  ? "glass text-muted hover:text-ink hover:border-ink/20"
+                                                  : "glass text-muted cursor-not-allowed"
                                         }`}
                                         dangerouslySetInnerHTML={{
                                             __html: link.label,
@@ -187,16 +190,16 @@ export default function HousePlansIndex({
             </section>
 
             {/* Custom Design CTA */}
-            <section className="section-padding bg-brand-900">
+            <section className="section-padding border-t border-ink/10 bg-brand-700">
                 <div className="container-custom text-center">
                     <AnimatedSection variant="fade-up">
-                        <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
+                        <h2 className="text-3xl md:text-4xl font-display font-bold text-ink mb-4">
                             Need a{" "}
-                            <span className="gradient-text-accent">
+                            <span className="gradient-text-signal">
                                 Custom Design?
                             </span>
                         </h2>
-                        <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
+                        <p className="text-muted mb-8 max-w-2xl mx-auto">
                             Can't find what you're looking for? Our team can
                             create a custom house plan tailored to your specific
                             needs and preferences.

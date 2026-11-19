@@ -255,7 +255,7 @@ export default function Create({ meta, project }: CreateProps) {
                     <AnimatedSection variant="fade-up">
                         <Link
                             href={`/site-work/project/${project.id}`}
-                            className="inline-flex items-center gap-2 text-gray-400 hover:text-accent transition-colors mb-6"
+                            className="inline-flex items-center gap-2 text-muted hover:text-signal transition-colors mb-6"
                         >
                             <svg
                                 className="w-4 h-4"
@@ -272,10 +272,10 @@ export default function Create({ meta, project }: CreateProps) {
                             </svg>
                             Back to {project.title}
                         </Link>
-                        <h1 className="cn-detail-title text-3xl sm:text-4xl font-display font-bold text-white">
+                        <h1 className="cn-detail-title text-3xl sm:text-4xl font-display font-bold text-ink">
                             New Work Log
                         </h1>
-                        <p className="text-gray-400 mt-2">
+                        <p className="text-muted mt-2">
                             Record today's site work activities
                         </p>
                     </AnimatedSection>
@@ -289,7 +289,7 @@ export default function Create({ meta, project }: CreateProps) {
                         {/* Basic Info */}
                         <AnimatedSection variant="fade-up">
                             <div className="card-modern rounded-2xl p-6 md:p-8">
-                                <h2 className="text-xl font-display font-semibold text-white mb-6">
+                                <h2 className="text-xl font-display font-semibold text-ink mb-6">
                                     Basic Information
                                 </h2>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -310,7 +310,7 @@ export default function Create({ meta, project }: CreateProps) {
                                             required
                                         />
                                         {errors.work_date && (
-                                            <p className="text-red-400 text-sm mt-1">
+                                            <p className="text-red-700 text-sm mt-1">
                                                 {errors.work_date}
                                             </p>
                                         )}
@@ -381,7 +381,7 @@ export default function Create({ meta, project }: CreateProps) {
                         {/* Work Description */}
                         <AnimatedSection variant="fade-up" delay={100}>
                             <div className="card-modern rounded-2xl p-6 md:p-8">
-                                <h2 className="text-xl font-display font-semibold text-white mb-6">
+                                <h2 className="text-xl font-display font-semibold text-ink mb-6">
                                     Work Description *
                                 </h2>
                                 <textarea
@@ -398,7 +398,7 @@ export default function Create({ meta, project }: CreateProps) {
                                     required
                                 />
                                 {errors.work_description && (
-                                    <p className="text-red-400 text-sm mt-1">
+                                    <p className="text-red-700 text-sm mt-1">
                                         {errors.work_description}
                                     </p>
                                 )}
@@ -409,7 +409,7 @@ export default function Create({ meta, project }: CreateProps) {
                         <AnimatedSection variant="fade-up" delay={150}>
                             <div className="card-modern rounded-2xl p-6 md:p-8">
                                 <div className="flex items-center justify-between mb-6">
-                                    <h2 className="text-xl font-display font-semibold text-white">
+                                    <h2 className="text-xl font-display font-semibold text-ink">
                                         Workers
                                     </h2>
                                     <button
@@ -424,10 +424,10 @@ export default function Create({ meta, project }: CreateProps) {
                                     {workers.map((worker, index) => (
                                         <div
                                             key={index}
-                                            className="p-4 bg-brand-900/50 rounded-xl border border-white/5"
+                                            className="p-4 bg-brand-900/50 rounded-xl border border-ink/10"
                                         >
                                             <div className="flex items-center justify-between mb-4">
-                                                <span className="text-sm font-medium text-gray-400">
+                                                <span className="text-sm font-medium text-muted">
                                                     Worker {index + 1}
                                                 </span>
                                                 {workers.length > 1 && (
@@ -436,7 +436,7 @@ export default function Create({ meta, project }: CreateProps) {
                                                         onClick={() =>
                                                             removeWorker(index)
                                                         }
-                                                        className="text-red-400 hover:text-red-300 text-sm"
+                                                        className="text-red-700 hover:text-red-800 text-sm"
                                                     >
                                                         Remove
                                                     </button>
@@ -546,7 +546,7 @@ export default function Create({ meta, project }: CreateProps) {
                         <AnimatedSection variant="fade-up" delay={200}>
                             <div className="card-modern rounded-2xl p-6 md:p-8">
                                 <div className="flex items-center justify-between mb-6">
-                                    <h2 className="text-xl font-display font-semibold text-white">
+                                    <h2 className="text-xl font-display font-semibold text-ink">
                                         Materials Used
                                     </h2>
                                     <button
@@ -561,10 +561,10 @@ export default function Create({ meta, project }: CreateProps) {
                                     {materials.map((material, index) => (
                                         <div
                                             key={index}
-                                            className="p-4 bg-brand-900/50 rounded-xl border border-white/5"
+                                            className="p-4 bg-brand-900/50 rounded-xl border border-ink/10"
                                         >
                                             <div className="flex items-center justify-between mb-4">
-                                                <span className="text-sm font-medium text-gray-400">
+                                                <span className="text-sm font-medium text-muted">
                                                     Material {index + 1}
                                                 </span>
                                                 {materials.length > 1 && (
@@ -575,7 +575,7 @@ export default function Create({ meta, project }: CreateProps) {
                                                                 index,
                                                             )
                                                         }
-                                                        className="text-red-400 hover:text-red-300 text-sm"
+                                                        className="text-red-700 hover:text-red-800 text-sm"
                                                     >
                                                         Remove
                                                     </button>
@@ -703,7 +703,7 @@ export default function Create({ meta, project }: CreateProps) {
                         {/* Difficulties & Notes */}
                         <AnimatedSection variant="fade-up" delay={250}>
                             <div className="card-modern rounded-2xl p-6 md:p-8">
-                                <h2 className="text-xl font-display font-semibold text-white mb-6">
+                                <h2 className="text-xl font-display font-semibold text-ink mb-6">
                                     Additional Information
                                 </h2>
                                 <div className="space-y-6">
@@ -766,7 +766,7 @@ export default function Create({ meta, project }: CreateProps) {
                         <AnimatedSection variant="fade-up" delay={275}>
                             <div className="card-modern rounded-2xl p-6 md:p-8">
                                 <div className="flex items-center justify-between mb-6">
-                                    <h2 className="text-xl font-display font-semibold text-white">
+                                    <h2 className="text-xl font-display font-semibold text-ink">
                                         Work Images
                                     </h2>
                                     <button
@@ -805,7 +805,7 @@ export default function Create({ meta, project }: CreateProps) {
                                         className="border-2 border-dashed border-brand-700/50 rounded-xl p-8 text-center cursor-pointer hover:border-accent/50 transition-colors"
                                     >
                                         <svg
-                                            className="w-12 h-12 mx-auto text-gray-500 mb-4"
+                                            className="w-12 h-12 mx-auto text-muted mb-4"
                                             fill="none"
                                             viewBox="0 0 24 24"
                                             stroke="currentColor"
@@ -817,10 +817,10 @@ export default function Create({ meta, project }: CreateProps) {
                                                 d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                                             />
                                         </svg>
-                                        <p className="text-gray-400 mb-2">
+                                        <p className="text-muted mb-2">
                                             Click to upload images of work done
                                         </p>
-                                        <p className="text-gray-500 text-sm">
+                                        <p className="text-muted text-sm">
                                             Supports JPEG, PNG, GIF, WebP (max 5MB each)
                                         </p>
                                     </div>
@@ -841,7 +841,7 @@ export default function Create({ meta, project }: CreateProps) {
                                                 <button
                                                     type="button"
                                                     onClick={() => removeImage(index)}
-                                                    className="absolute top-2 right-2 p-1.5 bg-red-500 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                                                    className="absolute top-2 right-2 p-1.5 bg-red-700 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity"
                                                 >
                                                     <svg
                                                         className="w-4 h-4"
@@ -874,7 +874,7 @@ export default function Create({ meta, project }: CreateProps) {
                                         >
                                             <div className="text-center">
                                                 <svg
-                                                    className="w-8 h-8 mx-auto text-gray-500 mb-2"
+                                                    className="w-8 h-8 mx-auto text-muted mb-2"
                                                     fill="none"
                                                     viewBox="0 0 24 24"
                                                     stroke="currentColor"
@@ -886,7 +886,7 @@ export default function Create({ meta, project }: CreateProps) {
                                                         d="M12 4v16m8-8H4"
                                                     />
                                                 </svg>
-                                                <span className="text-gray-500 text-sm">Add More</span>
+                                                <span className="text-muted text-sm">Add More</span>
                                             </div>
                                         </div>
                                     </div>

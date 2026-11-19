@@ -40,12 +40,12 @@ export default function Contact({ meta, flash }: ContactProps) {
                         {/* Contact Form */}
                         <AnimatedSection variant="fade-up">
                             <div className="card-modern">
-                                <h2 className="text-2xl font-display font-bold text-white mb-6">
+                                <h2 className="text-2xl font-display font-bold text-ink mb-6">
                                     Send us a Message
                                 </h2>
 
                                 {flash?.success && (
-                                    <div className="mb-6 p-4 glass rounded-2xl border border-green-500/30 text-green-400">
+                                    <div className="mb-6 p-4 glass rounded-2xl border border-green-500/30 text-green-700">
                                         {flash.success}
                                     </div>
                                 )}
@@ -73,7 +73,7 @@ export default function Contact({ meta, flash }: ContactProps) {
                                             required
                                         />
                                         {errors.name && (
-                                            <p className="text-red-400 text-sm mt-1">
+                                            <p className="text-red-700 text-sm mt-1">
                                                 {errors.name}
                                             </p>
                                         )}
@@ -98,7 +98,7 @@ export default function Contact({ meta, flash }: ContactProps) {
                                             required
                                         />
                                         {errors.email && (
-                                            <p className="text-red-400 text-sm mt-1">
+                                            <p className="text-red-700 text-sm mt-1">
                                                 {errors.email}
                                             </p>
                                         )}
@@ -126,7 +126,7 @@ export default function Contact({ meta, flash }: ContactProps) {
                                             required
                                         />
                                         {errors.message && (
-                                            <p className="text-red-400 text-sm mt-1">
+                                            <p className="text-red-700 text-sm mt-1">
                                                 {errors.message}
                                             </p>
                                         )}
@@ -148,7 +148,7 @@ export default function Contact({ meta, flash }: ContactProps) {
                         {/* Contact Info */}
                         <AnimatedSection variant="slide-right" delay={200}>
                             <div>
-                                <h2 className="text-2xl font-display font-bold text-white mb-6">
+                                <h2 className="text-2xl font-display font-bold text-ink mb-6">
                                     Get in Touch
                                 </h2>
 
@@ -156,7 +156,7 @@ export default function Contact({ meta, flash }: ContactProps) {
                                     <div className="flex items-start">
                                         <div className="flex-shrink-0 w-12 h-12 glass rounded-2xl flex items-center justify-center">
                                             <svg
-                                                className="w-6 h-6 text-accent"
+                                                className="w-6 h-6 text-signal"
                                                 fill="none"
                                                 viewBox="0 0 24 24"
                                                 stroke="currentColor"
@@ -176,10 +176,10 @@ export default function Contact({ meta, flash }: ContactProps) {
                                             </svg>
                                         </div>
                                         <div className="ml-4">
-                                            <h3 className="text-lg font-display font-semibold text-white">
+                                            <h3 className="text-lg font-display font-semibold text-ink">
                                                 Office Address
                                             </h3>
-                                            <p className="text-gray-400 mt-1">
+                                            <p className="text-muted mt-1">
                                                 Rond Point Express
                                                 <br />
                                                 Yaoundé, Cameroon
@@ -190,7 +190,7 @@ export default function Contact({ meta, flash }: ContactProps) {
                                     <div className="flex items-start">
                                         <div className="flex-shrink-0 w-12 h-12 glass rounded-2xl flex items-center justify-center">
                                             <svg
-                                                className="w-6 h-6 text-accent"
+                                                className="w-6 h-6 text-signal"
                                                 fill="none"
                                                 viewBox="0 0 24 24"
                                                 stroke="currentColor"
@@ -204,13 +204,13 @@ export default function Contact({ meta, flash }: ContactProps) {
                                             </svg>
                                         </div>
                                         <div className="ml-4">
-                                            <h3 className="text-lg font-display font-semibold text-white">
+                                            <h3 className="text-lg font-display font-semibold text-ink">
                                                 Phone
                                             </h3>
-                                            <p className="text-gray-400 mt-1">
+                                            <p className="text-muted mt-1">
                                                 <a
                                                     href="tel:+237678626645"
-                                                    className="hover:text-accent transition"
+                                                    className="hover:text-signal transition"
                                                 >
                                                     +237 678 626 645
                                                 </a>
@@ -221,7 +221,7 @@ export default function Contact({ meta, flash }: ContactProps) {
                                     <div className="flex items-start">
                                         <div className="flex-shrink-0 w-12 h-12 glass rounded-2xl flex items-center justify-center">
                                             <svg
-                                                className="w-6 h-6 text-accent"
+                                                className="w-6 h-6 text-signal"
                                                 fill="none"
                                                 viewBox="0 0 24 24"
                                                 stroke="currentColor"
@@ -235,13 +235,13 @@ export default function Contact({ meta, flash }: ContactProps) {
                                             </svg>
                                         </div>
                                         <div className="ml-4">
-                                            <h3 className="text-lg font-display font-semibold text-white">
+                                            <h3 className="text-lg font-display font-semibold text-ink">
                                                 Email
                                             </h3>
-                                            <p className="text-gray-400 mt-1">
+                                            <p className="text-muted mt-1">
                                                 <a
                                                     href="mailto:support@civiconnexusengineering.com"
-                                                    className="hover:text-accent transition"
+                                                    className="hover:text-signal transition"
                                                 >
                                                     support@civiconnexusengineering.com
                                                 </a>
@@ -252,7 +252,7 @@ export default function Contact({ meta, flash }: ContactProps) {
                                     <div className="flex items-start">
                                         <div className="flex-shrink-0 w-12 h-12 glass rounded-2xl flex items-center justify-center">
                                             <svg
-                                                className="w-6 h-6 text-accent"
+                                                className="w-6 h-6 text-signal"
                                                 fill="none"
                                                 viewBox="0 0 24 24"
                                                 stroke="currentColor"
@@ -266,10 +266,10 @@ export default function Contact({ meta, flash }: ContactProps) {
                                             </svg>
                                         </div>
                                         <div className="ml-4">
-                                            <h3 className="text-lg font-display font-semibold text-white">
+                                            <h3 className="text-lg font-display font-semibold text-ink">
                                                 Business Hours
                                             </h3>
-                                            <p className="text-gray-400 mt-1">
+                                            <p className="text-muted mt-1">
                                                 Monday - Friday: 8:00 AM - 6:00
                                                 PM
                                                 <br />
@@ -286,7 +286,7 @@ export default function Contact({ meta, flash }: ContactProps) {
                                     href={`https://wa.me/237678626645?text=${encodeURIComponent("Hello Civicon Nexus Engineering! I'm interested in your services. Could you please provide more information?\n\nBonjour Civicon Nexus Engineering ! Je suis intéressé(e) par vos services. Pourriez-vous me fournir plus d'informations ?")}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="mt-8 flex items-center justify-center glass rounded-2xl px-6 py-4 font-semibold text-green-400 border border-green-500/20 hover:border-green-500/40 hover:bg-green-500/10 transition-all duration-300"
+                                    className="mt-8 flex items-center justify-center glass rounded-2xl px-6 py-4 font-semibold text-green-700 border border-green-500/20 hover:border-green-500/40 hover:bg-green-500/10 transition-all duration-300"
                                 >
                                     <svg
                                         className="w-6 h-6 mr-2"

@@ -41,7 +41,7 @@ export default function BlogIndex({ meta, posts }: BlogIndexProps) {
                             >
                                 <Link
                                     href={`/blog/${post.slug}`}
-                                    className="group cn-media-card block h-full hover:border-white/20 transition-all duration-300"
+                                    className="group cn-media-card block h-full hover:border-ink/20 transition-all duration-300"
                                 >
                                     <div className="aspect-[16/10] bg-brand-900 relative overflow-hidden">
                                         {post.featured_image ? (
@@ -57,7 +57,7 @@ export default function BlogIndex({ meta, posts }: BlogIndexProps) {
                                                 className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
                                             />
                                         ) : (
-                                            <div className="w-full h-full flex items-center justify-center text-gray-700 bg-gradient-to-br from-brand-900 to-brand-800">
+                                            <div className="w-full h-full flex items-center justify-center text-muted bg-gradient-to-br from-brand-900 to-brand-800">
                                                 <svg
                                                     className="w-14 h-14 opacity-50"
                                                     fill="none"
@@ -76,19 +76,19 @@ export default function BlogIndex({ meta, posts }: BlogIndexProps) {
                                     </div>
                                     <div className="p-7">
                                         {post.published_at && (
-                                            <span className="text-xs text-accent font-medium tracking-wide uppercase">
+                                            <span className="text-xs text-signal font-medium tracking-wide uppercase">
                                                 {formatDate(post.published_at)}
                                             </span>
                                         )}
-                                        <h2 className="text-xl font-display font-semibold text-white mt-3 mb-4 leading-snug group-hover:text-accent transition-colors duration-200">
+                                        <h2 className="text-xl font-display font-semibold text-ink mt-3 mb-4 leading-snug group-hover:text-signal transition-colors duration-200">
                                             {post.title}
                                         </h2>
                                         {post.excerpt && (
-                                            <p className="text-gray-400 text-[0.9375rem] leading-relaxed line-clamp-3 mb-6">
+                                            <p className="text-muted text-[0.9375rem] leading-relaxed line-clamp-3 mb-6">
                                                 {post.excerpt}
                                             </p>
                                         )}
-                                        <span className="inline-flex items-center text-accent text-sm font-semibold group-hover:gap-3 gap-1.5 transition-all duration-300">
+                                        <span className="inline-flex items-center text-signal text-sm font-semibold group-hover:gap-3 gap-1.5 transition-all duration-300">
                                             Read Article
                                             <svg
                                                 className="w-4 h-4"
@@ -112,7 +112,7 @@ export default function BlogIndex({ meta, posts }: BlogIndexProps) {
 
                     {posts.data.length === 0 && (
                         <div className="text-center py-12">
-                            <p className="text-gray-400">
+                            <p className="text-muted">
                                 No blog posts available at the moment. Check
                                 back soon!
                             </p>
@@ -129,10 +129,10 @@ export default function BlogIndex({ meta, posts }: BlogIndexProps) {
                                         href={link.url || "#"}
                                         className={`px-4 py-2 rounded-xl text-sm font-medium transition ${
                                             link.active
-                                                ? "bg-accent text-brand-950 font-semibold"
+                                                ? "bg-accent text-ink font-semibold"
                                                 : link.url
-                                                  ? "glass text-gray-300 hover:text-white hover:border-white/20"
-                                                  : "glass text-gray-600 cursor-not-allowed"
+                                                  ? "glass text-muted hover:text-ink hover:border-ink/20"
+                                                  : "glass text-muted cursor-not-allowed"
                                         }`}
                                         dangerouslySetInnerHTML={{
                                             __html: link.label,

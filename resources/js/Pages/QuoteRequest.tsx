@@ -67,7 +67,7 @@ export default function QuoteRequest({ meta, flash }: QuoteRequestProps) {
                 <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
                     {flash?.success && (
                         <AnimatedSection variant="fade-in">
-                            <div className="mb-8 p-4 glass rounded-2xl border border-green-500/30 text-green-400">
+                            <div className="mb-8 p-4 glass rounded-2xl border border-green-500/30 text-green-700">
                                 {flash.success}
                             </div>
                         </AnimatedSection>
@@ -78,8 +78,8 @@ export default function QuoteRequest({ meta, flash }: QuoteRequestProps) {
                             <form onSubmit={handleSubmit} className="space-y-8">
                                 {/* Personal Info */}
                                 <div>
-                                    <h2 className="text-xl font-display font-semibold text-white mb-6 flex items-center">
-                                        <span className="w-8 h-8 rounded-lg bg-accent/20 text-accent text-sm flex items-center justify-center mr-3 font-bold">
+                                    <h2 className="text-xl font-display font-semibold text-ink mb-6 flex items-center">
+                                        <span className="w-8 h-8 rounded-lg bg-accent/20 text-signal text-sm flex items-center justify-center mr-3 font-bold">
                                             1
                                         </span>
                                         Personal Information
@@ -107,7 +107,7 @@ export default function QuoteRequest({ meta, flash }: QuoteRequestProps) {
                                                 required
                                             />
                                             {errors.name && (
-                                                <p className="text-red-400 text-sm mt-1">
+                                                <p className="text-red-700 text-sm mt-1">
                                                     {errors.name}
                                                 </p>
                                             )}
@@ -135,7 +135,7 @@ export default function QuoteRequest({ meta, flash }: QuoteRequestProps) {
                                                 required
                                             />
                                             {errors.phone && (
-                                                <p className="text-red-400 text-sm mt-1">
+                                                <p className="text-red-700 text-sm mt-1">
                                                     {errors.phone}
                                                 </p>
                                             )}
@@ -162,7 +162,7 @@ export default function QuoteRequest({ meta, flash }: QuoteRequestProps) {
                                                 placeholder="john@example.com"
                                             />
                                             {errors.email && (
-                                                <p className="text-red-400 text-sm mt-1">
+                                                <p className="text-red-700 text-sm mt-1">
                                                     {errors.email}
                                                 </p>
                                             )}
@@ -189,7 +189,7 @@ export default function QuoteRequest({ meta, flash }: QuoteRequestProps) {
                                                 placeholder="Your city"
                                             />
                                             {errors.city && (
-                                                <p className="text-red-400 text-sm mt-1">
+                                                <p className="text-red-700 text-sm mt-1">
                                                     {errors.city}
                                                 </p>
                                             )}
@@ -198,12 +198,12 @@ export default function QuoteRequest({ meta, flash }: QuoteRequestProps) {
                                 </div>
 
                                 {/* Divider */}
-                                <div className="border-t border-white/5" />
+                                <div className="border-t border-ink/10" />
 
                                 {/* Project Info */}
                                 <div>
-                                    <h2 className="text-xl font-display font-semibold text-white mb-6 flex items-center">
-                                        <span className="w-8 h-8 rounded-lg bg-accent/20 text-accent text-sm flex items-center justify-center mr-3 font-bold">
+                                    <h2 className="text-xl font-display font-semibold text-ink mb-6 flex items-center">
+                                        <span className="w-8 h-8 rounded-lg bg-accent/20 text-signal text-sm flex items-center justify-center mr-3 font-bold">
                                             2
                                         </span>
                                         Project Details
@@ -241,7 +241,7 @@ export default function QuoteRequest({ meta, flash }: QuoteRequestProps) {
                                                 ))}
                                             </select>
                                             {errors.project_type && (
-                                                <p className="text-red-400 text-sm mt-1">
+                                                <p className="text-red-700 text-sm mt-1">
                                                     {errors.project_type}
                                                 </p>
                                             )}
@@ -278,7 +278,7 @@ export default function QuoteRequest({ meta, flash }: QuoteRequestProps) {
                                                 ))}
                                             </select>
                                             {errors.budget && (
-                                                <p className="text-red-400 text-sm mt-1">
+                                                <p className="text-red-700 text-sm mt-1">
                                                     {errors.budget}
                                                 </p>
                                             )}
@@ -306,7 +306,7 @@ export default function QuoteRequest({ meta, flash }: QuoteRequestProps) {
                                             placeholder="Tell us more about your project, requirements, timeline, etc."
                                         />
                                         {errors.message && (
-                                            <p className="text-red-400 text-sm mt-1">
+                                            <p className="text-red-700 text-sm mt-1">
                                                 {errors.message}
                                             </p>
                                         )}
@@ -319,7 +319,7 @@ export default function QuoteRequest({ meta, flash }: QuoteRequestProps) {
                                         >
                                             Attachment (Optional)
                                         </label>
-                                        <p className="text-sm text-gray-500 mb-2">
+                                        <p className="text-sm text-muted mb-2">
                                             Upload any relevant documents,
                                             drawings, or images (Max 10MB)
                                         </p>
@@ -332,17 +332,17 @@ export default function QuoteRequest({ meta, flash }: QuoteRequestProps) {
                                                     e.target.files?.[0] || null,
                                                 )
                                             }
-                                            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-2xl text-gray-300 focus:ring-2 focus:ring-accent/50 focus:border-accent/50 transition file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-accent/20 file:text-accent hover:file:bg-accent/30"
+                                            className="w-full px-4 py-3 bg-ink/5 border border-ink/10 rounded-2xl text-muted focus:ring-2 focus:ring-accent/50 focus:border-accent/50 transition file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-accent/20 file:text-signal hover:file:bg-accent/30"
                                             accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.zip"
                                         />
                                         {errors.attachment && (
-                                            <p className="text-red-400 text-sm mt-1">
+                                            <p className="text-red-700 text-sm mt-1">
                                                 {errors.attachment}
                                             </p>
                                         )}
                                         {progress && (
                                             <div className="mt-2">
-                                                <div className="bg-white/10 rounded-full h-2 overflow-hidden">
+                                                <div className="bg-ink/10 rounded-full h-2 overflow-hidden">
                                                     <div
                                                         className="bg-accent h-2 rounded-full transition-all"
                                                         style={{
@@ -370,12 +370,12 @@ export default function QuoteRequest({ meta, flash }: QuoteRequestProps) {
 
                     {/* Additional Info */}
                     <AnimatedSection variant="fade-up" delay={300}>
-                        <div className="mt-8 text-center text-gray-500">
+                        <div className="mt-8 text-center text-muted">
                             <p>
                                 Or call us directly at{" "}
                                 <a
                                     href="tel:+237678626645"
-                                    className="text-accent font-semibold hover:underline"
+                                    className="text-signal font-semibold hover:underline"
                                 >
                                     +237 678 626 645
                                 </a>

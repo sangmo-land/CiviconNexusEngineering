@@ -40,13 +40,13 @@ export default function ServicesIndex({ meta, services }: ServicesIndexProps) {
                                             {service.icon}
                                         </div>
                                     )}
-                                    <h2 className="font-display text-xl font-semibold text-white mb-3 group-hover:text-accent transition-colors duration-300">
+                                    <h2 className="font-display text-xl font-semibold text-ink mb-3 group-hover:text-signal transition-colors duration-300">
                                         {service.title}
                                     </h2>
-                                    <p className="text-gray-400 mb-6 leading-relaxed">
+                                    <p className="text-muted mb-6 leading-relaxed">
                                         {service.short_description}
                                     </p>
-                                    <span className="inline-flex items-center text-accent font-medium text-sm group-hover:gap-3 gap-2 transition-all duration-300">
+                                    <span className="inline-flex items-center text-signal font-medium text-sm group-hover:gap-3 gap-2 transition-all duration-300">
                                         Learn More
                                         <svg
                                             className="w-4 h-4"
@@ -69,7 +69,7 @@ export default function ServicesIndex({ meta, services }: ServicesIndexProps) {
 
                     {services.length === 0 && (
                         <div className="text-center py-16">
-                            <p className="text-gray-500 text-lg">
+                            <p className="text-muted text-lg">
                                 No services available at the moment. Check back
                                 soon!
                             </p>
@@ -83,10 +83,10 @@ export default function ServicesIndex({ meta, services }: ServicesIndexProps) {
                 <div className="absolute inset-0 bg-gradient-to-r from-brand-700 via-brand-600 to-brand-700" />
                 <div className="container-custom relative z-10 text-center">
                     <AnimatedSection variant="scale">
-                        <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">
+                        <h2 className="font-display text-4xl md:text-5xl font-bold text-ink mb-6">
                             Need a Custom Solution?
                         </h2>
-                        <p className="text-blue-100/80 text-lg mb-10 max-w-2xl mx-auto">
+                        <p className="text-muted text-lg mb-10 max-w-2xl mx-auto">
                             Our team is ready to discuss your specific
                             requirements and provide tailored engineering
                             solutions.

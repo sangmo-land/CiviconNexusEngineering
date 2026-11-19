@@ -243,7 +243,7 @@ export default function ImageLightbox({ images, selectedIndex, onClose, onNaviga
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.25 }}
-                className="fixed inset-0 bg-brand-950/98 backdrop-blur-2xl z-50 flex flex-col"
+                className="cn-lightbox fixed inset-0 z-[60] flex flex-col bg-[#081e36]/95 backdrop-blur-2xl"
                 onClick={isZoomed ? undefined : onClose}
             >
                 {/* Top bar */}

@@ -33,7 +33,7 @@ export default function ProjectsIndex({ meta, projects }: ProjectsIndexProps) {
                             >
                                 <Link
                                     href={`/projects/${project.slug}`}
-                                    className="group cn-media-card block h-full hover:border-white/20 transition-all duration-500"
+                                    className="group cn-media-card block h-full hover:border-ink/20 transition-all duration-500"
                                 >
                                     <div className="aspect-[4/3] bg-brand-800 relative overflow-hidden">
                                         {project.images && project.images[0] ? (
@@ -44,7 +44,7 @@ export default function ProjectsIndex({ meta, projects }: ProjectsIndexProps) {
                                                 loading="lazy"
                                             />
                                         ) : (
-                                            <div className="w-full h-full flex items-center justify-center text-gray-600">
+                                            <div className="w-full h-full flex items-center justify-center text-muted">
                                                 <svg
                                                     className="w-16 h-16"
                                                     fill="none"
@@ -60,18 +60,18 @@ export default function ProjectsIndex({ meta, projects }: ProjectsIndexProps) {
                                                 </svg>
                                             </div>
                                         )}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-brand-950/90 via-transparent to-transparent" />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-[#081e36]/65 via-transparent to-transparent" />
                                         <div className="absolute top-4 left-4">
-                                            <span className="px-3 py-1 bg-accent/90 text-brand-950 text-xs font-bold rounded-full uppercase tracking-wider">
+                                            <span className="px-3 py-1 bg-accent/90 text-ink text-xs font-bold rounded-full uppercase tracking-wider">
                                                 {project.project_type}
                                             </span>
                                         </div>
                                     </div>
                                     <div className="p-6">
-                                        <h2 className="font-display text-lg font-semibold text-white group-hover:text-accent transition-colors duration-300 mb-2">
+                                        <h2 className="font-display text-lg font-semibold text-ink group-hover:text-signal transition-colors duration-300 mb-2">
                                             {project.title}
                                         </h2>
-                                        <div className="flex items-center text-gray-500 text-sm gap-1">
+                                        <div className="flex items-center text-muted text-sm gap-1">
                                             <svg
                                                 className="w-4 h-4"
                                                 fill="none"
@@ -94,7 +94,7 @@ export default function ProjectsIndex({ meta, projects }: ProjectsIndexProps) {
                                             {project.location}
                                         </div>
                                         {project.completion_year && (
-                                            <div className="flex items-center text-gray-500 text-sm mt-1 gap-1">
+                                            <div className="flex items-center text-muted text-sm mt-1 gap-1">
                                                 <svg
                                                     className="w-4 h-4"
                                                     fill="none"
@@ -120,7 +120,7 @@ export default function ProjectsIndex({ meta, projects }: ProjectsIndexProps) {
 
                     {projects.data.length === 0 && (
                         <div className="text-center py-16">
-                            <p className="text-gray-500 text-lg">
+                            <p className="text-muted text-lg">
                                 No projects available at the moment. Check back
                                 soon!
                             </p>
@@ -137,10 +137,10 @@ export default function ProjectsIndex({ meta, projects }: ProjectsIndexProps) {
                                         href={link.url || "#"}
                                         className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${
                                             link.active
-                                                ? "bg-accent text-brand-950 font-bold"
+                                                ? "bg-accent text-ink font-bold"
                                                 : link.url
-                                                  ? "glass text-gray-300 hover:text-white hover:bg-white/10"
-                                                  : "text-gray-600 cursor-not-allowed"
+                                                  ? "glass text-muted hover:text-ink hover:bg-ink/10"
+                                                  : "text-muted cursor-not-allowed"
                                         }`}
                                         dangerouslySetInnerHTML={{
                                             __html: link.label,

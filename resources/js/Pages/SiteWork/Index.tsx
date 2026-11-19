@@ -72,7 +72,7 @@ export default function SiteWorkIndex({
             <section className="py-16 md:py-24 bg-brand-950">
                 <div className="container-custom">
                     <AnimatedSection variant="fade-up">
-                        <h2 className="text-2xl font-display font-bold text-white mb-8">
+                        <h2 className="text-2xl font-display font-bold text-ink mb-8">
                             Select a Project
                         </h2>
                     </AnimatedSection>
@@ -86,12 +86,12 @@ export default function SiteWorkIndex({
                             >
                                 <Link
                                     href={`/site-work/project/${project.id}`}
-                                    className="card-modern rounded-2xl p-6 block hover:border-white/20 transition-all duration-300 group"
+                                    className="card-modern rounded-2xl p-6 block hover:border-ink/20 transition-all duration-300 group"
                                 >
                                     <div className="flex items-start justify-between mb-4">
                                         <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
                                             <svg
-                                                className="w-6 h-6 text-accent"
+                                                className="w-6 h-6 text-signal"
                                                 fill="none"
                                                 viewBox="0 0 24 24"
                                                 stroke="currentColor"
@@ -104,14 +104,14 @@ export default function SiteWorkIndex({
                                                 />
                                             </svg>
                                         </div>
-                                        <span className="text-xs font-medium text-gray-500 bg-brand-800 px-2 py-1 rounded-full">
+                                        <span className="text-xs font-medium text-muted bg-brand-800 px-2 py-1 rounded-full">
                                             {project.site_work_logs_count} logs
                                         </span>
                                     </div>
-                                    <h3 className="text-lg font-display font-semibold text-white mb-2 group-hover:text-accent transition-colors">
+                                    <h3 className="text-lg font-display font-semibold text-ink mb-2 group-hover:text-signal transition-colors">
                                         {project.title}
                                     </h3>
-                                    <p className="text-sm text-gray-400">
+                                    <p className="text-sm text-muted">
                                         {project.location}
                                     </p>
                                 </Link>
@@ -122,7 +122,7 @@ export default function SiteWorkIndex({
                     {projects.length === 0 && (
                         <AnimatedSection variant="fade-up">
                             <div className="text-center py-12">
-                                <p className="text-gray-400">
+                                <p className="text-muted">
                                     No projects found. Create a project first to
                                     start logging site work.
                                 </p>
@@ -137,7 +137,7 @@ export default function SiteWorkIndex({
                 <section className="py-16 md:py-24 bg-brand-900/50">
                     <div className="container-custom">
                         <AnimatedSection variant="fade-up">
-                            <h2 className="text-2xl font-display font-bold text-white mb-8">
+                            <h2 className="text-2xl font-display font-bold text-ink mb-8">
                                 Recent Activity
                             </h2>
                         </AnimatedSection>
@@ -151,32 +151,32 @@ export default function SiteWorkIndex({
                                 >
                                     <Link
                                         href={`/site-work/log/${log.id}`}
-                                        className="card-modern rounded-xl p-5 block hover:border-white/20 transition-all duration-300"
+                                        className="card-modern rounded-xl p-5 block hover:border-ink/20 transition-all duration-300"
                                     >
                                         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                                             <div className="flex-1">
                                                 <div className="flex items-center gap-3 mb-2">
-                                                    <span className="text-accent font-medium text-sm">
+                                                    <span className="text-signal font-medium text-sm">
                                                         {formatDate(
                                                             log.work_date,
                                                         )}
                                                     </span>
                                                     {log.weather_conditions && (
-                                                        <span className="text-xs text-gray-500 bg-brand-800 px-2 py-0.5 rounded-full">
+                                                        <span className="text-xs text-muted bg-brand-800 px-2 py-0.5 rounded-full">
                                                             {
                                                                 log.weather_conditions
                                                             }
                                                         </span>
                                                     )}
                                                 </div>
-                                                <h3 className="text-white font-medium mb-1">
+                                                <h3 className="text-ink font-medium mb-1">
                                                     {log.project.title}
                                                 </h3>
-                                                <p className="text-sm text-gray-400 line-clamp-2">
+                                                <p className="text-sm text-muted line-clamp-2">
                                                     {log.work_description}
                                                 </p>
                                             </div>
-                                            <div className="flex items-center gap-6 text-sm text-gray-400">
+                                            <div className="flex items-center gap-6 text-sm text-muted">
                                                 <div className="flex items-center gap-2">
                                                     <svg
                                                         className="w-4 h-4"

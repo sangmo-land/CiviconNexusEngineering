@@ -42,24 +42,24 @@ export default function HousePlanShow({ meta, housePlan }: HousePlanShowProps) {
             <SEOHead meta={meta} />
 
             {/* Breadcrumb */}
-            <div className="pt-24 border-b border-white/5 bg-brand-950">
+            <div className="pt-24 border-b border-ink/10 bg-brand-950">
                 <div className="container-custom py-4">
                     <nav className="flex text-sm">
                         <Link
                             href="/"
-                            className="text-gray-500 hover:text-accent transition"
+                            className="text-muted hover:text-signal transition"
                         >
                             Home
                         </Link>
-                        <span className="mx-2 text-gray-600">/</span>
+                        <span className="mx-2 text-muted">/</span>
                         <Link
                             href="/plans"
-                            className="text-gray-500 hover:text-accent transition"
+                            className="text-muted hover:text-signal transition"
                         >
                             House Plans
                         </Link>
-                        <span className="mx-2 text-gray-600">/</span>
-                        <span className="text-white">{housePlan.title}</span>
+                        <span className="mx-2 text-muted">/</span>
+                        <span className="text-ink">{housePlan.title}</span>
                     </nav>
                 </div>
             </div>
@@ -70,7 +70,7 @@ export default function HousePlanShow({ meta, housePlan }: HousePlanShowProps) {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                         {/* Preview Image */}
                         <AnimatedSection variant="slide-left">
-                            <div className="aspect-square bg-brand-900 rounded-2xl overflow-hidden border border-white/10">
+                            <div className="aspect-square bg-brand-900 rounded-2xl overflow-hidden border border-ink/10">
                                 {housePlan.preview_image ? (
                                     <img
                                         src={`/storage/${housePlan.preview_image}`}
@@ -78,7 +78,7 @@ export default function HousePlanShow({ meta, housePlan }: HousePlanShowProps) {
                                         className="w-full h-full object-cover"
                                     />
                                 ) : (
-                                    <div className="w-full h-full flex items-center justify-center text-gray-600">
+                                    <div className="w-full h-full flex items-center justify-center text-muted">
                                         <svg
                                             className="w-24 h-24"
                                             fill="none"
@@ -100,7 +100,7 @@ export default function HousePlanShow({ meta, housePlan }: HousePlanShowProps) {
                         {/* Plan Info */}
                         <AnimatedSection variant="slide-right" delay={200}>
                             <div>
-                                <h1 className="cn-detail-title text-3xl md:text-4xl font-display font-bold text-white mb-4">
+                                <h1 className="cn-detail-title text-3xl md:text-4xl font-display font-bold text-ink mb-4">
                                     {housePlan.title}
                                 </h1>
                                 <p className="text-4xl font-bold gradient-text mb-8">
@@ -110,34 +110,34 @@ export default function HousePlanShow({ meta, housePlan }: HousePlanShowProps) {
                                 {/* Specifications */}
                                 <div className="grid grid-cols-2 gap-4 mb-8">
                                     <div className="glass rounded-2xl p-4">
-                                        <div className="text-sm text-gray-500">
+                                        <div className="text-sm text-muted">
                                             Bedrooms
                                         </div>
-                                        <div className="text-2xl font-display font-bold text-white">
+                                        <div className="text-2xl font-display font-bold text-ink">
                                             {housePlan.bedrooms}
                                         </div>
                                     </div>
                                     <div className="glass rounded-2xl p-4">
-                                        <div className="text-sm text-gray-500">
+                                        <div className="text-sm text-muted">
                                             Bathrooms
                                         </div>
-                                        <div className="text-2xl font-display font-bold text-white">
+                                        <div className="text-2xl font-display font-bold text-ink">
                                             {housePlan.bathrooms}
                                         </div>
                                     </div>
                                     <div className="glass rounded-2xl p-4">
-                                        <div className="text-sm text-gray-500">
+                                        <div className="text-sm text-muted">
                                             Floors
                                         </div>
-                                        <div className="text-2xl font-display font-bold text-white">
+                                        <div className="text-2xl font-display font-bold text-ink">
                                             {housePlan.floors}
                                         </div>
                                     </div>
                                     <div className="glass rounded-2xl p-4">
-                                        <div className="text-sm text-gray-500">
+                                        <div className="text-sm text-muted">
                                             Area
                                         </div>
-                                        <div className="text-2xl font-display font-bold text-white">
+                                        <div className="text-2xl font-display font-bold text-ink">
                                             {housePlan.area} sq ft
                                         </div>
                                     </div>
@@ -170,11 +170,11 @@ export default function HousePlanShow({ meta, housePlan }: HousePlanShowProps) {
             <section className="pb-20 bg-brand-950">
                 <div className="container-custom">
                     <AnimatedSection variant="fade-up">
-                        <h2 className="text-2xl font-display font-bold text-white mb-6">
+                        <h2 className="text-2xl font-display font-bold text-ink mb-6">
                             Plan Description
                         </h2>
                         <div
-                            className="prose prose-lg prose-invert max-w-none prose-headings:font-display prose-p:text-gray-400 prose-a:text-accent prose-strong:text-white"
+                            className="prose prose-lg max-w-none prose-headings:font-display prose-p:text-muted prose-a:text-signal prose-strong:text-ink"
                             dangerouslySetInnerHTML={{
                                 __html: housePlan.description,
                             }}
@@ -185,18 +185,18 @@ export default function HousePlanShow({ meta, housePlan }: HousePlanShowProps) {
 
             {/* Download Modal */}
             {showDownloadModal && (
-                <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+                <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[60] flex items-center justify-center p-4">
                     <div
-                        className="glass-dark rounded-2xl max-w-md w-full p-8 border border-white/10"
+                        className="glass-dark rounded-2xl max-w-md w-full p-8 border border-ink/10"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <div className="flex justify-between items-center mb-6">
-                            <h3 className="text-xl font-display font-bold text-white">
+                            <h3 className="text-xl font-display font-bold text-ink">
                                 Download House Plan
                             </h3>
                             <button
                                 onClick={() => setShowDownloadModal(false)}
-                                className="text-gray-500 hover:text-white transition"
+                                className="text-muted hover:text-ink transition"
                             >
                                 <svg
                                     className="w-6 h-6"
@@ -213,7 +213,7 @@ export default function HousePlanShow({ meta, housePlan }: HousePlanShowProps) {
                                 </svg>
                             </button>
                         </div>
-                        <p className="text-gray-400 mb-6">
+                        <p className="text-muted mb-6">
                             Enter your email address to download the PDF for "
                             {housePlan.title}".
                         </p>
@@ -234,7 +234,7 @@ export default function HousePlanShow({ meta, housePlan }: HousePlanShowProps) {
                                     required
                                 />
                                 {errors.email && (
-                                    <p className="text-red-400 text-sm mt-1">
+                                    <p className="text-red-700 text-sm mt-1">
                                         {errors.email}
                                     </p>
                                 )}
