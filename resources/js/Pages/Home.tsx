@@ -1,7 +1,6 @@
 import { Link } from '@inertiajs/react';
 import SEOHead from '@/Components/SEOHead';
 import Layout from '@/Layouts/Layout';
-import { optimizedImageUrl } from '@/utils/image';
 import type { Meta, Project, Service } from '@/types';
 import './home.css';
 
@@ -98,7 +97,7 @@ export default function Home({ meta, featuredServices, featuredProjects }: HomeP
                                     return (
                                         <Link key={project.id} href={`/projects/${project.slug}`} className="cn-project">
                                             <div className="cn-project-image">
-                                                {cover && <img src={optimizedImageUrl(cover.image_path, 'medium')} alt="" loading="lazy" />}
+                                                {cover && <img src={`/storage/${cover.image_path}`} alt="" loading="lazy" />}
                                             </div>
                                             <div className="cn-project-copy">
                                                 <p>{[project.project_type, project.location].filter(Boolean).join(' / ')}</p>
