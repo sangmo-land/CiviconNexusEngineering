@@ -53,7 +53,7 @@ export default function ProcessReel() {
                 {PHASES.map((p, i) => (
                     <li key={p.key}>
                         <button type="button" onClick={() => go(i)} aria-pressed={phase === i} className="reel-phase">
-                            <span className="mono">0{i + 1}</span>
+                            <span className="reel-step">Step {i + 1}</span>
                             <span className="reel-phase-title">{p.title}</span>
                             <span className="reel-phase-cap">{p.caption}</span>
                         </button>
@@ -79,7 +79,7 @@ export default function ProcessReel() {
                 />
                 <button
                     type="button"
-                    className="reel-toggle mono"
+                    className="reel-toggle"
                     onClick={() => (playing ? player.current?.pause() : player.current?.play())}
                 >
                     {playing ? 'Pause' : 'Play'}

@@ -2,7 +2,7 @@ import { Link } from '@inertiajs/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useMemo, useState } from 'react';
 import SEOHead from '@/Components/SEOHead';
-import { CTA, Media, PageHeader, Pagination, pad, storageUrl } from '@/Components/ui';
+import { CTA, Media, PageHeader, Pagination, storageUrl } from '@/Components/ui';
 import Layout from '@/Layouts/Layout';
 import type { Meta, PaginatedData, Project } from '@/types';
 
@@ -21,7 +21,6 @@ export default function ProjectsIndex({ meta, projects }: ProjectsIndexProps) {
     const types = useMemo(() => Array.from(new Set(projects.data.map((p) => p.project_type).filter(Boolean))), [projects.data]);
     const [type, setType] = useState<string | null>(null);
     const visible = type ? projects.data.filter((p) => p.project_type === type) : projects.data;
-    const offset = (projects.current_page - 1) * projects.per_page;
 
     return (
         <Layout>
@@ -55,7 +54,6 @@ export default function ProjectsIndex({ meta, projects }: ProjectsIndexProps) {
                             <AnimatePresence mode="popLayout">
                                 {visible.map((project) => {
                                     const cover = project.images?.[0];
-                                    const n = offset + projects.data.indexOf(project) + 1;
                                     return (
                                         <motion.div
                                             key={project.id}
@@ -67,8 +65,7 @@ export default function ProjectsIndex({ meta, projects }: ProjectsIndexProps) {
                                         >
                                             <Link href={`/projects/${project.slug}`} className="pcard">
                                                 <Media src={storageUrl(cover?.image_path)} alt={cover?.caption ?? ''} ratio="4 / 5">
-                                                    <span className="pcard-num mono">{pad(n)}</span>
-                                                    {project.is_ongoing && <span className="tag tag-dark pcard-live"><span className="live-dot" /> Ongoing</span>}
+                                                    {project.is_ongoing && <span className="badge badge-live"><span className="live-dot" /> Ongoing</span>}
                                                 </Media>
                                                 <div className="pcard-body">
                                                     <p className="mono text-muted flex flex-wrap justify-between gap-2">

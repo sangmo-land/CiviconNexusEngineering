@@ -3,7 +3,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion
 import { useRef, useState } from 'react';
 import ImageLightbox from '@/Components/ImageLightbox';
 import SEOHead from '@/Components/SEOHead';
-import { Arrow, CTA, Crumbs, Reveal, SplitTitle, pad, storageUrl } from '@/Components/ui';
+import { Arrow, CTA, Crumbs, Reveal, SplitTitle, storageUrl } from '@/Components/ui';
 import Layout from '@/Layouts/Layout';
 import type { Meta, Project } from '@/types';
 
@@ -67,19 +67,19 @@ export default function ProjectShow({ meta, project }: ProjectShowProps) {
                     <Crumbs items={[{ label: 'Home', href: '/' }, { label: 'Projects', href: '/projects' }, { label: project.title }]} />
                     <div className="mt-auto">
                         <div className="flex flex-wrap gap-2 mb-6">
-                            <span className="tag tag-signal">{project.project_type}</span>
-                            {project.is_ongoing && <span className="tag"><span className="live-dot" /> Ongoing</span>}
+                            <span className="badge">{project.project_type}</span>
+                            {project.is_ongoing && <span className="badge badge-live"><span className="live-dot" /> Ongoing</span>}
                         </div>
-                        <SplitTitle as="h1" id="project-title" immediate className="display phero-title" lines={titleLines} />
+                        <SplitTitle as="h1" id="project-title" immediate className="phero-title" lines={titleLines} />
                     </div>
                 </div>
             </section>
 
             <section aria-label="Project specification" className="spec-strip">
                 <dl className="wrap spec-grid">
-                    {specs.map((s, i) => (
+                    {specs.map((s) => (
                         <div key={s.label}>
-                            <dt className="mono">{pad(i + 1)} · {s.label}</dt>
+                            <dt>{s.label}</dt>
                             <dd>{s.value}</dd>
                         </div>
                     ))}
@@ -110,14 +110,14 @@ export default function ProjectShow({ meta, project }: ProjectShowProps) {
                                 <span className="eyebrow">On site</span>
                                 <h2 id="gallery-title" className="h-sec mt-5">Gallery</h2>
                             </div>
-                            <span className="mono text-muted">{pad(images.length)} {images.length === 1 ? 'image' : 'images'}</span>
+                            <span className="text-muted">{images.length} {images.length === 1 ? 'photo' : 'photos'}</span>
                         </div>
                         <div className="gallery">
                             {images.map((image, i) => (
                                 <Reveal key={image.id} delay={(i % 3) * 0.06}>
                                     <button type="button" className="gallery-item" onClick={() => setSelected(i)} aria-label={`Open image ${i + 1}${image.caption ? `: ${image.caption}` : ''}`}>
                                         <img src={storageUrl(image.image_path)} alt={image.caption || `${project.title} — image ${i + 1}`} loading="lazy" />
-                                        <span className="gallery-cap mono">{pad(i + 1)}{image.caption ? ` · ${image.caption}` : ''}</span>
+                                        {image.caption && <span className="gallery-cap">{image.caption}</span>}
                                     </button>
                                 </Reveal>
                             ))}

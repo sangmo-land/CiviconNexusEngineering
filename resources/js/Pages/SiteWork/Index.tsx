@@ -1,6 +1,6 @@
 import { Link } from '@inertiajs/react';
 import SEOHead from '@/Components/SEOHead';
-import { Arrow, PageHeader, Reveal, formatDate, pad } from '@/Components/ui';
+import { Arrow, PageHeader, Reveal, formatDate } from '@/Components/ui';
 import Layout from '@/Layouts/Layout';
 import type { Meta } from '@/types';
 
@@ -47,7 +47,7 @@ export default function SiteWorkIndex({ meta, projects, recentLogs }: SiteWorkIn
                 <div className="wrap">
                     <div className="sec-head">
                         <h2 id="sw-projects" className="h-sec">Select a project</h2>
-                        <span className="mono text-muted">{pad(projects.length)} projects</span>
+                        <span className="text-muted">{projects.length} {projects.length === 1 ? 'project' : 'projects'}</span>
                     </div>
 
                     {projects.length > 0 ? (
@@ -56,8 +56,7 @@ export default function SiteWorkIndex({ meta, projects, recentLogs }: SiteWorkIn
                                 <Reveal key={project.id} delay={(i % 3) * 0.06}>
                                     <Link href={`/site-work/project/${project.id}`} className="card card-pad sw-card">
                                         <div className="flex items-start justify-between gap-4">
-                                            <span className="mono text-muted">{pad(i + 1)}</span>
-                                            <span className="tag">{project.site_work_logs_count} {project.site_work_logs_count === 1 ? 'log' : 'logs'}</span>
+                                            <span className="badge">{project.site_work_logs_count} {project.site_work_logs_count === 1 ? 'log' : 'logs'}</span>
                                         </div>
                                         <h3 className="mt-12 text-[1.6rem] font-[750] leading-tight tracking-[-0.03em]">{project.title}</h3>
                                         <p className="mt-1 text-muted">{project.location}</p>

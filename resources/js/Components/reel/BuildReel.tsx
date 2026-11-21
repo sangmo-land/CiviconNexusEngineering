@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig, Easing } from 'remotion';
+import { AbsoluteFill, interpolate, spring, useCurrentFrame, Easing } from 'remotion';
 
 /**
  * Remotion composition — "From survey to site".
@@ -17,16 +17,17 @@ export const PHASES = [
 ] as const;
 export const REEL_DURATION = PHASE_FRAMES * PHASES.length;
 
+// Drawing-office palette: blue linework on paper, orange for highlights (logo colours).
 const C = {
-    night: '#0b0c0a',
-    paper: '#f1eee7',
-    dim: '#f1eee733',
-    faint: '#f1eee714',
-    muted: '#a8a79f',
-    signal: '#ff5a1f',
+    bg: '#fbfaf7',
+    line: '#1f6fd1',
+    dim: '#1f6fd133',
+    faint: '#1f6fd114',
+    muted: '#566170',
+    signal: '#e8890c',
 };
-const MONO = "'Geist Mono', ui-monospace, monospace";
-const DISPLAY = 'Archivo, ui-sans-serif, system-ui, sans-serif';
+const MONO = "Barlow, ui-sans-serif, system-ui, sans-serif";
+const DISPLAY = "'Barlow Semi Condensed', Barlow, ui-sans-serif, system-ui, sans-serif";
 
 const clamp = { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' } as const;
 const ease = Easing.bezier(0.16, 1, 0.3, 1);
@@ -83,7 +84,7 @@ function Survey(f: number) {
                     d={contour(520, 470, 40 + i * 42, i * 0.9)}
                     pathLength={1}
                     fill="none"
-                    stroke={i === 4 ? C.signal : C.paper}
+                    stroke={i === 4 ? C.signal : C.line}
                     strokeOpacity={i === 4 ? 0.9 : 0.35}
                     strokeWidth={i % 2 ? 1.2 : 2}
                     strokeDasharray={1}
@@ -104,7 +105,7 @@ function Survey(f: number) {
                     <g key={i} transform={`translate(${p.x} ${p.y}) scale(${s})`}>
                         <circle r={14} fill="none" stroke={C.signal} strokeWidth={2} />
                         <path d="M-24 0H24M0 -24V24" stroke={C.signal} strokeWidth={1.5} />
-                        <text x={22} y={-18} fill={C.paper} fontFamily={MONO} fontSize={18}>{`SP-0${i + 1}`}</text>
+                        <text x={22} y={-18} fill={C.line} fontFamily={MONO} fontSize={18}>{`SP-0${i + 1}`}</text>
                         <text x={22} y={4} fill={C.muted} fontFamily={MONO} fontSize={16}>{p.z}</text>
                     </g>
                 );
@@ -135,14 +136,14 @@ function Design(f: number) {
                 const s = spring({ frame: f - i * 4, fps: REEL_FPS, config: { damping: 16 } });
                 return (
                     <g key={a} opacity={s}>
-                        <line x1={x} y1={y0 - 90} x2={x} y2={y0 + h + 30} stroke={C.paper} strokeOpacity={0.18} strokeDasharray="10 8" />
-                        <circle cx={x} cy={y0 - 112} r={20} fill="none" stroke={C.paper} strokeOpacity={0.6} />
-                        <text x={x} y={y0 - 106} textAnchor="middle" fill={C.paper} fontFamily={MONO} fontSize={18}>{a}</text>
+                        <line x1={x} y1={y0 - 90} x2={x} y2={y0 + h + 30} stroke={C.line} strokeOpacity={0.18} strokeDasharray="10 8" />
+                        <circle cx={x} cy={y0 - 112} r={20} fill="none" stroke={C.line} strokeOpacity={0.6} />
+                        <text x={x} y={y0 - 106} textAnchor="middle" fill={C.line} fontFamily={MONO} fontSize={18}>{a}</text>
                     </g>
                 );
             })}
             {walls.map((d, i) => (
-                <path key={i} d={d} pathLength={1} fill="none" stroke={C.paper} strokeWidth={i === 0 ? 10 : 6}
+                <path key={i} d={d} pathLength={1} fill="none" stroke={C.line} strokeWidth={i === 0 ? 10 : 6}
                     strokeDasharray={1} strokeDashoffset={1 - prog(f, 8 + i * 6, 48 + i * 6)} />
             ))}
             {/* door swings */}
@@ -159,10 +160,10 @@ function Design(f: number) {
                 <line x1={x0 + w + 48} y1={y0} x2={x0 + w + 72} y2={y0} />
                 <line x1={x0 + w + 48} y1={y0 + h * dimH} x2={x0 + w + 72} y2={y0 + h * dimH} />
             </g>
-            <text x={x0 + (w * dimW) / 2} y={y0 + h + 95} textAnchor="middle" fill={C.paper} fontFamily={MONO} fontSize={20}>
+            <text x={x0 + (w * dimW) / 2} y={y0 + h + 95} textAnchor="middle" fill={C.line} fontFamily={MONO} fontSize={20}>
                 {(12 * dimW).toFixed(2)} m
             </text>
-            <text x={x0 + w + 80} y={y0 + (h * dimH) / 2} fill={C.paper} fontFamily={MONO} fontSize={20}>
+            <text x={x0 + w + 80} y={y0 + (h * dimH) / 2} fill={C.line} fontFamily={MONO} fontSize={20}>
                 {(8.4 * dimH).toFixed(2)} m
             </text>
             {[['LIVING', x0 + 110, y0 + 120], ['KITCHEN', x0 + 330, y0 + 90], ['BED 01', x0 + 90, y0 + 350], ['BED 02', x0 + 500, y0 + 310]].map(([t, x, y], i) => (
@@ -189,36 +190,36 @@ function Structure(f: number) {
         const y0 = fl * HT, y1 = y0 + HT;
         const sp = prog(f, t0 + 14, t0 + 30);
         const slab = [iso(ox, y1, oz), iso(ox + BX * SP, y1, oz), iso(ox + BX * SP, y1, oz + BZ * SP), iso(ox, y1, oz + BZ * SP)];
-        out.push(<polygon key={`s${fl}`} points={slab.map((p) => p.join(',')).join(' ')} fill={C.paper} fillOpacity={0.07 * sp} stroke={C.paper} strokeOpacity={0.5 * sp} strokeWidth={1.5} />);
+        out.push(<polygon key={`s${fl}`} points={slab.map((p) => p.join(',')).join(' ')} fill={C.line} fillOpacity={0.07 * sp} stroke={C.line} strokeOpacity={0.5 * sp} strokeWidth={1.5} />);
         for (let i = 0; i <= BX; i++) {
             for (let k = 0; k <= BZ; k++) {
                 const g = prog(f, t0 + (i + k) * 1.2, t0 + 12 + (i + k) * 1.2);
                 const [ax, ay] = iso(ox + i * SP, y0, oz + k * SP);
                 const [bx, by] = iso(ox + i * SP, y0 + HT * g, oz + k * SP);
                 const hl = fl === FL - 1 && i === BX && k === 0;
-                out.push(<line key={`c${fl}${i}${k}`} x1={ax} y1={ay} x2={bx} y2={by} stroke={hl ? C.signal : C.paper} strokeWidth={6} strokeLinecap="square" />);
+                out.push(<line key={`c${fl}${i}${k}`} x1={ax} y1={ay} x2={bx} y2={by} stroke={hl ? C.signal : C.line} strokeWidth={6} strokeLinecap="square" />);
             }
         }
         for (let k = 0; k <= BZ; k++) {
             const g = prog(f, t0 + 10, t0 + 24);
             const [ax, ay] = iso(ox, y1, oz + k * SP);
             const [bx, by] = iso(ox + BX * SP * g, y1, oz + k * SP);
-            out.push(<line key={`bx${fl}${k}`} x1={ax} y1={ay} x2={bx} y2={by} stroke={k === 0 ? C.signal : C.paper} strokeWidth={4} />);
+            out.push(<line key={`bx${fl}${k}`} x1={ax} y1={ay} x2={bx} y2={by} stroke={k === 0 ? C.signal : C.line} strokeWidth={4} />);
         }
         for (let i = 0; i <= BX; i++) {
             const g = prog(f, t0 + 12, t0 + 26);
             const [ax, ay] = iso(ox + i * SP, y1, oz);
             const [bx, by] = iso(ox + i * SP, y1, oz + BZ * SP * g);
-            out.push(<line key={`bz${fl}${i}`} x1={ax} y1={ay} x2={bx} y2={by} stroke={C.paper} strokeWidth={4} />);
+            out.push(<line key={`bz${fl}${i}`} x1={ax} y1={ay} x2={bx} y2={by} stroke={C.line} strokeWidth={4} />);
         }
     }
     const base = [iso(ox - 0.6, 0, oz - 0.6), iso(ox + BX * SP + 0.6, 0, oz - 0.6), iso(ox + BX * SP + 0.6, 0, oz + BZ * SP + 0.6), iso(ox - 0.6, 0, oz + BZ * SP + 0.6)];
     const lvl = Math.min(Math.floor(prog(f, 6, 92) * FL) + 1, FL);
     return (
         <g>
-            <polygon points={base.map((p) => p.join(',')).join(' ')} fill="none" stroke={C.paper} strokeOpacity={0.3} strokeDasharray="8 8" />
+            <polygon points={base.map((p) => p.join(',')).join(' ')} fill="none" stroke={C.line} strokeOpacity={0.3} strokeDasharray="8 8" />
             {out}
-            <text x={130} y={250} fill={C.paper} fontFamily={MONO} fontSize={20}>{`LEVEL ${String(lvl).padStart(2, '0')} / 0${FL}`}</text>
+            <text x={130} y={250} fill={C.line} fontFamily={MONO} fontSize={20}>{`LEVEL ${String(lvl).padStart(2, '0')} / 0${FL}`}</text>
             <text x={130} y={280} fill={C.muted} fontFamily={MONO} fontSize={16}>RC FRAME · 3 × 2 BAYS</text>
         </g>
     );
@@ -237,7 +238,7 @@ function Site(f: number) {
             <circle cx={cx} cy={cy} r={r} fill="none" stroke={C.faint} strokeWidth={22} />
             <circle cx={cx} cy={cy} r={r} fill="none" stroke={C.signal} strokeWidth={22} strokeDasharray={circ}
                 strokeDashoffset={circ * (1 - total)} transform={`rotate(-90 ${cx} ${cy})`} />
-            <text x={cx} y={cy + 22} textAnchor="middle" fill={C.paper} fontFamily={DISPLAY} fontWeight={800} fontSize={76}>
+            <text x={cx} y={cy + 22} textAnchor="middle" fill={C.line} fontFamily={DISPLAY} fontWeight={700} fontSize={76}>
                 {Math.round(total * 100)}%
             </text>
             <text x={cx} y={cy + 62} textAnchor="middle" fill={C.muted} fontFamily={MONO} fontSize={16}>OVERALL PROGRESS</text>
@@ -247,10 +248,10 @@ function Site(f: number) {
                 const done = p >= 0.999;
                 return (
                     <g key={t}>
-                        <text x={540} y={y} fill={C.paper} fontFamily={MONO} fontSize={18}>{t.toUpperCase()}</text>
+                        <text x={540} y={y} fill={C.line} fontFamily={MONO} fontSize={18}>{t.toUpperCase()}</text>
                         <text x={880} y={y} textAnchor="end" fill={done ? C.signal : C.muted} fontFamily={MONO} fontSize={16}>{done ? 'DONE' : `${Math.round(p * 100)}%`}</text>
                         <rect x={540} y={y + 16} width={340} height={8} fill={C.faint} />
-                        <rect x={540} y={y + 16} width={340 * p} height={8} fill={done ? C.signal : C.paper} />
+                        <rect x={540} y={y + 16} width={340 * p} height={8} fill={done ? C.signal : C.line} />
                     </g>
                 );
             })}
@@ -262,15 +263,13 @@ function Site(f: number) {
 
 export default function BuildReel() {
     const frame = useCurrentFrame();
-    const { durationInFrames } = useVideoConfig();
     const phase = Math.min(Math.floor(frame / PHASE_FRAMES), PHASES.length - 1);
     const local = frame - phase * PHASE_FRAMES;
-    const secs = frame / REEL_FPS;
     const labelY = interpolate(local, [0, 14], [40, 0], { ...clamp, easing: ease });
     const chapters = [Survey, Design, Structure, Site];
 
     return (
-        <AbsoluteFill style={{ background: C.night, fontFamily: MONO, color: C.paper, overflow: 'hidden' }}>
+        <AbsoluteFill style={{ background: C.bg, fontFamily: MONO, color: C.line, overflow: 'hidden' }}>
             {/* blueprint grid */}
             <AbsoluteFill
                 style={{
@@ -281,17 +280,14 @@ export default function BuildReel() {
 
             {chapters.map((draw, i) => <Chapter key={i} index={i}>{draw}</Chapter>)}
 
-            {/* chrome */}
-            <div style={{ position: 'absolute', inset: '44px 48px auto', display: 'flex', justifyContent: 'space-between', fontSize: 18, letterSpacing: '0.08em', color: C.muted }}>
-                <span>CNE / PROCESS</span>
-                <span>T+ 00:{String(Math.floor(secs)).padStart(2, '0')}:{String(Math.floor((frame % REEL_FPS) * (100 / REEL_FPS))).padStart(2, '0')}</span>
+            <div style={{ position: 'absolute', left: 48, top: 44, fontSize: 22, fontWeight: 600, color: C.muted }}>
+                Step {phase + 1} of {PHASES.length}
             </div>
 
             <div style={{ position: 'absolute', left: 48, right: 48, bottom: 44 }}>
                 <div style={{ overflow: 'hidden', height: 92 }}>
                     <div style={{ transform: `translateY(${labelY}px)`, display: 'flex', alignItems: 'baseline', gap: 22 }}>
-                        <span style={{ fontSize: 22, color: C.signal }}>{`0${phase + 1}`}</span>
-                        <span style={{ fontFamily: DISPLAY, fontWeight: 800, fontStretch: '112%', fontSize: 80, lineHeight: 1, letterSpacing: '-0.03em', textTransform: 'uppercase' }}>
+                        <span style={{ fontFamily: DISPLAY, fontWeight: 700, fontSize: 68, lineHeight: 1, letterSpacing: '-0.01em' }}>
                             {PHASES[phase].title}
                         </span>
                     </div>
@@ -301,15 +297,11 @@ export default function BuildReel() {
                         const fill = interpolate(frame, [i * PHASE_FRAMES, (i + 1) * PHASE_FRAMES], [0, 1], clamp);
                         return (
                             <div key={p.key} style={{ height: 4, background: C.faint }}>
-                                <div style={{ height: '100%', width: `${fill * 100}%`, background: i === phase ? C.signal : C.paper }} />
+                                <div style={{ height: '100%', width: `${fill * 100}%`, background: i === phase ? C.signal : C.line }} />
                             </div>
                         );
                     })}
                 </div>
-            </div>
-
-            <div style={{ position: 'absolute', right: 48, top: 80, fontSize: 14, color: C.muted, letterSpacing: '0.08em' }}>
-                {`FRAME ${String(frame).padStart(3, '0')}/${durationInFrames}`}
             </div>
         </AbsoluteFill>
     );

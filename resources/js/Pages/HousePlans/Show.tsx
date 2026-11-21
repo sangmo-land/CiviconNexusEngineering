@@ -55,7 +55,7 @@ export default function HousePlanShow({ meta, housePlan }: HousePlanShowProps) {
 
                     <div className="plan-hero-info">
                         <Crumbs items={[{ label: 'Home', href: '/' }, { label: 'House plans', href: '/plans' }, { label: housePlan.title }]} />
-                        <SplitTitle as="h1" immediate className="display mt-8 text-[clamp(2.1rem,4.2vw,4.1rem)]" lines={[housePlan.title]} />
+                        <SplitTitle as="h1" immediate className="plan-title mt-6" lines={[housePlan.title]} />
                         <p className="plan-hero-price">{formatPrice(housePlan.price)}</p>
                         <PlanSpecs plan={housePlan} large />
                         <div className="mt-8 grid gap-3 sm:grid-cols-2">

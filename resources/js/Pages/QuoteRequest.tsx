@@ -1,7 +1,7 @@
 import { useForm } from '@inertiajs/react';
 import type { FormEvent, ReactNode } from 'react';
 import SEOHead from '@/Components/SEOHead';
-import { Arrow, PageHeader, Reveal, pad } from '@/Components/ui';
+import { Arrow, PageHeader, Reveal } from '@/Components/ui';
 import Layout from '@/Layouts/Layout';
 import type { Meta, PageProps } from '@/types';
 
@@ -41,7 +41,7 @@ function Step({ n, title, children }: { n: number; title: string; children: Reac
     return (
         <fieldset className="q-step">
             <legend className="q-legend">
-                <span className="mono">{pad(n)}</span>
+                <span className="q-num">Step {n}</span>
                 {title}
             </legend>
             {children}
@@ -172,7 +172,7 @@ export default function QuoteRequest({ meta, flash }: QuoteRequestProps) {
                         <ol className="next-steps">
                             {nextSteps.map(([t, d], i) => (
                                 <Reveal as="li" key={t} delay={i * 0.08}>
-                                    <span className="mono">{pad(i + 1)}</span>
+                                    <span className="q-num">{i + 1}</span>
                                     <div>
                                         <h3>{t}</h3>
                                         <p>{d}</p>
@@ -181,7 +181,7 @@ export default function QuoteRequest({ meta, flash }: QuoteRequestProps) {
                             ))}
                         </ol>
                         <div className="card card-pad card-ink mt-8">
-                            <p className="mono text-[#a8a79f]">Prefer to talk?</p>
+                            <p className="card-ink-label">Prefer to talk?</p>
                             <a href="tel:+237678626645" className="mt-2 block text-[1.6rem] font-[750] tracking-[-0.03em] hover:text-accent">+237 678 626 645</a>
                         </div>
                     </aside>

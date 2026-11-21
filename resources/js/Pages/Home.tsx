@@ -1,12 +1,10 @@
 ﻿import { Link } from '@inertiajs/react';
-import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform, type MotionValue } from 'framer-motion';
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import SEOHead from '@/Components/SEOHead';
-import { Arrow, CTA, Marquee, Media, Reveal, SplitTitle, pad, storageUrl } from '@/Components/ui';
+import { Arrow, CTA, Media, PHONE, PHONE_HREF, PhoneIcon, Reveal, WHATSAPP_URL, WhatsAppIcon, storageUrl } from '@/Components/ui';
 import Layout from '@/Layouts/Layout';
-import type { Meta, Project, Service } from '@/types';
+import type { Meta, Project, ProjectImage, Service } from '@/types';
 
-const HeroScene = lazy(() => import('@/Components/HeroScene'));
 const ProcessReel = lazy(() => import('@/Components/reel/ProcessReel'));
 
 interface HomeProps {
@@ -15,184 +13,173 @@ interface HomeProps {
     featuredProjects: Project[];
 }
 
-const coreServices = [
-    { title: 'Structural engineering', description: 'Analysis and design of reinforced-concrete and steel structures for buildings and infrastructure.' },
-    { title: 'Civil infrastructure', description: 'Roads, drainage, earthworks and site planning — from feasibility to construction drawings.' },
-    { title: 'Construction management', description: 'Site supervision, coordination and progress tracking so work is built as designed.' },
-    { title: 'House plans', description: 'Ready-to-build residential designs, or a custom plan drawn around your plot and brief.' },
+const fallbackServices = [
+    { title: 'Structural engineering', description: 'Analysis and design of reinforced-concrete structures for homes, apartment buildings and commercial projects.' },
+    { title: 'Construction management', description: 'Planning, site supervision and coordination so the building is built as designed.' },
+    { title: 'Site planning', description: 'Site analysis and layout before anything is built.' },
+    { title: 'House plans', description: 'Ready-made residential plans, or a plan drawn for your plot.' },
 ];
 
-const disciplines = ['Structural design', 'Civil works', 'Construction management', 'House plans', 'Site supervision', 'Roads & drainage', 'Génie civil', 'Bureau d’études'];
+type Shot = { image: ProjectImage; project: Project };
+
+function statusText(p: Project) {
+    if (p.is_ongoing) return p.start_year ? `Ongoing · since ${p.start_year}` : 'Ongoing';
+    if (p.start_year && p.completion_year) return `Completed · ${p.start_year}–${p.completion_year}`;
+    return p.completion_year ? `Completed · ${p.completion_year}` : '';
+}
+
+/** Spread picks across projects: each project's 2nd photo, then each project's 3rd, … */
+function interleave(projects: Project[], from: number, limit: number): Shot[] {
+    const out: Shot[] = [];
+    const longest = Math.max(0, ...projects.map((p) => p.images?.length ?? 0));
+    for (let i = from; i < longest && out.length < limit; i++) {
+        for (const p of projects) {
+            if (p.images?.[i] && out.length < limit) out.push({ image: p.images[i], project: p });
+        }
+    }
+    return out;
+}
 
 /* ------------------------------------------------------------------ hero */
 
-const heroWords = ['what’s next', 'what lasts', 'for Cameroon'];
-
-/** Last headline line cycles through a few endings with a masked slide. */
-function RotatingWord() {
-    const reduce = useReducedMotion();
-    const [i, setI] = useState(0);
-    useEffect(() => {
-        if (reduce) return;
-        const id = window.setInterval(() => setI((n) => (n + 1) % heroWords.length), 3200);
-        return () => window.clearInterval(id);
-    }, [reduce]);
-
-    return (
-        <span className="rotator">
-            <span className="sr-only">{heroWords[0]}.</span>
-            <AnimatePresence initial={false}>
-                <motion.span
-                    key={i}
-                    aria-hidden="true"
-                    className="rotator-word"
-                    initial={{ y: '105%' }}
-                    animate={{ y: 0 }}
-                    exit={{ y: '-105%' }}
-                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                >
-                    {heroWords[i]}<span className="text-accent">.</span>
-                </motion.span>
-            </AnimatePresence>
-        </span>
-    );
-}
-
-/** Real project photography, cross-fading on a timer. */
-function HeroProjects({ projects }: { projects: Project[] }) {
-    const withImages = projects.filter((p) => p.images?.[0]);
-    const reduce = useReducedMotion();
-    const [i, setI] = useState(0);
-    const [paused, setPaused] = useState(false);
-
-    useEffect(() => {
-        if (reduce || paused || withImages.length < 2) return;
-        const id = window.setTimeout(() => setI((n) => (n + 1) % withImages.length), 5000);
-        return () => window.clearTimeout(id);
-    }, [i, reduce, paused, withImages.length]);
-
-    if (!withImages.length) return null;
-    const current = withImages[i];
-
-    return (
-        <div className="hero-proj" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-            <Link href={`/projects/${current.slug}`} className="hero-proj-link">
-                <div className="hero-proj-media">
-                    {withImages.map((p, n) => (
-                        <img
-                            key={p.id}
-                            src={storageUrl(p.images[0].image_path)}
-                            alt={n === i ? p.images[0].caption ?? p.title : ''}
-                            data-active={n === i}
-                            loading={n === 0 ? 'eager' : 'lazy'}
-                            decoding="async"
-                        />
-                    ))}
-                    <span className="tag tag-signal hero-proj-tag">{current.is_ongoing ? 'On site now' : 'Featured project'}</span>
-                </div>
-                <div className="hero-proj-body">
-                    <span className="mono">{pad(i + 1)} / {pad(withImages.length)} · {current.location}</span>
-                    <strong>{current.title}</strong>
-                </div>
-            </Link>
-            {withImages.length > 1 && (
-                <div className="hero-proj-dots" role="group" aria-label="Choose featured project">
-                    {withImages.map((p, n) => (
-                        <button
-                            key={p.id}
-                            type="button"
-                            aria-label={`Show ${p.title}`}
-                            aria-pressed={n === i}
-                            onClick={() => setI(n)}
-                        >
-                            <span className="dot-track">
-                                <i key={n === i ? `on-${i}` : 'off'} style={{ animationPlayState: paused ? 'paused' : 'running' }} />
-                            </span>
-                        </button>
-                    ))}
-                </div>
-            )}
-        </div>
-    );
-}
-
 function Hero({ projects }: { projects: Project[] }) {
-    const [progress, setProgress] = useState(0);
-    const [storey, setStorey] = useState(1);
-    const hasPhotos = projects.some((p) => p.images?.[0]);
+    const withPhotos = projects.filter((p) => p.images?.length);
+    const main = withPhotos[0] ? { image: withPhotos[0].images[0], project: withPhotos[0] } : null;
+    const side = interleave(withPhotos, 1, 2);
+    const sites = Array.from(new Set(projects.filter((p) => p.is_ongoing).map((p) => p.location.split(',')[0].trim()))).slice(0, 4);
 
     return (
-        <section className="hero on-dark" aria-labelledby="hero-title">
-            <Suspense fallback={<div className="hero-canvas" />}>
-                <HeroScene onProgress={(p, s) => { setProgress(p); setStorey(s); }} />
-            </Suspense>
-
-            <div className="wrap hero-inner">
-                <div className="hero-top">
-                    <span className="eyebrow">Civil &amp; structural engineering — Cameroon</span>
-                    <div className="hud-mini mono" aria-hidden="true">
-                        <span>Frame {Math.round(progress * 100)}%</span>
-                        <span className="hud-mini-bar"><i style={{ transform: `scaleX(${progress})` }} /></span>
-                        <span>L{pad(storey)}/09</span>
+        <section className="hero" aria-labelledby="hero-title">
+            <div className="wrap hero-grid">
+                <div className="hero-copy">
+                    <p className="eyebrow">Civil engineering &amp; construction · Yaoundé</p>
+                    <h1 id="hero-title" className="hero-title">
+                        We design and build <span className="hl">solid buildings</span> in Cameroon.
+                    </h1>
+                    <p className="hero-lede">
+                        Structural design, construction management and site supervision for homes, apartment buildings and
+                        commercial projects — from the soil study to the roof.
+                    </p>
+                    <div className="hero-actions">
+                        <Link className="btn btn-signal" href="/quote-request">Request a quote <Arrow /></Link>
+                        <a className="btn btn-ghost" href={PHONE_HREF}><PhoneIcon /> {PHONE}</a>
                     </div>
-                </div>
-
-                <SplitTitle
-                    as="h1"
-                    id="hero-title"
-                    immediate
-                    className="display hero-title"
-                    lines={['Engineering', <RotatingWord key="rot" />]}
-                />
-
-                <div className={`hero-bottom ${hasPhotos ? '' : 'hero-bottom-solo'}`}>
-                    <Reveal delay={0.35}>
-                        <p className="hero-lede">
-                            We design structures and infrastructure, and manage construction from the first drawing to the last day on site.
+                    <a className="hero-wa" href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+                        <WhatsAppIcon size={18} /> Or message us on WhatsApp — English or French
+                    </a>
+                    {sites.length > 0 && (
+                        <p className="hero-sites">
+                            <span className="live-dot" aria-hidden="true" /> On site now: {sites.join(' · ')}
                         </p>
-                        <div className="flex flex-wrap gap-3 mt-7">
-                            <Link className="btn btn-signal" href="/quote-request">Request a quote <Arrow /></Link>
-                            <Link className="btn btn-ghost" href="/projects">See our work</Link>
-                        </div>
-                        <p className="mono hero-coords mt-8">Yaoundé · 3.8480° N, 11.5021° E</p>
-                    </Reveal>
-
-                    {hasPhotos && (
-                        <Reveal delay={0.55}>
-                            <HeroProjects projects={projects} />
-                        </Reveal>
                     )}
                 </div>
-            </div>
 
-            <div className="hero-scroll mono" aria-hidden="true"><span />Scroll</div>
+                {main ? (
+                    <div className={`hero-photos ${side.length ? '' : 'hero-photos-single'}`}>
+                        <Link href={`/projects/${main.project.slug}`} className="hero-photo hero-photo-main">
+                            <img src={storageUrl(main.image.image_path)} alt={main.image.caption ?? main.project.title} fetchPriority="high" />
+                            <span className="photo-cap">{main.project.title} — {main.project.location}</span>
+                        </Link>
+                        {side.map((s) => (
+                            <Link key={s.image.id} href={`/projects/${s.project.slug}`} className="hero-photo">
+                                <img src={storageUrl(s.image.image_path)} alt={s.image.caption ?? `On site: ${s.project.title}`} loading="eager" />
+                                <span className="photo-cap">On site · {s.project.location.split(',')[0]}</span>
+                            </Link>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="hero-photos hero-photos-single">
+                        <div className="hero-photo hero-photo-main">
+                            <img src="/images/infrastructure-hero.webp" alt="" fetchPriority="high" />
+                        </div>
+                    </div>
+                )}
+            </div>
         </section>
     );
 }
 
-/* ------------------------------------------------------------------ statement */
+/* ------------------------------------------------------------------ projects */
 
-function Word({ word, range, progress }: { word: string; range: [number, number]; progress: MotionValue<number> }) {
-    const opacity = useTransform(progress, range, [0.14, 1]);
-    return <motion.span style={{ opacity }}>{word} </motion.span>;
+function ProjectCard({ project, wide = false }: { project: Project; wide?: boolean }) {
+    const cover = project.images?.[0];
+    const status = statusText(project);
+    return (
+        <Link href={`/projects/${project.slug}`} className={`pcard ${wide ? 'pcard-wide' : ''}`}>
+            <Media src={storageUrl(cover?.image_path)} alt={cover?.caption ?? project.title} ratio={wide ? '16 / 10' : '4 / 3'}>
+                {status && <span className={`badge ${project.is_ongoing ? 'badge-live' : ''}`}>{project.is_ongoing && <span className="live-dot" />}{status}</span>}
+            </Media>
+            <div className="pcard-body">
+                <p className="pcard-meta">{project.project_type} · {project.location}</p>
+                <h3>{project.title}</h3>
+                <dl className="pcard-facts">
+                    {project.client && (<><dt>Client</dt><dd>{project.client}</dd></>)}
+                    {project.role && (<><dt>Our role</dt><dd>{project.role}</dd></>)}
+                </dl>
+                <span className="pcard-link">
+                    View project{project.images?.length ? ` · ${project.images.length} photos` : ''} <Arrow size={16} />
+                </span>
+            </div>
+        </Link>
+    );
 }
 
-function Statement() {
-    const ref = useRef<HTMLParagraphElement>(null);
-    const reduce = useReducedMotion();
-    const { scrollYProgress } = useScroll({ target: ref, offset: ['start 0.85', 'end 0.45'] });
-    const text = 'Every structure starts as a question about the ground, the load and the budget. We answer it with calculation, clear drawings and engineers on site — so what gets built is what was designed.';
-    const words = text.split(' ');
+function Projects({ projects }: { projects: Project[] }) {
+    const [first, ...rest] = projects;
+    return (
+        <section className="sec" aria-labelledby="work-title">
+            <div className="wrap">
+                <div className="sec-head">
+                    <div>
+                        <p className="eyebrow">Our projects</p>
+                        <h2 id="work-title" className="h-sec">Buildings we are designing and building</h2>
+                    </div>
+                    <Link href="/projects" className="link-arrow">All projects <Arrow size={16} /></Link>
+                </div>
+                <Reveal><ProjectCard project={first} wide /></Reveal>
+                {rest.length > 0 && (
+                    <div className="pgrid mt-6">
+                        {rest.map((p, i) => <Reveal key={p.id} delay={i * 0.06}><ProjectCard project={p} /></Reveal>)}
+                    </div>
+                )}
+            </div>
+        </section>
+    );
+}
+
+/* ------------------------------------------------------------------ site photos */
+
+function SitePhotos({ projects }: { projects: Project[] }) {
+    const shots = interleave(projects.filter((p) => p.images?.length), 1, 16);
+    const strip = useRef<HTMLDivElement>(null);
+    if (shots.length < 3) return null;
+
+    const scroll = (dir: number) => {
+        const el = strip.current;
+        if (el) el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: 'smooth' });
+    };
 
     return (
-        <section className="sec statement" aria-label="Our approach">
-            <div className="wrap statement-grid">
-                <span className="eyebrow">Our approach</span>
-                <p ref={ref} className="statement-text">
-                    {reduce
-                        ? text
-                        : words.map((w, i) => <Word key={i} word={w} progress={scrollYProgress} range={[i / words.length, (i + 1) / words.length]} />)}
-                </p>
+        <section className="sec sec-tint" aria-labelledby="photos-title">
+            <div className="wrap">
+                <div className="sec-head">
+                    <div>
+                        <p className="eyebrow">From our sites</p>
+                        <h2 id="photos-title" className="h-sec">Work in progress, photographed by our team</h2>
+                    </div>
+                    <div className="strip-btns">
+                        <button type="button" onClick={() => scroll(-1)} aria-label="Previous photos"><Arrow className="rotate-180" /></button>
+                        <button type="button" onClick={() => scroll(1)} aria-label="Next photos"><Arrow /></button>
+                    </div>
+                </div>
+            </div>
+            <div className="strip" ref={strip}>
+                {shots.map((s) => (
+                    <Link key={s.image.id} href={`/projects/${s.project.slug}`} className="strip-item">
+                        <img src={storageUrl(s.image.image_path)} alt={s.image.caption ?? `${s.project.title}, ${s.project.location}`} loading="lazy" decoding="async" />
+                        <span>{s.image.caption ?? s.project.title}<small>{s.project.location}</small></span>
+                    </Link>
+                ))}
             </div>
         </section>
     );
@@ -202,23 +189,24 @@ function Statement() {
 
 function Services({ services }: { services: { title: string; description: string; href: string }[] }) {
     return (
-        <section className="sec pt-0" aria-labelledby="services-title">
+        <section className="sec" aria-labelledby="services-title">
             <div className="wrap">
                 <div className="sec-head">
                     <div>
-                        <span className="eyebrow">Capabilities</span>
-                        <SplitTitle id="services-title" className="h-sec mt-5" lines={['From design', 'to delivery.']} />
+                        <p className="eyebrow">Services</p>
+                        <h2 id="services-title" className="h-sec">What we do</h2>
                     </div>
-                    <Link href="/services" className="link-u font-semibold">All services</Link>
+                    <Link href="/services" className="link-arrow">All services <Arrow size={16} /></Link>
                 </div>
-                <div className="rows">
+                <div className="svc-grid">
                     {services.map((s, i) => (
-                        <Link key={s.title} href={s.href} className="row">
-                            <span className="row-num">{pad(i + 1)}</span>
-                            <h3>{s.title}</h3>
-                            <p>{s.description}</p>
-                            <span className="row-arrow" aria-hidden="true"><Arrow /></span>
-                        </Link>
+                        <Reveal key={s.title} delay={(i % 2) * 0.05}>
+                            <Link href={s.href} className="svc">
+                                <h3>{s.title}</h3>
+                                <p>{s.description}</p>
+                                <span className="pcard-link">Learn more <Arrow size={16} /></span>
+                            </Link>
+                        </Reveal>
                     ))}
                 </div>
             </div>
@@ -242,14 +230,13 @@ function Process() {
     }, []);
 
     return (
-        <section ref={ref} className="sec on-dark process" aria-labelledby="process-title">
+        <section ref={ref} className="sec sec-tint" aria-labelledby="process-title">
             <div className="wrap">
                 <div className="sec-head">
                     <div>
-                        <span className="eyebrow">How we work</span>
-                        <SplitTitle id="process-title" className="h-sec mt-5" lines={['Survey. Design.', 'Structure. Site.']} />
+                        <p className="eyebrow">How we work</p>
+                        <h2 id="process-title" className="h-sec">One team from the survey to the finished building</h2>
                     </div>
-                    <p className="lede max-w-sm">One team carries your project through every phase, so nothing is lost between the drawing board and the site.</p>
                 </div>
                 {show ? (
                     <Suspense fallback={<div className="reel-skeleton" />}>
@@ -261,157 +248,21 @@ function Process() {
     );
 }
 
-/* ------------------------------------------------------------------ projects */
-
-function useMedia(query: string) {
-    const [match, setMatch] = useState(() => typeof window !== 'undefined' && window.matchMedia(query).matches);
-    useEffect(() => {
-        const mq = window.matchMedia(query);
-        const on = () => setMatch(mq.matches);
-        mq.addEventListener('change', on);
-        return () => mq.removeEventListener('change', on);
-    }, [query]);
-    return match;
-}
-
-function ProjectCard({ project, index }: { project: Project; index: number }) {
-    const cover = project.images[0];
-    const meta = [project.project_type, project.location].filter(Boolean).join(' · ');
-    return (
-        <Link href={`/projects/${project.slug}`} className="pcard">
-            <Media src={storageUrl(cover?.image_path)} alt={cover?.caption ?? ''} ratio="4 / 5">
-                <span className="pcard-num mono">{pad(index + 1)}</span>
-                {project.is_ongoing && <span className="tag tag-dark pcard-live"><span className="live-dot" /> Ongoing</span>}
-            </Media>
-            <div className="pcard-body">
-                <p className="mono text-muted">{meta}</p>
-                <h3>{project.title}</h3>
-            </div>
-        </Link>
-    );
-}
-
-function ProjectsHead() {
-    return (
-        <div className="sec-head">
-            <div>
-                <span className="eyebrow">Portfolio</span>
-                <SplitTitle id="work-title" className="h-sec mt-5" lines={['Selected', 'projects.']} />
-            </div>
-            <Link href="/projects" className="link-u font-semibold">All projects</Link>
-        </div>
-    );
-}
-
-function Projects({ projects }: { projects: Project[] }) {
-    const reduce = useReducedMotion();
-    const wide = useMedia('(min-width: 64rem)');
-
-    if (wide && !reduce && projects.length > 2) return <PinnedProjects projects={projects} />;
-
-    return (
-        <section className="sec" aria-labelledby="work-title">
-            <div className="wrap">
-                <ProjectsHead />
-                <div className="pgrid">
-                    {projects.map((p, i) => <Reveal key={p.id} delay={(i % 3) * 0.08}><ProjectCard project={p} index={i} /></Reveal>)}
-                </div>
-            </div>
-        </section>
-    );
-}
-
-/** Desktop: vertical scroll drives a horizontal track of project cards. */
-function PinnedProjects({ projects }: { projects: Project[] }) {
-    const section = useRef<HTMLElement>(null);
-    const track = useRef<HTMLDivElement>(null);
-    const [distance, setDistance] = useState(0);
-
-    useEffect(() => {
-        const el = track.current;
-        if (!el) return;
-        const measure = () => setDistance(Math.max(0, el.scrollWidth - el.clientWidth));
-        const ro = new ResizeObserver(measure);
-        ro.observe(el);
-        measure();
-        return () => ro.disconnect();
-    }, [projects.length]);
-
-    const { scrollYProgress } = useScroll({ target: section, offset: ['start start', 'end end'] });
-    const x = useTransform(scrollYProgress, [0, 1], [0, -distance]);
-
-    return (
-        <section ref={section} className="hscroll" style={{ height: `calc(100vh + ${distance}px)` }} aria-labelledby="work-title">
-            <div className="hscroll-sticky">
-                <div className="wrap"><ProjectsHead /></div>
-                <motion.div ref={track} className="hscroll-track" style={{ x }}>
-                    {projects.map((p, i) => <ProjectCard key={p.id} project={p} index={i} />)}
-                    <Link href="/projects" className="pcard pcard-more">
-                        <span className="display">All<br />projects</span>
-                        <span className="row-arrow"><Arrow /></span>
-                    </Link>
-                </motion.div>
-                <div className="wrap"><div className="hscroll-bar"><motion.i style={{ scaleX: scrollYProgress }} /></div></div>
-            </div>
-        </section>
-    );
-}
-
-/* ------------------------------------------------------------------ resources */
-
-function Resources() {
-    const items = [
-        { href: '/plans', n: '01', title: 'House plans', text: 'Browse ready-to-build residential designs by floor area, bedrooms and storeys.', cls: 'bento-a' },
-        { href: '/site-work', n: '02', title: 'Site work logs', text: 'Daily records of activity, crews and materials on our active sites.', cls: 'bento-b' },
-        { href: '/blog', n: '03', title: 'Journal', text: 'Notes on structural design, construction practice and building in Cameroon.', cls: 'bento-c' },
-    ];
-    return (
-        <section className="sec pt-0" aria-labelledby="resources-title">
-            <div className="wrap">
-                <div className="sec-head">
-                    <div>
-                        <span className="eyebrow">Resources</span>
-                        <SplitTitle id="resources-title" className="h-sec mt-5" lines={['Plans, logs', '& field notes.']} />
-                    </div>
-                </div>
-                <div className="bento">
-                    {items.map((it, i) => (
-                        <Reveal key={it.href} delay={i * 0.08} className={it.cls}>
-                            <Link href={it.href} className="card bento-card">
-                                <span className="mono text-muted">{it.n}</span>
-                                <div>
-                                    <h3>{it.title}</h3>
-                                    <p>{it.text}</p>
-                                </div>
-                                <span className="row-arrow" aria-hidden="true"><Arrow /></span>
-                            </Link>
-                        </Reveal>
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
-}
-
 /* ------------------------------------------------------------------ page */
 
 export default function Home({ meta, featuredServices, featuredProjects }: HomeProps) {
     const services = featuredServices.length
         ? featuredServices.map((s) => ({ title: s.title, description: s.short_description, href: `/services/${s.slug}` }))
-        : coreServices.map((s) => ({ ...s, href: '/services' }));
+        : fallbackServices.map((s) => ({ ...s, href: '/services' }));
 
     return (
         <Layout>
             <SEOHead meta={meta} />
             <Hero projects={featuredProjects} />
-            <div className="band-signal">
-                <Marquee items={disciplines} className="band-marquee" />
-            </div>
-            <Statement />
+            {featuredProjects.length > 0 && <Projects projects={featuredProjects} />}
+            <SitePhotos projects={featuredProjects} />
             <Services services={services} />
             <Process />
-            {featuredProjects.length > 0 && <Projects projects={featuredProjects} />}
-            <Resources />
             <CTA />
         </Layout>
     );

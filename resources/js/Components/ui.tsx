@@ -1,16 +1,24 @@
 import { Link } from '@inertiajs/react';
-import { motion, useReducedMotion, type Variants } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useState, type ElementType, type ReactNode } from 'react';
 import type { PaginatedData } from '@/types';
 
-const EASE = [0.16, 1, 0.3, 1] as const;
+/* ---------------------------------------------------------------- contact */
+
+export const PHONE = '+237 678 626 645';
+export const PHONE_HREF = 'tel:+237678626645';
+export const EMAIL = 'support@civiconnexusengineering.com';
+
+export const WHATSAPP_URL = `https://wa.me/237678626645?text=${encodeURIComponent(
+    "Hello Civicon Nexus Engineering! I'm interested in your services. Could you please provide more information?\n\nBonjour Civicon Nexus Engineering ! Je suis intéressé(e) par vos services. Pourriez-vous me fournir plus d'informations ?",
+)}`;
 
 /* ---------------------------------------------------------------- icons */
 
 export function Arrow({ className = '', size = 18 }: { className?: string; size?: number }) {
     return (
-        <svg className={`arw ${className}`} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} aria-hidden="true">
-            <path d="M4 12h15M13 6l6 6-6 6" strokeLinecap="square" />
+        <svg className={`arw ${className}`} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
     );
 }
@@ -23,9 +31,13 @@ export function WhatsAppIcon({ size = 26 }: { size?: number }) {
     );
 }
 
-export const WHATSAPP_URL = `https://wa.me/237678626645?text=${encodeURIComponent(
-    "Hello Civicon Nexus Engineering! I'm interested in your services. Could you please provide more information?\n\nBonjour Civicon Nexus Engineering ! Je suis intéressé(e) par vos services. Pourriez-vous me fournir plus d'informations ?",
-)}`;
+export function PhoneIcon({ size = 18 }: { size?: number }) {
+    return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+            <path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" strokeLinejoin="round" />
+        </svg>
+    );
+}
 
 /* ---------------------------------------------------------------- motion */
 
@@ -37,8 +49,8 @@ interface RevealProps {
     as?: 'div' | 'section' | 'li' | 'article' | 'header' | 'p';
 }
 
-/** Fade + rise into view once. Respects reduced motion. */
-export function Reveal({ children, className, delay = 0, y = 28, as = 'div' }: RevealProps) {
+/** A gentle fade-up when content first scrolls into view. Respects reduced motion. */
+export function Reveal({ children, className, delay = 0, y = 14, as = 'div' }: RevealProps) {
     const reduce = useReducedMotion();
     const Tag = motion[as] as ElementType;
     return (
@@ -46,26 +58,23 @@ export function Reveal({ children, className, delay = 0, y = 28, as = 'div' }: R
             className={className}
             initial={reduce ? false : { opacity: 0, y }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '0px 0px -10% 0px' }}
-            transition={{ duration: 0.9, delay, ease: EASE }}
+            viewport={{ once: true, margin: '0px 0px -8% 0px' }}
+            transition={{ duration: 0.55, delay, ease: 'easeOut' }}
         >
             {children}
         </Tag>
     );
 }
 
-const lineVariants: Variants = {
-    hidden: { y: '105%' },
-    show: (i: number) => ({ y: 0, transition: { duration: 1, delay: 0.08 * i, ease: EASE } }),
-};
-
-/** Title revealed line-by-line from behind a mask. Pass lines as an array. */
+/**
+ * Section/page heading. `lines` are joined with spaces so the text wraps naturally
+ * (kept as an array so existing call sites don't change).
+ */
 export function SplitTitle({
     lines,
     as: Tag = 'h2',
     className = '',
     id,
-    immediate = false,
 }: {
     lines: ReactNode[];
     as?: 'h1' | 'h2' | 'h3';
@@ -73,21 +82,12 @@ export function SplitTitle({
     id?: string;
     immediate?: boolean;
 }) {
-    const reduce = useReducedMotion();
-    const viewProps = immediate
-        ? { animate: 'show' }
-        : { whileInView: 'show', viewport: { once: true, margin: '0px 0px -8% 0px' } };
-
     return (
-        <motion.div initial={reduce ? false : 'hidden'} {...viewProps}>
-            <Tag id={id} className={className}>
-                {lines.map((line, i) => (
-                    <span className="split-line" key={i}>
-                        <motion.span custom={i} variants={lineVariants}>{line}</motion.span>
-                    </span>
-                ))}
-            </Tag>
-        </motion.div>
+        <Tag id={id} className={className}>
+            {lines.map((line, i) => (
+                <span key={i}>{i > 0 && ' '}{line}</span>
+            ))}
+        </Tag>
     );
 }
 
@@ -95,10 +95,10 @@ export function SplitTitle({
 
 export function Crumbs({ items }: { items: { label: string; href?: string }[] }) {
     return (
-        <nav aria-label="Breadcrumb" className="ph-crumbs mono">
+        <nav aria-label="Breadcrumb" className="ph-crumbs">
             {items.map((item, i) => (
                 <span key={item.label} className="contents">
-                    {i > 0 && <span aria-hidden="true">/</span>}
+                    {i > 0 && <span aria-hidden="true">›</span>}
                     {item.href ? <Link href={item.href}>{item.label}</Link> : <span aria-current="page">{item.label}</span>}
                 </span>
             ))}
@@ -110,58 +110,30 @@ interface PageHeaderProps {
     label: string;
     title: string;
     description?: ReactNode;
+    /** @deprecated no longer displayed */
     index?: string;
     crumbs?: { label: string; href?: string }[];
     aside?: ReactNode;
 }
 
-export function PageHeader({ label, title, description, index, crumbs, aside }: PageHeaderProps) {
-    const words = title.split(' ');
-    // Break long titles into two balanced lines for the masked reveal.
-    const lines = words.length > 2
-        ? [words.slice(0, Math.ceil(words.length / 2)).join(' '), words.slice(Math.ceil(words.length / 2)).join(' ')]
-        : [title];
-
+export function PageHeader({ label, title, description, crumbs, aside }: PageHeaderProps) {
     return (
         <header className="ph" aria-labelledby="page-title">
             <div className="wrap">
-                <div className="ph-top">
-                    <span className="eyebrow">{label}</span>
-                    {crumbs && <Crumbs items={crumbs} />}
-                </div>
-                <SplitTitle as="h1" id="page-title" className="display" lines={lines} immediate />
-                <div className="ph-foot">
-                    <Reveal delay={0.25}>
-                        {description && <p className="lede">{description}</p>}
-                        {aside}
-                    </Reveal>
-                    {index && <span className="ph-index" aria-hidden="true">{index}</span>}
-                </div>
-                <div className="ruler" aria-hidden="true" />
+                {crumbs && <Crumbs items={crumbs} />}
+                <p className="eyebrow mt-6">{label}</p>
+                <h1 id="page-title" className="ph-title">{title}</h1>
+                {description && <p className="lede mt-4">{description}</p>}
+                {aside}
             </div>
         </header>
     );
 }
 
-export function Marquee({ items, className = '', duration = 38 }: { items: string[]; className?: string; duration?: number }) {
-    const track = (hidden: boolean) => (
-        <div className="marquee-track" aria-hidden={hidden || undefined} style={{ ['--dur' as string]: `${duration}s` }}>
-            {items.map((item) => <span className="marquee-item" key={item}>{item}</span>)}
-        </div>
-    );
-    return (
-        <div className={`marquee ${className}`}>
-            {track(false)}
-            {track(true)}
-        </div>
-    );
-}
-
 export function CTA({
-    title = ['What are you', 'building?'],
-    text = 'Tell us where your project stands and what you need to move it forward.',
+    title = ['Planning a build?'],
+    text = 'Tell us about your plot, your plans and your budget. We’ll walk you through the next steps.',
     primary = { href: '/quote-request', label: 'Request a quote' },
-    secondary = { href: '/contact', label: 'Talk to an engineer' },
 }: {
     title?: string[];
     text?: string;
@@ -169,17 +141,17 @@ export function CTA({
     secondary?: { href: string; label: string };
 }) {
     return (
-        <section className="sec-sm" aria-labelledby="cta-title">
-            <div className="wrap">
-                <div className="cta">
-                    <span className="eyebrow on-dark">Work with us</span>
-                    <SplitTitle id="cta-title" className="display mt-6" lines={title} />
-                    <div className="cta-row">
-                        <p className="max-w-md text-[#a8a79f] text-lg">{text}</p>
-                        <div className="flex flex-wrap gap-3">
-                            <Link href={primary.href} className="btn btn-signal">{primary.label} <Arrow /></Link>
-                            <Link href={secondary.href} className="btn btn-ghost on-dark">{secondary.label}</Link>
-                        </div>
+        <section className="cta" aria-labelledby="cta-title">
+            <div className="wrap cta-inner">
+                <div>
+                    <h2 id="cta-title" className="cta-title">{title.join(' ')}</h2>
+                    <p className="cta-text">{text}</p>
+                </div>
+                <div className="cta-actions">
+                    <a href={PHONE_HREF} className="cta-phone"><PhoneIcon size={22} /> {PHONE}</a>
+                    <div className="flex flex-wrap gap-3">
+                        <Link href={primary.href} className="btn btn-signal">{primary.label} <Arrow /></Link>
+                        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn btn-ghost on-dark"><WhatsAppIcon size={18} /> WhatsApp</a>
                     </div>
                 </div>
             </div>
@@ -220,7 +192,7 @@ export function storageUrl(path: string | null | undefined) {
     return `/storage/${path}`;
 }
 
-/** Image that falls back to a blueprint placeholder when missing or broken. */
+/** Image with a plain fallback when missing or broken. */
 export function Media({
     src,
     alt = '',
@@ -243,10 +215,7 @@ export function Media({
                 <img src={src} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" onError={() => setFailed(true)} />
             ) : (
                 <div className="media-empty" aria-hidden="true">
-                    <svg width="56" height="56" viewBox="0 0 56 56" fill="none" stroke="currentColor" strokeWidth="1">
-                        <path d="M6 50V22L28 8l22 14v28H6Z" />
-                        <path d="M6 22h44M20 50V32h16v18M28 8v14" strokeDasharray="3 3" />
-                    </svg>
+                    <img src="/images/logo.png" alt="" width={56} height={60} />
                 </div>
             )}
             {children}

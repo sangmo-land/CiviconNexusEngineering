@@ -31,8 +31,8 @@ export default function HousePlansIndex({ meta, housePlans }: HousePlansIndexPro
                                 <Reveal key={plan.id} delay={(i % 3) * 0.08}>
                                     <Link href={`/plans/${plan.slug}`} className="card plan-card">
                                         <Media src={storageUrl(plan.preview_image)} alt={plan.title} ratio="4 / 3">
-                                            <span className="tag tag-signal plan-price">{formatPrice(plan.price)}</span>
-                                            {plan.is_featured && <span className="tag tag-dark pcard-num">Featured</span>}
+                                            <span className="badge badge-price plan-price">{formatPrice(plan.price)}</span>
+                                            {plan.is_featured && <span className="badge plan-featured">Featured</span>}
                                         </Media>
                                         <div className="plan-body">
                                             <h2>{plan.title}</h2>

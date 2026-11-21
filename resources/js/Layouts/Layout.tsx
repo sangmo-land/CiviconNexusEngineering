@@ -1,13 +1,13 @@
 import { Link, router, usePage } from '@inertiajs/react';
 import { type ReactNode, useEffect, useRef, useState } from 'react';
-import { Arrow, WHATSAPP_URL, WhatsAppIcon, pad } from '@/Components/ui';
+import { EMAIL, PHONE, PHONE_HREF, WHATSAPP_URL, WhatsAppIcon } from '@/Components/ui';
 
 const navLinks = [
     { href: '/services', label: 'Services' },
     { href: '/projects', label: 'Projects' },
     { href: '/plans', label: 'House plans' },
     { href: '/site-work', label: 'Site work' },
-    { href: '/blog', label: 'Journal' },
+    { href: '/blog', label: 'Blog' },
     { href: '/contact', label: 'Contact' },
 ];
 
@@ -24,14 +24,14 @@ export default function Layout({ children }: { children: ReactNode }) {
     const [hidden, setHidden] = useState(false);
     const menuButton = useRef<HTMLButtonElement>(null);
 
-    // Hide the bar while scrolling down, reveal on scroll up.
+    // Hide the header while scrolling down, reveal on scroll up.
     // Decisions use distance travelled since the scroll direction last changed, not the
     // delta between two events — momentum/trackpad scrolling emits many 1–3px events,
-    // which used to make the bar flicker between hidden and shown.
+    // which used to make the header flicker between hidden and shown.
     useEffect(() => {
         const HIDE_AFTER = 80; // px of continuous downward travel before hiding
         const SHOW_AFTER = 40; // px of continuous upward travel before showing
-        const TOP_ZONE = 120; // always visible near the top of the page
+        const TOP_ZONE = 160; // always visible near the top of the page
         let last = Math.max(window.scrollY, 0);
         let anchor = last;
         let dir = 0;
@@ -75,6 +75,17 @@ export default function Layout({ children }: { children: ReactNode }) {
         <div className="site min-h-screen">
             <a className="skip-link" href="#main-content">Skip to content</a>
 
+            <div className="topbar">
+                <div className="wrap topbar-inner">
+                    <span className="topbar-place">Rond Point Express, Yaoundé</span>
+                    <div className="topbar-links">
+                        <a href={PHONE_HREF}>{PHONE}</a>
+                        <a href={`mailto:${EMAIL}`} className="topbar-email">{EMAIL}</a>
+                        <span className="topbar-hours">Mon–Fri 08:00–18:00 · Sat 09:00–14:00</span>
+                    </div>
+                </div>
+            </div>
+
             <header
                 className="nav"
                 data-hidden={hidden && !open}
@@ -85,12 +96,12 @@ export default function Layout({ children }: { children: ReactNode }) {
                     }
                 }}
             >
-                <nav className="nav-bar" aria-label="Main navigation">
+                <nav className="wrap nav-bar" aria-label="Main navigation">
                     <Link href="/" className="brand" aria-label="Civicon Nexus Engineering — home">
-                        <img src="/images/logo.jpeg" alt="" width={40} height={40} />
+                        <img src="/images/logo.png" alt="" width={44} height={48} />
                         <span>
                             <span className="brand-name">Civicon Nexus</span>
-                            <span className="brand-sub">Engineering · Cameroon</span>
+                            <span className="brand-sub">Engineering</span>
                         </span>
                     </Link>
 
@@ -103,38 +114,38 @@ export default function Layout({ children }: { children: ReactNode }) {
                     </div>
 
                     <div className="nav-actions">
-                        <Link href="/quote-request" className="btn btn-signal">Get a quote</Link>
+                        <Link href="/quote-request" className="btn btn-signal btn-sm">Get a quote</Link>
                         <button
                             ref={menuButton}
                             type="button"
                             className="menu-btn"
                             aria-expanded={open}
                             aria-controls="site-menu"
+                            aria-label={open ? 'Close menu' : 'Open menu'}
                             onClick={() => setOpen((v) => !v)}
                         >
-                            {open ? 'Close' : 'Menu'} <i aria-hidden="true" />
+                            <i aria-hidden="true" />
                         </button>
                     </div>
                 </nav>
 
                 <div id="site-menu" className="menu" data-open={open} inert={!open}>
-                    <div className="menu-list">
-                        {[{ href: '/', label: 'Home' }, ...navLinks, { href: '/quote-request', label: 'Get a quote' }].map((link, i) => (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                aria-current={link.href === '/' ? (path === '/' ? 'page' : undefined) : currentFor(path, link.href)}
-                                style={{ transitionDelay: open ? `${0.12 + i * 0.045}s` : '0s' }}
-                            >
-                                <small>{pad(i + 1)}</small>
-                                {link.label}
-                            </Link>
-                        ))}
-                    </div>
-                    <div className="menu-foot mono">
-                        <span>Rond Point Express, Yaoundé</span>
-                        <a href="tel:+237678626645">+237 678 626 645</a>
-                        <a href="mailto:support@civiconnexusengineering.com">support@civiconnexusengineering.com</a>
+                    <div className="wrap">
+                        <ul className="menu-list">
+                            {[{ href: '/', label: 'Home' }, ...navLinks].map((link) => (
+                                <li key={link.href}>
+                                    <Link href={link.href} aria-current={link.href === '/' ? (path === '/' ? 'page' : undefined) : currentFor(path, link.href)}>
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                        <Link href="/quote-request" className="btn btn-signal btn-block mt-6">Request a quote</Link>
+                        <div className="menu-foot">
+                            <a href={PHONE_HREF}>{PHONE}</a>
+                            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+                        </div>
                     </div>
                 </div>
             </header>
@@ -142,47 +153,46 @@ export default function Layout({ children }: { children: ReactNode }) {
             <main id="main-content" tabIndex={-1} className="outline-none">{children}</main>
 
             <footer className="footer">
-                <div className="wrap">
-                    <div className="footer-grid">
-                        <div>
-                            <p className="footer-lead">Structures and infrastructure, from first drawing to finished site.</p>
-                            <Link href="/quote-request" className="btn btn-signal mt-8">Start a project <Arrow /></Link>
-                        </div>
-
-                        <div>
-                            <h2 className="eyebrow on-dark">Explore</h2>
-                            <ul>
-                                {navLinks.slice(0, 4).map((link) => <li key={link.href}><Link href={link.href}>{link.label}</Link></li>)}
-                            </ul>
-                        </div>
-
-                        <div>
-                            <h2 className="eyebrow on-dark">Company</h2>
-                            <ul>
-                                <li><Link href="/blog">Journal</Link></li>
-                                <li><Link href="/contact">Contact</Link></li>
-                                <li><Link href="/quote-request">Request a quote</Link></li>
-                                <li><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
-                            </ul>
-                        </div>
-
-                        <div>
-                            <h2 className="eyebrow on-dark">Office</h2>
-                            <address>
-                                <span>Rond Point Express<br />Yaoundé, Cameroon</span>
-                                <a href="tel:+237678626645">+237 678 626 645</a>
-                                <a href="mailto:support@civiconnexusengineering.com">support@civiconnexusengineering.com</a>
-                            </address>
-                        </div>
+                <div className="wrap footer-grid">
+                    <div>
+                        <Link href="/" className="footer-brand">
+                            <img src="/images/logo.png" alt="" width={52} height={56} />
+                            <span>Civicon Nexus Engineering</span>
+                        </Link>
+                        <p className="mt-4 max-w-xs">
+                            Civil engineering, structural design and construction in Yaoundé and across Cameroon.
+                        </p>
+                        <p className="mt-2 max-w-xs footer-fr">Génie civil, études structurelles et construction au Cameroun.</p>
                     </div>
 
-                    <span className="footer-mark" aria-hidden="true">Civicon</span>
+                    <div>
+                        <h2>Pages</h2>
+                        <ul>
+                            {navLinks.map((link) => <li key={link.href}><Link href={link.href}>{link.label}</Link></li>)}
+                            <li><Link href="/quote-request">Request a quote</Link></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h2>Office</h2>
+                        <address>
+                            <span>Rond Point Express<br />Yaoundé, Cameroon</span>
+                            <span>Mon–Fri 08:00–18:00<br />Sat 09:00–14:00</span>
+                        </address>
+                    </div>
+
+                    <div>
+                        <h2>Contact</h2>
+                        <address>
+                            <a href={PHONE_HREF}>{PHONE}</a>
+                            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                            <a href={`mailto:${EMAIL}`}>{EMAIL.split('@')[0]}@<wbr />{EMAIL.split('@')[1]}</a>
+                        </address>
+                    </div>
                 </div>
-                <div className="relative bg-night">
-                    <div className="wrap footer-base mono">
-                        <span>&copy; {new Date().getFullYear()} Civicon Nexus Engineering</span>
-                        <span>3.8480° N, 11.5021° E</span>
-                    </div>
+                <div className="wrap footer-base">
+                    <span>&copy; {new Date().getFullYear()} Civicon Nexus Engineering</span>
+                    <span>Yaoundé, Cameroon</span>
                 </div>
             </footer>
 

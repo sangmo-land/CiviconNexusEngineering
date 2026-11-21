@@ -1,10 +1,9 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 
 /**
- * Design tokens — "Concrete & Signal"
- * paper/concrete neutrals, near-black ink, safety-orange signal.
- * The legacy token names (ink, muted, signal, brand-*, accent) are kept so the
- * internal Site Work pages inherit the new look without being rewritten.
+ * Design tokens — taken from the Civicon Nexus logo (blue + orange).
+ * Legacy token names (ink, muted, signal, brand-*, accent) are kept so the
+ * internal Site Work pages inherit the look without being rewritten.
  */
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -19,38 +18,39 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Geist', ...defaultTheme.fontFamily.sans],
-                display: ['Archivo', ...defaultTheme.fontFamily.sans],
-                mono: ['"Geist Mono"', ...defaultTheme.fontFamily.mono],
+                sans: ['Barlow', ...defaultTheme.fontFamily.sans],
+                display: ['"Barlow Semi Condensed"', 'Barlow', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                ink: '#0d0e0c',
-                muted: '#5a5c55',
-                signal: '#b83509',
+                ink: '#14202e',
+                muted: '#566170',
+                signal: '#b4530f',
+                blue: {
+                    DEFAULT: '#1f6fd1',
+                    dark: '#1758a8',
+                    tint: '#e8f0fb',
+                },
                 night: {
-                    DEFAULT: '#0b0c0a',
-                    800: '#141512',
-                    700: '#1d1f1b',
+                    DEFAULT: '#14202e',
+                    800: '#1b2a3c',
+                    700: '#24364b',
                 },
                 paper: {
-                    DEFAULT: '#f1eee7',
-                    2: '#e8e4da',
+                    DEFAULT: '#f7f5f0',
+                    2: '#efece5',
                 },
                 brand: {
-                    600: '#ece8df',
-                    700: '#e2ddd1',
-                    800: '#e8e4da',
-                    900: '#faf8f4',
-                    950: '#f1eee7',
+                    600: '#f2efe9',
+                    700: '#e6e2d9',
+                    800: '#efece5',
+                    900: '#ffffff',
+                    950: '#f7f5f0',
                 },
                 accent: {
-                    DEFAULT: '#ff5a1f',
-                    light: '#ff7a47',
-                    dark: '#d9440f',
+                    DEFAULT: '#f59e1b',
+                    light: '#f8b44a',
+                    dark: '#d9850a',
                 },
-            },
-            transitionTimingFunction: {
-                expo: 'cubic-bezier(0.16, 1, 0.3, 1)',
             },
         },
     },

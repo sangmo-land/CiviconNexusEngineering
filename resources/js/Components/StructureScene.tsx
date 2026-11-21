@@ -1,19 +1,20 @@
 import { useEffect, useRef } from 'react';
 import {
-    AdditiveBlending, BoxGeometry, BufferGeometry, CanvasTexture, Color, DirectionalLight, EdgesGeometry,
-    Float32BufferAttribute, Fog, Group, HemisphereLight, InstancedMesh, LineBasicMaterial, LineLoop, LineSegments,
-    Matrix4, Mesh, MeshBasicMaterial, MeshStandardMaterial, PerspectiveCamera, PlaneGeometry, PointLight, Points,
-    PointsMaterial, Quaternion, Scene, SphereGeometry, SRGBColorSpace, Vector3, WebGLRenderer, type Material,
+    BoxGeometry, BufferGeometry, Color, DirectionalLight, EdgesGeometry, Float32BufferAttribute, Fog, Group,
+    HemisphereLight, InstancedMesh, LineBasicMaterial, LineLoop, LineSegments, Matrix4, Mesh, MeshBasicMaterial,
+    MeshStandardMaterial, PerspectiveCamera, PointLight, Points, PointsMaterial, Quaternion, Scene, SphereGeometry,
+    SRGBColorSpace, Vector3, WebGLRenderer, type Material,
 } from 'three';
 
 /**
- * Procedural hero: a 9-storey reinforced-concrete frame assembles itself inside its
+ * Illustrative model: a 9-storey reinforced-concrete frame assembles itself inside its
  * own blueprint "ghost", while a tower crane slews overhead. Pure Three.js, no assets.
  */
 
-const NIGHT = 0x0b0c0a;
-const PAPER = 0xf1eee7;
-const SIGNAL = 0xff5a1f;
+const NIGHT = 0x14202e; // brand navy
+const PAPER = 0xf4f6fa;
+const SIGNAL = 0xf59e1b; // logo orange
+const BLUE = 0x1f6fd1; // logo blue
 
 const FLOORS = 9;
 const NX = 4; // bays along x
@@ -66,12 +67,12 @@ function lines(points: number[], material: LineBasicMaterial) {
     return new LineSegments(g, material);
 }
 
-export interface HeroSceneProps {
+export interface StructureSceneProps {
     /** Called with build progress 0..1 and the storey currently being built. */
     onProgress?: (progress: number, storey: number) => void;
 }
 
-export default function HeroScene({ onProgress }: HeroSceneProps) {
+export default function StructureScene({ onProgress }: StructureSceneProps) {
     const host = useRef<HTMLDivElement>(null);
     const progressRef = useRef(onProgress);
     progressRef.current = onProgress;
@@ -102,43 +103,17 @@ export default function HeroScene({ onProgress }: HeroSceneProps) {
         const disposables: { dispose: () => void }[] = [];
         const track = <T extends { dispose: () => void }>(x: T) => { disposables.push(x); return x; };
 
-        /* ---------- lights: low sunset key, cool fill ---------- */
-        scene.add(new HemisphereLight(0xfff1e0, 0x15130f, 1.35));
-        const sun = new DirectionalLight(0xffb27a, 2.6);
-        sun.position.set(-14, 9, -12);
-        scene.add(sun);
-        const fill = new DirectionalLight(0xbfd2ff, 0.9);
-        fill.position.set(14, 16, 12);
-        scene.add(fill);
-        const warm = new PointLight(SIGNAL, 60, 30, 1.4);
+        /* ---------- lights ---------- */
+        scene.add(new HemisphereLight(0xffffff, NIGHT, 1.6));
+        const key = new DirectionalLight(0xffffff, 1.9);
+        key.position.set(12, 20, 10);
+        scene.add(key);
+        const warm = new PointLight(SIGNAL, 30, 26, 1.6);
         warm.position.set(W / 2 + 3, H + 2, 2);
         scene.add(warm);
 
-        /* ---------- sunset glow: a billboard behind the building ---------- */
-        const glowCanvas = document.createElement('canvas');
-        glowCanvas.width = 512;
-        glowCanvas.height = 256;
-        const gctx = glowCanvas.getContext('2d');
-        if (gctx) {
-            const g = gctx.createRadialGradient(256, 256, 0, 256, 256, 300);
-            g.addColorStop(0, 'rgba(255,120,50,0.85)');
-            g.addColorStop(0.35, 'rgba(255,90,31,0.35)');
-            g.addColorStop(0.7, 'rgba(120,40,20,0.08)');
-            g.addColorStop(1, 'rgba(0,0,0,0)');
-            gctx.fillStyle = g;
-            gctx.fillRect(0, 0, 512, 256);
-        }
-        const glowTex = track(new CanvasTexture(glowCanvas));
-        glowTex.colorSpace = SRGBColorSpace;
-        const glow = new Mesh(
-            track(new PlaneGeometry(130, 52)),
-            track(new MeshBasicMaterial({ map: glowTex, transparent: true, depthWrite: false, fog: false, blending: AdditiveBlending })),
-        );
-        glow.renderOrder = -1;
-        scene.add(glow);
-
         /* ---------- ground ---------- */
-        const gridMat = track(new LineBasicMaterial({ color: 0x2a2b27 }));
+        const gridMat = track(new LineBasicMaterial({ color: 0x24364b }));
         const gridPts: number[] = [];
         const G = 40;
         for (let i = -G; i <= G; i += 1) {
@@ -148,7 +123,7 @@ export default function HeroScene({ onProgress }: HeroSceneProps) {
         track(grid.geometry);
         scene.add(grid);
 
-        const ringMat = track(new LineBasicMaterial({ color: 0x3a3b36 }));
+        const ringMat = track(new LineBasicMaterial({ color: 0x2c4361 }));
         for (const r of [9, 15, 22]) {
             const pts: number[] = [];
             for (let i = 0; i < 128; i++) {
@@ -169,7 +144,7 @@ export default function HeroScene({ onProgress }: HeroSceneProps) {
         }
         const markerGeo = track(new BufferGeometry());
         markerGeo.setAttribute('position', new Float32BufferAttribute(markerPts, 3));
-        const markerMat = track(new PointsMaterial({ color: SIGNAL, size: 0.09, sizeAttenuation: true }));
+        const markerMat = track(new PointsMaterial({ color: BLUE, size: 0.12, sizeAttenuation: true }));
         scene.add(new Points(markerGeo, markerMat));
 
         /* ---------- building ---------- */
@@ -179,7 +154,7 @@ export default function HeroScene({ onProgress }: HeroSceneProps) {
 
         const podium = new Mesh(
             track(new BoxGeometry(W + 1.4, 0.3, D + 1.4)),
-            track(new MeshStandardMaterial({ color: 0x1d1f1b, roughness: 0.9 })),
+            track(new MeshStandardMaterial({ color: 0x1b2a3c, roughness: 0.9 })),
         );
         podium.position.set(W / 2, 0.15, D / 2);
         building.add(podium);
@@ -218,7 +193,7 @@ export default function HeroScene({ onProgress }: HeroSceneProps) {
         building.add(ghost);
 
         const unit = track(new BoxGeometry(1, 1, 1));
-        const frameMat = track(new MeshStandardMaterial({ color: 0xe9e3d4, roughness: 0.55, metalness: 0.05, emissive: new Color(0x2a2620), emissiveIntensity: 0.6 }));
+        const frameMat = track(new MeshStandardMaterial({ color: 0xe9e3d4, roughness: 0.55, metalness: 0.05, emissive: new Color(0x1b2a3c), emissiveIntensity: 0.5 }));
         const frame = new InstancedMesh(unit, frameMat, elements.length);
         building.add(frame);
 
@@ -283,7 +258,7 @@ export default function HeroScene({ onProgress }: HeroSceneProps) {
         const apex = lines([0, 0, 0, 0, 2.6, 0, 0, 2.6, 0, -12.5, 0.75, 0, 0, 2.6, 0, 4.2, 0.35, 0], craneMat);
         [jib, counterJib, apex].forEach((l) => { track(l.geometry); slew.add(l); });
 
-        const ballastMat = track(new MeshStandardMaterial({ color: 0x2a2b27, roughness: 0.9 }));
+        const ballastMat = track(new MeshStandardMaterial({ color: 0x24364b, roughness: 0.9 }));
         const ballast = new Mesh(track(new BoxGeometry(1.2, 0.9, 1.1)), ballastMat);
         ballast.position.set(3.6, -0.3, 0);
         slew.add(ballast);
@@ -310,39 +285,6 @@ export default function HeroScene({ onProgress }: HeroSceneProps) {
         beaconB.position.set(-12.5, 0.2, 0);
         slew.add(beaconA, beaconB);
 
-        /* ---------- welding sparks at the active storey ---------- */
-        const SPARKS = 220;
-        const sparkPos = new Float32Array(SPARKS * 3);
-        const sparkCol = new Float32Array(SPARKS * 3);
-        const sparkVel = new Float32Array(SPARKS * 3);
-        const sparkLife = new Float32Array(SPARKS);
-        const sparkGeo = track(new BufferGeometry());
-        sparkGeo.setAttribute('position', new Float32BufferAttribute(sparkPos, 3));
-        sparkGeo.setAttribute('color', new Float32BufferAttribute(sparkCol, 3));
-        const sparkMat = track(new PointsMaterial({ size: 0.19, vertexColors: true, transparent: true, depthWrite: false, blending: AdditiveBlending }));
-        const sparks = new Points(sparkGeo, sparkMat);
-        building.add(sparks);
-        let emitter = { x: W, y: 0.3, z: 0 };
-        const respawn = (i: number) => {
-            sparkPos[i * 3] = emitter.x;
-            sparkPos[i * 3 + 1] = emitter.y;
-            sparkPos[i * 3 + 2] = emitter.z;
-            const a = Math.random() * Math.PI * 2;
-            const sp = 1.2 + Math.random() * 2.6;
-            sparkVel[i * 3] = Math.cos(a) * sp;
-            sparkVel[i * 3 + 1] = 1 + Math.random() * 2.5;
-            sparkVel[i * 3 + 2] = Math.sin(a) * sp;
-            sparkLife[i] = 0.4 + Math.random() * 0.9;
-        };
-        const pickEmitter = (y: number) => {
-            const onX = Math.random() < 0.5;
-            emitter = onX
-                ? { x: Math.round(Math.random() * NX) * BAY, y, z: Math.random() < 0.5 ? 0 : D }
-                : { x: Math.random() < 0.5 ? 0 : W, y, z: Math.round(Math.random() * NZ) * BAY };
-        };
-        let nextEmitterSwap = 0;
-        let lastT = 0;
-
         /* ---------- sizing ---------- */
         let width = 0;
         let height = 0;
@@ -352,9 +294,6 @@ export default function HeroScene({ onProgress }: HeroSceneProps) {
             if (!width || !height) return;
             renderer.setSize(width, height, false);
             camera.aspect = width / height;
-            // On wide screens push the model to the right so the headline has room.
-            if (width > 900) camera.setViewOffset(width, height, -width * 0.24, 0, width, height);
-            else camera.clearViewOffset();
             camera.updateProjectionMatrix();
             if (reduceMotion) render(BUILD_END + 1);
         };
@@ -371,7 +310,6 @@ export default function HeroScene({ onProgress }: HeroSceneProps) {
         let lastPct = -1;
         let built = false;
         const target = new Vector3(0, H * 0.46, 0);
-        const glowDir = new Vector3();
 
         function render(t: number) {
             // Build sequence.
@@ -401,35 +339,6 @@ export default function HeroScene({ onProgress }: HeroSceneProps) {
                 }
             }
 
-            // Sparks: burst from a joint on the active storey, falling under gravity.
-            const dt = Math.min(Math.max(t - lastT, 0), 0.05);
-            lastT = t;
-            if (!reduceMotion) {
-                const activeY = built ? 0.3 + FLOORS * STOREY : level.position.y;
-                if (t > nextEmitterSwap) {
-                    pickEmitter(activeY);
-                    nextEmitterSwap = t + (built ? 1.6 + Math.random() * 2.4 : 0.35 + Math.random() * 0.4);
-                }
-                const emitting = !built || (t % 4) < 1.4;
-                for (let i = 0; i < SPARKS; i++) {
-                    sparkLife[i] -= dt;
-                    if (sparkLife[i] <= 0) {
-                        if (emitting && Math.random() < 0.35) respawn(i);
-                        else { sparkCol[i * 3] = sparkCol[i * 3 + 1] = sparkCol[i * 3 + 2] = 0; continue; }
-                    }
-                    sparkVel[i * 3 + 1] -= 9.8 * dt;
-                    sparkPos[i * 3] += sparkVel[i * 3] * dt;
-                    sparkPos[i * 3 + 1] += sparkVel[i * 3 + 1] * dt;
-                    sparkPos[i * 3 + 2] += sparkVel[i * 3 + 2] * dt;
-                    const k = Math.min(sparkLife[i] / 0.9, 1);
-                    sparkCol[i * 3] = 1 * k;
-                    sparkCol[i * 3 + 1] = (0.45 + 0.4 * k) * k;
-                    sparkCol[i * 3 + 2] = 0.15 * k;
-                }
-                sparkGeo.attributes.position.needsUpdate = true;
-                sparkGeo.attributes.color.needsUpdate = true;
-            }
-
             // Beacons blink.
             beaconMat.visible = reduceMotion || Math.sin(t * 4.5) > 0.2;
 
@@ -444,33 +353,22 @@ export default function HeroScene({ onProgress }: HeroSceneProps) {
             load.position.y = -drop - 0.1;
             load.rotation.y = Math.sin(ct * 0.4) * 0.4;
 
-            // Camera: slow orbit + pointer parallax + scroll rise.
+            // Camera: slow orbit + gentle pointer parallax. Pull back on tall/narrow panels.
             pointer.x += (pointer.tx - pointer.x) * 0.04;
             pointer.y += (pointer.ty - pointer.y) * 0.04;
-            const scroll = Math.min(window.scrollY / Math.max(height, 1), 1.2);
-            const angle = 0.75 + (reduceMotion ? 0 : t * 0.035) + pointer.x * 0.18;
-            // Cinematic intro: start high and far, settle in over ~3.5s.
-            const intro = reduceMotion ? 1 : easeOut(t / 3.5);
-            const radius = (width < 700 ? 58 : 47) - scroll * 6 + (1 - intro) * 22;
-            camera.position.set(
-                Math.sin(angle) * radius,
-                12 + pointer.y * -2.2 + scroll * 7 + (1 - intro) * 14,
-                Math.cos(angle) * radius,
-            );
-            target.y = H * 0.62 + scroll * 2;
+            const angle = 0.75 + (reduceMotion ? 0 : t * 0.035) + pointer.x * 0.12;
+            const radius = camera.aspect < 1 ? 64 : 46;
+            camera.position.set(Math.sin(angle) * radius, 12 + pointer.y * -1.5, Math.cos(angle) * radius);
+            target.y = H * 0.6;
             camera.lookAt(target);
-
-            // Keep the sunset glow behind the building, facing the camera.
-            glowDir.copy(target).sub(camera.position).setY(0).normalize();
-            glow.position.set(target.x + glowDir.x * 60, 9, target.z + glowDir.z * 60);
-            glow.lookAt(camera.position.x, 9, camera.position.z);
 
             renderer.render(scene, camera);
         }
 
         let raf = 0;
         let running = false;
-        let start = performance.now();
+        // The build clock starts the first time the panel is actually on screen.
+        let start = 0;
         let pausedAt = 0;
 
         const loop = (now: number) => {
@@ -480,7 +378,8 @@ export default function HeroScene({ onProgress }: HeroSceneProps) {
         const play = () => {
             if (running || reduceMotion) return;
             running = true;
-            if (pausedAt) start += performance.now() - pausedAt;
+            if (!start) start = performance.now();
+            else if (pausedAt) start += performance.now() - pausedAt;
             raf = requestAnimationFrame(loop);
         };
         const pause = () => {
@@ -524,5 +423,5 @@ export default function HeroScene({ onProgress }: HeroSceneProps) {
         };
     }, []);
 
-    return <div ref={host} className="hero-canvas" />;
+    return <div ref={host} className="structure-canvas" />;
 }
