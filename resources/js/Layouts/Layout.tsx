@@ -25,16 +25,43 @@ export default function Layout({ children }: { children: ReactNode }) {
     const menuButton = useRef<HTMLButtonElement>(null);
 
     // Hide the bar while scrolling down, reveal on scroll up.
+    // Decisions use distance travelled since the scroll direction last changed, not the
+    // delta between two events — momentum/trackpad scrolling emits many 1–3px events,
+    // which used to make the bar flicker between hidden and shown.
     useEffect(() => {
-        let last = window.scrollY;
-        const onScroll = () => {
-            const y = window.scrollY;
-            setHidden(y > 240 && y > last + 4);
-            if (y < last - 4 || y < 240) setHidden(false);
+        const HIDE_AFTER = 80; // px of continuous downward travel before hiding
+        const SHOW_AFTER = 40; // px of continuous upward travel before showing
+        const TOP_ZONE = 120; // always visible near the top of the page
+        let last = Math.max(window.scrollY, 0);
+        let anchor = last;
+        let dir = 0;
+        let frame = 0;
+
+        const update = () => {
+            frame = 0;
+            const y = Math.max(window.scrollY, 0); // ignore iOS overscroll bounce
+            const delta = y - last;
+            if (delta !== 0) {
+                const next = delta > 0 ? 1 : -1;
+                if (next !== dir) {
+                    dir = next;
+                    anchor = last;
+                }
+                if (y < TOP_ZONE) setHidden(false);
+                else if (dir > 0 && y - anchor > HIDE_AFTER) setHidden(true);
+                else if (dir < 0 && anchor - y > SHOW_AFTER) setHidden(false);
+            }
             last = y;
         };
+        const onScroll = () => {
+            if (!frame) frame = requestAnimationFrame(update);
+        };
+
         window.addEventListener('scroll', onScroll, { passive: true });
-        return () => window.removeEventListener('scroll', onScroll);
+        return () => {
+            window.removeEventListener('scroll', onScroll);
+            if (frame) cancelAnimationFrame(frame);
+        };
     }, []);
 
     // Close the menu on navigation and lock scroll while it's open.
