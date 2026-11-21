@@ -1,55 +1,69 @@
-import PageHeader from '@/Components/PageHeader';
 import { useForm } from '@inertiajs/react';
+import type { FormEvent, ReactNode } from 'react';
 import SEOHead from '@/Components/SEOHead';
+import { Arrow, PageHeader, Reveal, pad } from '@/Components/ui';
 import Layout from '@/Layouts/Layout';
-import AnimatedSection from "@/Components/AnimatedSection";
-import { Meta, PageProps } from "@/types";
+import type { Meta, PageProps } from '@/types';
 
 interface QuoteRequestProps extends PageProps {
     meta: Meta;
 }
 
+const projectTypes = [
+    'Residential Construction',
+    'Commercial Construction',
+    'Industrial Construction',
+    'Road & Bridge Construction',
+    'Structural Engineering',
+    'Renovation & Remodeling',
+    'Custom House Plan',
+    'Site Planning',
+    'Other',
+];
+
+const budgetRanges = [
+    'Under $50,000',
+    '$50,000 - $100,000',
+    '$100,000 - $250,000',
+    '$250,000 - $500,000',
+    '$500,000 - $1,000,000',
+    'Over $1,000,000',
+    'Not Sure',
+];
+
+const nextSteps = [
+    ['We review', 'An engineer reads your brief and any drawings you attach.'],
+    ['We call', 'We clarify scope, site conditions and timing with you.'],
+    ['You get a quote', 'A clear, itemised proposal you can compare and plan with.'],
+];
+
+function Step({ n, title, children }: { n: number; title: string; children: ReactNode }) {
+    return (
+        <fieldset className="q-step">
+            <legend className="q-legend">
+                <span className="mono">{pad(n)}</span>
+                {title}
+            </legend>
+            {children}
+        </fieldset>
+    );
+}
+
 export default function QuoteRequest({ meta, flash }: QuoteRequestProps) {
-    const { data, setData, post, processing, errors, reset, progress } =
-        useForm({
-            name: "",
-            phone: "",
-            email: "",
-            city: "",
-            project_type: "",
-            budget: "",
-            message: "",
-            attachment: null as File | null,
-        });
+    const { data, setData, post, processing, errors, reset, progress } = useForm({
+        name: '',
+        phone: '',
+        email: '',
+        city: '',
+        project_type: '',
+        budget: '',
+        message: '',
+        attachment: null as File | null,
+    });
 
-    const projectTypes = [
-        "Residential Construction",
-        "Commercial Construction",
-        "Industrial Construction",
-        "Road & Bridge Construction",
-        "Structural Engineering",
-        "Renovation & Remodeling",
-        "Custom House Plan",
-        "Site Planning",
-        "Other",
-    ];
-
-    const budgetRanges = [
-        "Under $50,000",
-        "$50,000 - $100,000",
-        "$100,000 - $250,000",
-        "$250,000 - $500,000",
-        "$500,000 - $1,000,000",
-        "Over $1,000,000",
-        "Not Sure",
-    ];
-
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        post("/quote-request", {
-            forceFormData: true,
-            onSuccess: () => reset(),
-        });
+        post('/quote-request', { forceFormData: true, onSuccess: () => reset() });
     };
 
     return (
@@ -59,329 +73,118 @@ export default function QuoteRequest({ meta, flash }: QuoteRequestProps) {
             <PageHeader
                 label="Project enquiry"
                 title="Request a quote"
-                description="Share your project location, scope and timeline so our team can prepare a quote."
+                index="07"
+                crumbs={[{ label: 'Home', href: '/' }, { label: 'Request a quote' }]}
+                description="Share your location, scope and timeline. The more we know, the more precise the quote."
             />
 
-            {/* Quote Form */}
-            <section className="section-padding bg-brand-950">
-                <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-                    {flash?.success && (
-                        <AnimatedSection variant="fade-in">
-                            <div className="mb-8 p-4 glass rounded-2xl border border-green-500/30 text-green-700">
-                                {flash.success}
-                            </div>
-                        </AnimatedSection>
-                    )}
+            <section className="sec">
+                <div className="wrap quote-grid">
+                    <form onSubmit={handleSubmit} className="card card-pad quote-form" noValidate={false}>
+                        {flash?.success && <p role="status" className="notice mb-8">{flash.success}</p>}
 
-                    <AnimatedSection variant="fade-up" delay={100}>
-                        <div className="card-modern md:p-10">
-                            <form onSubmit={handleSubmit} className="space-y-8">
-                                {/* Personal Info */}
-                                <div>
-                                    <h2 className="text-xl font-display font-semibold text-ink mb-6 flex items-center">
-                                        <span className="w-8 h-8 rounded-lg bg-accent/20 text-signal text-sm flex items-center justify-center mr-3 font-bold">
-                                            1
-                                        </span>
-                                        Personal Information
-                                    </h2>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        <div>
-                                            <label
-                                                htmlFor="name"
-                                                className="label-modern"
-                                            >
-                                                Full Name *
-                                            </label>
-                                            <input
-                                                type="text"
-                                                id="name"
-                                                value={data.name}
-                                                onChange={(e) =>
-                                                    setData(
-                                                        "name",
-                                                        e.target.value,
-                                                    )
-                                                }
-                                                className="input-modern"
-                                                placeholder="John Doe"
-                                                required
-                                            />
-                                            {errors.name && (
-                                                <p className="text-red-700 text-sm mt-1">
-                                                    {errors.name}
-                                                </p>
-                                            )}
-                                        </div>
-
-                                        <div>
-                                            <label
-                                                htmlFor="phone"
-                                                className="label-modern"
-                                            >
-                                                Phone Number *
-                                            </label>
-                                            <input
-                                                type="tel"
-                                                id="phone"
-                                                value={data.phone}
-                                                onChange={(e) =>
-                                                    setData(
-                                                        "phone",
-                                                        e.target.value,
-                                                    )
-                                                }
-                                                className="input-modern"
-                                                placeholder="+1 (234) 567-890"
-                                                required
-                                            />
-                                            {errors.phone && (
-                                                <p className="text-red-700 text-sm mt-1">
-                                                    {errors.phone}
-                                                </p>
-                                            )}
-                                        </div>
-
-                                        <div>
-                                            <label
-                                                htmlFor="email"
-                                                className="label-modern"
-                                            >
-                                                Email Address
-                                            </label>
-                                            <input
-                                                type="email"
-                                                id="email"
-                                                value={data.email}
-                                                onChange={(e) =>
-                                                    setData(
-                                                        "email",
-                                                        e.target.value,
-                                                    )
-                                                }
-                                                className="input-modern"
-                                                placeholder="john@example.com"
-                                            />
-                                            {errors.email && (
-                                                <p className="text-red-700 text-sm mt-1">
-                                                    {errors.email}
-                                                </p>
-                                            )}
-                                        </div>
-
-                                        <div>
-                                            <label
-                                                htmlFor="city"
-                                                className="label-modern"
-                                            >
-                                                City
-                                            </label>
-                                            <input
-                                                type="text"
-                                                id="city"
-                                                value={data.city}
-                                                onChange={(e) =>
-                                                    setData(
-                                                        "city",
-                                                        e.target.value,
-                                                    )
-                                                }
-                                                className="input-modern"
-                                                placeholder="Your city"
-                                            />
-                                            {errors.city && (
-                                                <p className="text-red-700 text-sm mt-1">
-                                                    {errors.city}
-                                                </p>
-                                            )}
-                                        </div>
-                                    </div>
+                        <Step n={1} title="About you">
+                            <div className="grid gap-5 md:grid-cols-2">
+                                <div className="field">
+                                    <label htmlFor="name" className="field-label">Full name *</label>
+                                    <input id="name" className="input" value={data.name} onChange={(e) => setData('name', e.target.value)} autoComplete="name" required />
+                                    {errors.name && <p className="field-error">{errors.name}</p>}
                                 </div>
+                                <div className="field">
+                                    <label htmlFor="phone" className="field-label">Phone *</label>
+                                    <input id="phone" type="tel" className="input" value={data.phone} onChange={(e) => setData('phone', e.target.value)} placeholder="+237 6XX XXX XXX" autoComplete="tel" required />
+                                    {errors.phone && <p className="field-error">{errors.phone}</p>}
+                                </div>
+                                <div className="field">
+                                    <label htmlFor="email" className="field-label">Email</label>
+                                    <input id="email" type="email" className="input" value={data.email} onChange={(e) => setData('email', e.target.value)} autoComplete="email" />
+                                    {errors.email && <p className="field-error">{errors.email}</p>}
+                                </div>
+                                <div className="field">
+                                    <label htmlFor="city" className="field-label">City</label>
+                                    <input id="city" className="input" value={data.city} onChange={(e) => setData('city', e.target.value)} placeholder="Douala, Yaoundé…" autoComplete="address-level2" />
+                                    {errors.city && <p className="field-error">{errors.city}</p>}
+                                </div>
+                            </div>
+                        </Step>
 
-                                {/* Divider */}
-                                <div className="border-t border-ink/10" />
+                        <Step n={2} title="Project type *">
+                            <div className="chips chips-choice" role="radiogroup" aria-label="Project type">
+                                {projectTypes.map((t) => (
+                                    <label key={t} className="chip">
+                                        <input type="radio" name="project_type" value={t} checked={data.project_type === t} onChange={() => setData('project_type', t)} required />
+                                        {t}
+                                    </label>
+                                ))}
+                            </div>
+                            {errors.project_type && <p className="field-error mt-2">{errors.project_type}</p>}
+                        </Step>
 
-                                {/* Project Info */}
-                                <div>
-                                    <h2 className="text-xl font-display font-semibold text-ink mb-6 flex items-center">
-                                        <span className="w-8 h-8 rounded-lg bg-accent/20 text-signal text-sm flex items-center justify-center mr-3 font-bold">
-                                            2
-                                        </span>
-                                        Project Details
-                                    </h2>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        <div>
-                                            <label
-                                                htmlFor="project_type"
-                                                className="label-modern"
-                                            >
-                                                Project Type *
-                                            </label>
-                                            <select
-                                                id="project_type"
-                                                value={data.project_type}
-                                                onChange={(e) =>
-                                                    setData(
-                                                        "project_type",
-                                                        e.target.value,
-                                                    )
-                                                }
-                                                className="input-modern"
-                                                required
-                                            >
-                                                <option value="">
-                                                    Select project type
-                                                </option>
-                                                {projectTypes.map((type) => (
-                                                    <option
-                                                        key={type}
-                                                        value={type}
-                                                    >
-                                                        {type}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                            {errors.project_type && (
-                                                <p className="text-red-700 text-sm mt-1">
-                                                    {errors.project_type}
-                                                </p>
-                                            )}
-                                        </div>
+                        <Step n={3} title="Estimated budget">
+                            <div className="chips chips-choice" role="radiogroup" aria-label="Estimated budget">
+                                {budgetRanges.map((b) => (
+                                    <label key={b} className="chip">
+                                        <input type="radio" name="budget" value={b} checked={data.budget === b} onChange={() => setData('budget', b)} />
+                                        {b}
+                                    </label>
+                                ))}
+                            </div>
+                            {errors.budget && <p className="field-error mt-2">{errors.budget}</p>}
+                        </Step>
 
-                                        <div>
-                                            <label
-                                                htmlFor="budget"
-                                                className="label-modern"
-                                            >
-                                                Estimated Budget
-                                            </label>
-                                            <select
-                                                id="budget"
-                                                value={data.budget}
-                                                onChange={(e) =>
-                                                    setData(
-                                                        "budget",
-                                                        e.target.value,
-                                                    )
-                                                }
-                                                className="input-modern"
-                                            >
-                                                <option value="">
-                                                    Select budget range
-                                                </option>
-                                                {budgetRanges.map((range) => (
-                                                    <option
-                                                        key={range}
-                                                        value={range}
-                                                    >
-                                                        {range}
-                                                    </option>
-                                                ))}
-                                            </select>
-                                            {errors.budget && (
-                                                <p className="text-red-700 text-sm mt-1">
-                                                    {errors.budget}
-                                                </p>
-                                            )}
-                                        </div>
-                                    </div>
-
-                                    <div className="mt-6">
-                                        <label
-                                            htmlFor="message"
-                                            className="label-modern"
-                                        >
-                                            Project Description
-                                        </label>
-                                        <textarea
-                                            id="message"
-                                            value={data.message}
-                                            onChange={(e) =>
-                                                setData(
-                                                    "message",
-                                                    e.target.value,
-                                                )
-                                            }
-                                            rows={5}
-                                            className="input-modern resize-none"
-                                            placeholder="Tell us more about your project, requirements, timeline, etc."
-                                        />
-                                        {errors.message && (
-                                            <p className="text-red-700 text-sm mt-1">
-                                                {errors.message}
-                                            </p>
-                                        )}
-                                    </div>
-
-                                    <div className="mt-6">
-                                        <label
-                                            htmlFor="attachment"
-                                            className="label-modern"
-                                        >
-                                            Attachment (Optional)
-                                        </label>
-                                        <p className="text-sm text-muted mb-2">
-                                            Upload any relevant documents,
-                                            drawings, or images (Max 10MB)
-                                        </p>
+                        <Step n={4} title="Details">
+                            <div className="grid gap-5">
+                                <div className="field">
+                                    <label htmlFor="message" className="field-label">Project description</label>
+                                    <textarea id="message" rows={5} className="input" value={data.message} onChange={(e) => setData('message', e.target.value)} placeholder="Plot size, number of floors, timeline, anything we should know…" />
+                                    {errors.message && <p className="field-error">{errors.message}</p>}
+                                </div>
+                                <div className="field">
+                                    <span className="field-label" id="attachment-label">Attachment (optional)</span>
+                                    <label className="file-drop">
                                         <input
                                             type="file"
                                             id="attachment"
-                                            onChange={(e) =>
-                                                setData(
-                                                    "attachment",
-                                                    e.target.files?.[0] || null,
-                                                )
-                                            }
-                                            className="w-full px-4 py-3 bg-ink/5 border border-ink/10 rounded-2xl text-muted focus:ring-2 focus:ring-accent/50 focus:border-accent/50 transition file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-accent/20 file:text-signal hover:file:bg-accent/30"
+                                            aria-labelledby="attachment-label"
                                             accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.zip"
+                                            onChange={(e) => setData('attachment', e.target.files?.[0] || null)}
                                         />
-                                        {errors.attachment && (
-                                            <p className="text-red-700 text-sm mt-1">
-                                                {errors.attachment}
-                                            </p>
-                                        )}
-                                        {progress && (
-                                            <div className="mt-2">
-                                                <div className="bg-ink/10 rounded-full h-2 overflow-hidden">
-                                                    <div
-                                                        className="bg-accent h-2 rounded-full transition-all"
-                                                        style={{
-                                                            width: `${progress.percentage}%`,
-                                                        }}
-                                                    />
-                                                </div>
-                                            </div>
-                                        )}
-                                    </div>
+                                        <span className="font-semibold">{data.attachment ? data.attachment.name : 'Drop a file or click to browse'}</span>
+                                        <span className="mono text-muted">PDF, DOC, JPG, PNG, ZIP · max 10 MB</span>
+                                    </label>
+                                    {errors.attachment && <p className="field-error">{errors.attachment}</p>}
+                                    {progress && (
+                                        <div className="h-1 bg-[var(--line)]" role="progressbar" aria-valuenow={progress.percentage} aria-valuemin={0} aria-valuemax={100} aria-label="Upload progress">
+                                            <div className="h-full bg-accent transition-all" style={{ width: `${progress.percentage}%` }} />
+                                        </div>
+                                    )}
                                 </div>
+                            </div>
+                        </Step>
 
-                                <button
-                                    type="submit"
-                                    disabled={processing}
-                                    className="w-full btn-accent text-lg py-4 disabled:opacity-50"
-                                >
-                                    {processing
-                                        ? "Submitting..."
-                                        : "Submit Quote Request"}
-                                </button>
-                            </form>
-                        </div>
-                    </AnimatedSection>
+                        <button type="submit" disabled={processing} className="btn btn-signal btn-block mt-2">
+                            {processing ? 'Submitting…' : <>Submit quote request <Arrow /></>}
+                        </button>
+                    </form>
 
-                    {/* Additional Info */}
-                    <AnimatedSection variant="fade-up" delay={300}>
-                        <div className="mt-8 text-center text-muted">
-                            <p>
-                                Or call us directly at{" "}
-                                <a
-                                    href="tel:+237678626645"
-                                    className="text-signal font-semibold hover:underline"
-                                >
-                                    +237 678 626 645
-                                </a>
-                            </p>
+                    <aside className="detail-aside">
+                        <span className="eyebrow">What happens next</span>
+                        <ol className="next-steps">
+                            {nextSteps.map(([t, d], i) => (
+                                <Reveal as="li" key={t} delay={i * 0.08}>
+                                    <span className="mono">{pad(i + 1)}</span>
+                                    <div>
+                                        <h3>{t}</h3>
+                                        <p>{d}</p>
+                                    </div>
+                                </Reveal>
+                            ))}
+                        </ol>
+                        <div className="card card-pad card-ink mt-8">
+                            <p className="mono text-[#a8a79f]">Prefer to talk?</p>
+                            <a href="tel:+237678626645" className="mt-2 block text-[1.6rem] font-[750] tracking-[-0.03em] hover:text-accent">+237 678 626 645</a>
                         </div>
-                    </AnimatedSection>
+                    </aside>
                 </div>
             </section>
         </Layout>

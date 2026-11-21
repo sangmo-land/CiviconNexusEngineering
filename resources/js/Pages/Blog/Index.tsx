@@ -1,9 +1,8 @@
-import PageHeader from '@/Components/PageHeader';
 import { Link } from '@inertiajs/react';
 import SEOHead from '@/Components/SEOHead';
+import { Arrow, Media, PageHeader, Pagination, Reveal, formatDate, pad, storageUrl } from '@/Components/ui';
 import Layout from '@/Layouts/Layout';
-import AnimatedSection from "@/Components/AnimatedSection";
-import { Post, Meta, PaginatedData } from "@/types";
+import type { Meta, PaginatedData, Post } from '@/types';
 
 interface BlogIndexProps {
     meta: Meta;
@@ -11,13 +10,9 @@ interface BlogIndexProps {
 }
 
 export default function BlogIndex({ meta, posts }: BlogIndexProps) {
-    const formatDate = (dateString: string) => {
-        return new Date(dateString).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-        });
-    };
+    const showFeature = posts.current_page === 1 && posts.data.length > 0;
+    const [feature, ...rest] = showFeature ? posts.data : [undefined, ...posts.data];
+    const offset = (posts.current_page - 1) * posts.per_page;
 
     return (
         <Layout>
@@ -26,122 +21,54 @@ export default function BlogIndex({ meta, posts }: BlogIndexProps) {
             <PageHeader
                 label="Journal"
                 title="Engineering insights"
+                index="05"
+                crumbs={[{ label: 'Home', href: '/' }, { label: 'Journal' }]}
                 description="Articles on structural design, construction practice and the built environment in Cameroon."
             />
 
-            {/* Blog Posts */}
-            <section className="py-16 md:py-24 bg-brand-950">
-                <div className="container-custom">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-                        {posts.data.map((post, index) => (
-                            <AnimatedSection
-                                key={post.id}
-                                variant="fade-up"
-                                delay={index * 100}
-                            >
-                                <Link
-                                    href={`/blog/${post.slug}`}
-                                    className="group cn-media-card block h-full hover:border-ink/20 transition-all duration-300"
-                                >
-                                    <div className="aspect-[16/10] bg-brand-900 relative overflow-hidden">
-                                        {post.featured_image ? (
-                                            <img
-                                                src={
-                                                    post.featured_image.startsWith(
-                                                        "http",
-                                                    )
-                                                        ? post.featured_image
-                                                        : `/storage/${post.featured_image}`
-                                                }
-                                                alt={post.title}
-                                                className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
-                                            />
-                                        ) : (
-                                            <div className="w-full h-full flex items-center justify-center text-muted bg-gradient-to-br from-brand-900 to-brand-800">
-                                                <svg
-                                                    className="w-14 h-14 opacity-50"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke="currentColor"
-                                                >
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth={1}
-                                                        d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-                                                    />
-                                                </svg>
-                                            </div>
-                                        )}
-                                    </div>
-                                    <div className="p-7">
-                                        {post.published_at && (
-                                            <span className="text-xs text-signal font-medium tracking-wide uppercase">
-                                                {formatDate(post.published_at)}
-                                            </span>
-                                        )}
-                                        <h2 className="text-xl font-display font-semibold text-ink mt-3 mb-4 leading-snug group-hover:text-signal transition-colors duration-200">
-                                            {post.title}
-                                        </h2>
-                                        {post.excerpt && (
-                                            <p className="text-muted text-[0.9375rem] leading-relaxed line-clamp-3 mb-6">
-                                                {post.excerpt}
-                                            </p>
-                                        )}
-                                        <span className="inline-flex items-center text-signal text-sm font-semibold group-hover:gap-3 gap-1.5 transition-all duration-300">
-                                            Read Article
-                                            <svg
-                                                className="w-4 h-4"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth={2}
-                                                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                                                />
-                                            </svg>
-                                        </span>
-                                    </div>
-                                </Link>
-                            </AnimatedSection>
-                        ))}
-                    </div>
+            <section className="sec" aria-label="Articles">
+                <div className="wrap">
+                    {feature && (
+                        <Reveal>
+                            <Link href={`/blog/${feature.slug}`} className="feature">
+                                <Media src={storageUrl(feature.featured_image, 'large')} alt="" ratio="16 / 10" eager />
+                                <div className="feature-body">
+                                    <span className="tag tag-signal">Latest</span>
+                                    {feature.published_at && <time className="mono text-muted mt-6 block" dateTime={feature.published_at}>{formatDate(feature.published_at)}</time>}
+                                    <h2 className="mt-3 text-[clamp(1.9rem,3.6vw,3.25rem)] font-[750] leading-[1.02] tracking-[-0.04em]">{feature.title}</h2>
+                                    {feature.excerpt && <p className="mt-4 text-muted text-lg line-clamp-4">{feature.excerpt}</p>}
+                                    <span className="btn btn-ink mt-8 self-start">Read article <Arrow /></span>
+                                </div>
+                            </Link>
+                        </Reveal>
+                    )}
+
+                    {rest.length > 0 && (
+                        <ol className="post-list" start={offset + (feature ? 2 : 1)}>
+                            {rest.map((post, i) => post && (
+                                <li key={post.id}>
+                                    <Link href={`/blog/${post.slug}`} className="post-row">
+                                        <span className="mono text-muted">{pad(offset + i + (feature ? 2 : 1))}</span>
+                                        <div className="min-w-0">
+                                            {post.published_at && <time className="mono text-muted" dateTime={post.published_at}>{formatDate(post.published_at, 'short')}</time>}
+                                            <h2>{post.title}</h2>
+                                            {post.excerpt && <p className="line-clamp-2">{post.excerpt}</p>}
+                                        </div>
+                                        <Media src={storageUrl(post.featured_image, 'thumb')} alt="" ratio="4 / 3" className="post-thumb" />
+                                    </Link>
+                                </li>
+                            ))}
+                        </ol>
+                    )}
 
                     {posts.data.length === 0 && (
-                        <div className="text-center py-12">
-                            <p className="text-muted">
-                                No blog posts available at the moment. Check
-                                back soon!
-                            </p>
+                        <div className="empty">
+                            <p className="mono">No articles yet</p>
+                            <p>We’re writing — check back soon.</p>
                         </div>
                     )}
 
-                    {/* Pagination */}
-                    {posts.last_page > 1 && (
-                        <div className="flex justify-center mt-12">
-                            <nav className="flex space-x-2">
-                                {posts.links.map((link, index) => (
-                                    <Link
-                                        key={index}
-                                        href={link.url || "#"}
-                                        className={`px-4 py-2 rounded-xl text-sm font-medium transition ${
-                                            link.active
-                                                ? "bg-accent text-ink font-semibold"
-                                                : link.url
-                                                  ? "glass text-muted hover:text-ink hover:border-ink/20"
-                                                  : "glass text-muted cursor-not-allowed"
-                                        }`}
-                                        dangerouslySetInnerHTML={{
-                                            __html: link.label,
-                                        }}
-                                    />
-                                ))}
-                            </nav>
-                        </div>
-                    )}
+                    <Pagination data={posts} label="Articles" />
                 </div>
             </section>
         </Layout>

@@ -1,16 +1,28 @@
-import PageHeader from '@/Components/PageHeader';
 import { Link } from '@inertiajs/react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useMemo, useState } from 'react';
 import SEOHead from '@/Components/SEOHead';
+import { CTA, Media, PageHeader, Pagination, pad, storageUrl } from '@/Components/ui';
 import Layout from '@/Layouts/Layout';
-import AnimatedSection from "@/Components/AnimatedSection";
-import { Project, Meta, PaginatedData } from "@/types";
+import type { Meta, PaginatedData, Project } from '@/types';
 
 interface ProjectsIndexProps {
     meta: Meta;
     projects: PaginatedData<Project>;
 }
 
+function timeline(p: Project) {
+    if (p.is_ongoing) return p.start_year ? `${p.start_year} — now` : 'Ongoing';
+    if (p.start_year && p.completion_year) return `${p.start_year} — ${p.completion_year}`;
+    return p.completion_year ? String(p.completion_year) : '';
+}
+
 export default function ProjectsIndex({ meta, projects }: ProjectsIndexProps) {
+    const types = useMemo(() => Array.from(new Set(projects.data.map((p) => p.project_type).filter(Boolean))), [projects.data]);
+    const [type, setType] = useState<string | null>(null);
+    const visible = type ? projects.data.filter((p) => p.project_type === type) : projects.data;
+    const offset = (projects.current_page - 1) * projects.per_page;
+
     return (
         <Layout>
             <SEOHead meta={meta} />
@@ -18,140 +30,72 @@ export default function ProjectsIndex({ meta, projects }: ProjectsIndexProps) {
             <PageHeader
                 label="Portfolio"
                 title="Our projects"
-                description="Explore our civil engineering and construction work by project type and location."
+                index="02"
+                crumbs={[{ label: 'Home', href: '/' }, { label: 'Projects' }]}
+                description="Civil engineering and construction work across Cameroon — by type, location and our role on site."
             />
 
-            {/* Projects Grid */}
-            <section className="section-padding">
-                <div className="container-custom">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {projects.data.map((project, index) => (
-                            <AnimatedSection
-                                key={project.id}
-                                variant="scale"
-                                delay={index * 80}
-                            >
-                                <Link
-                                    href={`/projects/${project.slug}`}
-                                    className="group cn-media-card block h-full hover:border-ink/20 transition-all duration-500"
-                                >
-                                    <div className="aspect-[4/3] bg-brand-800 relative overflow-hidden">
-                                        {project.images && project.images[0] ? (
-                                            <img
-                                                src={`/storage/${project.images[0].image_path}`}
-                                                alt={project.title}
-                                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                                                loading="lazy"
-                                            />
-                                        ) : (
-                                            <div className="w-full h-full flex items-center justify-center text-muted">
-                                                <svg
-                                                    className="w-16 h-16"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke="currentColor"
-                                                >
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth={1}
-                                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                                    />
-                                                </svg>
-                                            </div>
-                                        )}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-[#081e36]/65 via-transparent to-transparent" />
-                                        <div className="absolute top-4 left-4">
-                                            <span className="px-3 py-1 bg-accent/90 text-ink text-xs font-bold rounded-full uppercase tracking-wider">
-                                                {project.project_type}
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="p-6">
-                                        <h2 className="font-display text-lg font-semibold text-ink group-hover:text-signal transition-colors duration-300 mb-2">
-                                            {project.title}
-                                        </h2>
-                                        <div className="flex items-center text-muted text-sm gap-1">
-                                            <svg
-                                                className="w-4 h-4"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke="currentColor"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth={1.5}
-                                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                                                />
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth={1.5}
-                                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                                                />
-                                            </svg>
-                                            {project.location}
-                                        </div>
-                                        {project.completion_year && (
-                                            <div className="flex items-center text-muted text-sm mt-1 gap-1">
-                                                <svg
-                                                    className="w-4 h-4"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke="currentColor"
-                                                >
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        strokeWidth={1.5}
-                                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                                    />
-                                                </svg>
-                                                Completed{" "}
-                                                {project.completion_year}
-                                            </div>
-                                        )}
-                                    </div>
-                                </Link>
-                            </AnimatedSection>
-                        ))}
-                    </div>
-
-                    {projects.data.length === 0 && (
-                        <div className="text-center py-16">
-                            <p className="text-muted text-lg">
-                                No projects available at the moment. Check back
-                                soon!
-                            </p>
+            <section className="sec" aria-label="Project list">
+                <div className="wrap">
+                    {types.length > 1 && (
+                        <div className="chips" role="group" aria-label="Filter projects by type">
+                            <button type="button" className="chip" aria-pressed={type === null} onClick={() => setType(null)}>
+                                All <span>{projects.data.length}</span>
+                            </button>
+                            {types.map((t) => (
+                                <button key={t} type="button" className="chip" aria-pressed={type === t} onClick={() => setType(t)}>
+                                    {t} <span>{projects.data.filter((p) => p.project_type === t).length}</span>
+                                </button>
+                            ))}
                         </div>
                     )}
 
-                    {/* Pagination */}
-                    {projects.last_page > 1 && (
-                        <div className="flex justify-center mt-16">
-                            <nav className="flex gap-2">
-                                {projects.links.map((link, index) => (
-                                    <Link
-                                        key={index}
-                                        href={link.url || "#"}
-                                        className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${
-                                            link.active
-                                                ? "bg-accent text-ink font-bold"
-                                                : link.url
-                                                  ? "glass text-muted hover:text-ink hover:bg-ink/10"
-                                                  : "text-muted cursor-not-allowed"
-                                        }`}
-                                        dangerouslySetInnerHTML={{
-                                            __html: link.label,
-                                        }}
-                                    />
-                                ))}
-                            </nav>
+                    {projects.data.length > 0 ? (
+                        <motion.div layout className="pgrid">
+                            <AnimatePresence mode="popLayout">
+                                {visible.map((project) => {
+                                    const cover = project.images?.[0];
+                                    const n = offset + projects.data.indexOf(project) + 1;
+                                    return (
+                                        <motion.div
+                                            key={project.id}
+                                            layout
+                                            initial={{ opacity: 0, y: 24 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, scale: 0.96 }}
+                                            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                                        >
+                                            <Link href={`/projects/${project.slug}`} className="pcard">
+                                                <Media src={storageUrl(cover?.image_path, 'medium')} alt={cover?.caption ?? ''} ratio="4 / 5">
+                                                    <span className="pcard-num mono">{pad(n)}</span>
+                                                    {project.is_ongoing && <span className="tag tag-dark pcard-live"><span className="live-dot" /> Ongoing</span>}
+                                                </Media>
+                                                <div className="pcard-body">
+                                                    <p className="mono text-muted flex flex-wrap justify-between gap-2">
+                                                        <span>{project.project_type}</span>
+                                                        <span>{timeline(project)}</span>
+                                                    </p>
+                                                    <h2 className="mt-2 text-[clamp(1.3rem,2vw,1.65rem)] font-bold tracking-[-0.03em]">{project.title}</h2>
+                                                    <p className="mt-1 text-muted">{project.location}</p>
+                                                </div>
+                                            </Link>
+                                        </motion.div>
+                                    );
+                                })}
+                            </AnimatePresence>
+                        </motion.div>
+                    ) : (
+                        <div className="empty">
+                            <p className="mono">No projects published yet</p>
+                            <p>Check back soon — or ask us about our current work.</p>
                         </div>
                     )}
+
+                    <Pagination data={projects} label="Projects" />
                 </div>
             </section>
+
+            <CTA />
         </Layout>
     );
 }

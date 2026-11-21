@@ -1,71 +1,56 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 
+/**
+ * Design tokens — "Concrete & Signal"
+ * paper/concrete neutrals, near-black ink, safety-orange signal.
+ * The legacy token names (ink, muted, signal, brand-*, accent) are kept so the
+ * internal Site Work pages inherit the new look without being rewritten.
+ */
 /** @type {import('tailwindcss').Config} */
 export default {
     content: [
-        "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
-        "./storage/framework/views/*.php",
-        "./resources/**/*.blade.php",
-        "./resources/**/*.js",
-        "./resources/**/*.tsx",
-        "./resources/**/*.ts",
+        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
+        './storage/framework/views/*.php',
+        './resources/**/*.blade.php',
+        './resources/**/*.js',
+        './resources/**/*.tsx',
+        './resources/**/*.ts',
     ],
     theme: {
         extend: {
             fontFamily: {
-                sans: ["Plus Jakarta Sans", ...defaultTheme.fontFamily.sans],
-                display: ["Outfit", ...defaultTheme.fontFamily.sans],
+                sans: ['Geist', ...defaultTheme.fontFamily.sans],
+                display: ['Archivo', ...defaultTheme.fontFamily.sans],
+                mono: ['"Geist Mono"', ...defaultTheme.fontFamily.mono],
             },
             colors: {
-                ink: "#102b46",
-                muted: "#4a6075",
-                signal: "#a6460a",
+                ink: '#0d0e0c',
+                muted: '#5a5c55',
+                signal: '#b83509',
+                night: {
+                    DEFAULT: '#0b0c0a',
+                    800: '#141512',
+                    700: '#1d1f1b',
+                },
+                paper: {
+                    DEFAULT: '#f1eee7',
+                    2: '#e8e4da',
+                },
                 brand: {
-                    600: "#f2f8fe",
-                    700: "#e5f1fc",
-                    800: "#deedf8",
-                    900: "#ffffff",
-                    950: "#f7fbff",
+                    600: '#ece8df',
+                    700: '#e2ddd1',
+                    800: '#e8e4da',
+                    900: '#faf8f4',
+                    950: '#f1eee7',
                 },
                 accent: {
-                    DEFAULT: "#ffae51",
-                    light: "#ffc27d",
-                    dark: "#dd720f",
+                    DEFAULT: '#ff5a1f',
+                    light: '#ff7a47',
+                    dark: '#d9440f',
                 },
             },
-            animation: {
-                "fade-in": "fadeIn 0.6s ease-out forwards",
-                "slide-up": "slideUp 0.6s ease-out forwards",
-                "slide-in-left": "slideInLeft 0.6s ease-out forwards",
-                "slide-in-right": "slideInRight 0.6s ease-out forwards",
-                "scale-in": "scaleIn 0.5s ease-out forwards",
-                float: "float 6s ease-in-out infinite",
-            },
-            keyframes: {
-                fadeIn: {
-                    "0%": { opacity: "0" },
-                    "100%": { opacity: "1" },
-                },
-                slideUp: {
-                    "0%": { opacity: "0", transform: "translateY(30px)" },
-                    "100%": { opacity: "1", transform: "translateY(0)" },
-                },
-                slideInLeft: {
-                    "0%": { opacity: "0", transform: "translateX(-30px)" },
-                    "100%": { opacity: "1", transform: "translateX(0)" },
-                },
-                slideInRight: {
-                    "0%": { opacity: "0", transform: "translateX(30px)" },
-                    "100%": { opacity: "1", transform: "translateX(0)" },
-                },
-                scaleIn: {
-                    "0%": { opacity: "0", transform: "scale(0.95)" },
-                    "100%": { opacity: "1", transform: "scale(1)" },
-                },
-                float: {
-                    "0%, 100%": { transform: "translateY(0px)" },
-                    "50%": { transform: "translateY(-20px)" },
-                },
+            transitionTimingFunction: {
+                expo: 'cubic-bezier(0.16, 1, 0.3, 1)',
             },
         },
     },
