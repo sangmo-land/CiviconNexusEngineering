@@ -1,5 +1,5 @@
 ﻿import { Link } from '@inertiajs/react';
-import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform, type MotionValue } from 'framer-motion';
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import SEOHead from '@/Components/SEOHead';
 import { Arrow, CTA, Marquee, Media, Reveal, SplitTitle, pad, storageUrl } from '@/Components/ui';
@@ -26,9 +26,100 @@ const disciplines = ['Structural design', 'Civil works', 'Construction managemen
 
 /* ------------------------------------------------------------------ hero */
 
-function Hero() {
+const heroWords = ['what’s next', 'what lasts', 'for Cameroon'];
+
+/** Last headline line cycles through a few endings with a masked slide. */
+function RotatingWord() {
+    const reduce = useReducedMotion();
+    const [i, setI] = useState(0);
+    useEffect(() => {
+        if (reduce) return;
+        const id = window.setInterval(() => setI((n) => (n + 1) % heroWords.length), 3200);
+        return () => window.clearInterval(id);
+    }, [reduce]);
+
+    return (
+        <span className="rotator">
+            <span className="sr-only">{heroWords[0]}.</span>
+            <AnimatePresence initial={false}>
+                <motion.span
+                    key={i}
+                    aria-hidden="true"
+                    className="rotator-word"
+                    initial={{ y: '105%' }}
+                    animate={{ y: 0 }}
+                    exit={{ y: '-105%' }}
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                >
+                    {heroWords[i]}<span className="text-accent">.</span>
+                </motion.span>
+            </AnimatePresence>
+        </span>
+    );
+}
+
+/** Real project photography, cross-fading on a timer. */
+function HeroProjects({ projects }: { projects: Project[] }) {
+    const withImages = projects.filter((p) => p.images?.[0]);
+    const reduce = useReducedMotion();
+    const [i, setI] = useState(0);
+    const [paused, setPaused] = useState(false);
+
+    useEffect(() => {
+        if (reduce || paused || withImages.length < 2) return;
+        const id = window.setTimeout(() => setI((n) => (n + 1) % withImages.length), 5000);
+        return () => window.clearTimeout(id);
+    }, [i, reduce, paused, withImages.length]);
+
+    if (!withImages.length) return null;
+    const current = withImages[i];
+
+    return (
+        <div className="hero-proj" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+            <Link href={`/projects/${current.slug}`} className="hero-proj-link">
+                <div className="hero-proj-media">
+                    {withImages.map((p, n) => (
+                        <img
+                            key={p.id}
+                            src={storageUrl(p.images[0].image_path)}
+                            alt={n === i ? p.images[0].caption ?? p.title : ''}
+                            data-active={n === i}
+                            loading={n === 0 ? 'eager' : 'lazy'}
+                            decoding="async"
+                        />
+                    ))}
+                    <span className="tag tag-signal hero-proj-tag">{current.is_ongoing ? 'On site now' : 'Featured project'}</span>
+                </div>
+                <div className="hero-proj-body">
+                    <span className="mono">{pad(i + 1)} / {pad(withImages.length)} · {current.location}</span>
+                    <strong>{current.title}</strong>
+                </div>
+            </Link>
+            {withImages.length > 1 && (
+                <div className="hero-proj-dots" role="group" aria-label="Choose featured project">
+                    {withImages.map((p, n) => (
+                        <button
+                            key={p.id}
+                            type="button"
+                            aria-label={`Show ${p.title}`}
+                            aria-pressed={n === i}
+                            onClick={() => setI(n)}
+                        >
+                            <span className="dot-track">
+                                <i key={n === i ? `on-${i}` : 'off'} style={{ animationPlayState: paused ? 'paused' : 'running' }} />
+                            </span>
+                        </button>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+}
+
+function Hero({ projects }: { projects: Project[] }) {
     const [progress, setProgress] = useState(0);
     const [storey, setStorey] = useState(1);
+    const hasPhotos = projects.some((p) => p.images?.[0]);
 
     return (
         <section className="hero on-dark" aria-labelledby="hero-title">
@@ -39,7 +130,11 @@ function Hero() {
             <div className="wrap hero-inner">
                 <div className="hero-top">
                     <span className="eyebrow">Civil &amp; structural engineering — Cameroon</span>
-                    <span className="mono hero-coords">Yaoundé · 3.8480° N, 11.5021° E</span>
+                    <div className="hud-mini mono" aria-hidden="true">
+                        <span>Frame {Math.round(progress * 100)}%</span>
+                        <span className="hud-mini-bar"><i style={{ transform: `scaleX(${progress})` }} /></span>
+                        <span>L{pad(storey)}/09</span>
+                    </div>
                 </div>
 
                 <SplitTitle
@@ -47,10 +142,10 @@ function Hero() {
                     id="hero-title"
                     immediate
                     className="display hero-title"
-                    lines={['Engineering', <>what’s next<span className="text-accent">.</span></>]}
+                    lines={['Engineering', <RotatingWord key="rot" />]}
                 />
 
-                <div className="hero-bottom">
+                <div className={`hero-bottom ${hasPhotos ? '' : 'hero-bottom-solo'}`}>
                     <Reveal delay={0.35}>
                         <p className="hero-lede">
                             We design structures and infrastructure, and manage construction from the first drawing to the last day on site.
@@ -59,17 +154,14 @@ function Hero() {
                             <Link className="btn btn-signal" href="/quote-request">Request a quote <Arrow /></Link>
                             <Link className="btn btn-ghost" href="/projects">See our work</Link>
                         </div>
+                        <p className="mono hero-coords mt-8">Yaoundé · 3.8480° N, 11.5021° E</p>
                     </Reveal>
 
-                    <Reveal delay={0.5} className="hud" >
-                        <div className="hud-row mono">
-                            <span>Frame assembly</span>
-                            <span>Level {pad(storey)} / 09</span>
-                        </div>
-                        <div className="hud-num" aria-hidden="true">{Math.round(progress * 100)}<small>%</small></div>
-                        <div className="hud-bar"><i style={{ transform: `scaleX(${progress})` }} /></div>
-                        <p className="mono hud-note">Illustrative RC frame · 4 × 3 bays</p>
-                    </Reveal>
+                    {hasPhotos && (
+                        <Reveal delay={0.55}>
+                            <HeroProjects projects={projects} />
+                        </Reveal>
+                    )}
                 </div>
             </div>
 
@@ -311,7 +403,7 @@ export default function Home({ meta, featuredServices, featuredProjects }: HomeP
     return (
         <Layout>
             <SEOHead meta={meta} />
-            <Hero />
+            <Hero projects={featuredProjects} />
             <div className="band-signal">
                 <Marquee items={disciplines} className="band-marquee" />
             </div>

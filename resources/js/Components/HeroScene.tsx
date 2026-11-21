@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react';
 import {
-    BoxGeometry, BufferGeometry, Color, DirectionalLight, EdgesGeometry, Float32BufferAttribute, Fog, Group,
-    HemisphereLight, InstancedMesh, LineBasicMaterial, LineLoop, LineSegments, Matrix4, Mesh, MeshStandardMaterial,
-    PerspectiveCamera, PointLight, Points, PointsMaterial, Quaternion, Scene, SRGBColorSpace, Vector3, WebGLRenderer,
-    type Material,
+    AdditiveBlending, BoxGeometry, BufferGeometry, CanvasTexture, Color, DirectionalLight, EdgesGeometry,
+    Float32BufferAttribute, Fog, Group, HemisphereLight, InstancedMesh, LineBasicMaterial, LineLoop, LineSegments,
+    Matrix4, Mesh, MeshBasicMaterial, MeshStandardMaterial, PerspectiveCamera, PlaneGeometry, PointLight, Points,
+    PointsMaterial, Quaternion, Scene, SphereGeometry, SRGBColorSpace, Vector3, WebGLRenderer, type Material,
 } from 'three';
 
 /**
@@ -102,14 +102,40 @@ export default function HeroScene({ onProgress }: HeroSceneProps) {
         const disposables: { dispose: () => void }[] = [];
         const track = <T extends { dispose: () => void }>(x: T) => { disposables.push(x); return x; };
 
-        /* ---------- lights ---------- */
-        scene.add(new HemisphereLight(PAPER, NIGHT, 1.15));
-        const key = new DirectionalLight(0xffffff, 1.7);
-        key.position.set(12, 20, 10);
-        scene.add(key);
-        const warm = new PointLight(SIGNAL, 40, 26, 1.6);
+        /* ---------- lights: low sunset key, cool fill ---------- */
+        scene.add(new HemisphereLight(0xfff1e0, 0x15130f, 1.35));
+        const sun = new DirectionalLight(0xffb27a, 2.6);
+        sun.position.set(-14, 9, -12);
+        scene.add(sun);
+        const fill = new DirectionalLight(0xbfd2ff, 0.9);
+        fill.position.set(14, 16, 12);
+        scene.add(fill);
+        const warm = new PointLight(SIGNAL, 60, 30, 1.4);
         warm.position.set(W / 2 + 3, H + 2, 2);
         scene.add(warm);
+
+        /* ---------- sunset glow: a billboard behind the building ---------- */
+        const glowCanvas = document.createElement('canvas');
+        glowCanvas.width = 512;
+        glowCanvas.height = 256;
+        const gctx = glowCanvas.getContext('2d');
+        if (gctx) {
+            const g = gctx.createRadialGradient(256, 256, 0, 256, 256, 300);
+            g.addColorStop(0, 'rgba(255,120,50,0.85)');
+            g.addColorStop(0.35, 'rgba(255,90,31,0.35)');
+            g.addColorStop(0.7, 'rgba(120,40,20,0.08)');
+            g.addColorStop(1, 'rgba(0,0,0,0)');
+            gctx.fillStyle = g;
+            gctx.fillRect(0, 0, 512, 256);
+        }
+        const glowTex = track(new CanvasTexture(glowCanvas));
+        glowTex.colorSpace = SRGBColorSpace;
+        const glow = new Mesh(
+            track(new PlaneGeometry(130, 52)),
+            track(new MeshBasicMaterial({ map: glowTex, transparent: true, depthWrite: false, fog: false, blending: AdditiveBlending })),
+        );
+        glow.renderOrder = -1;
+        scene.add(glow);
 
         /* ---------- ground ---------- */
         const gridMat = track(new LineBasicMaterial({ color: 0x2a2b27 }));
@@ -192,7 +218,7 @@ export default function HeroScene({ onProgress }: HeroSceneProps) {
         building.add(ghost);
 
         const unit = track(new BoxGeometry(1, 1, 1));
-        const frameMat = track(new MeshStandardMaterial({ color: 0xd8d3c6, roughness: 0.62, metalness: 0.05 }));
+        const frameMat = track(new MeshStandardMaterial({ color: 0xe9e3d4, roughness: 0.55, metalness: 0.05, emissive: new Color(0x2a2620), emissiveIntensity: 0.6 }));
         const frame = new InstancedMesh(unit, frameMat, elements.length);
         building.add(frame);
 
@@ -220,7 +246,7 @@ export default function HeroScene({ onProgress }: HeroSceneProps) {
         const slabGeo = track(new BoxGeometry(W + 0.35, 0.07, D + 0.35));
         const slabEdges = track(new EdgesGeometry(slabGeo));
         const slabs = Array.from({ length: FLOORS }, (_, f) => {
-            const mat = track(new MeshStandardMaterial({ color: PAPER, transparent: true, opacity: 0, roughness: 0.8, depthWrite: false }));
+            const mat = track(new MeshStandardMaterial({ color: 0xcfc8b8, transparent: true, opacity: 0, roughness: 0.85, depthWrite: false }));
             const edgeMat = track(new LineBasicMaterial({ color: PAPER, transparent: true, opacity: 0 }));
             const slab = new Mesh(slabGeo, mat);
             slab.add(new LineSegments(slabEdges, edgeMat));
@@ -275,6 +301,48 @@ export default function HeroScene({ onProgress }: HeroSceneProps) {
         const load = new Mesh(track(new BoxGeometry(1.6, 0.16, 0.24)), frameMat);
         trolley.add(load);
 
+        // Aviation warning lights on the crane apex and jib tip.
+        const beaconMat = track(new MeshBasicMaterial({ color: 0xff2a1a, fog: false }));
+        const beaconGeo = track(new SphereGeometry(0.16, 12, 8));
+        const beaconA = new Mesh(beaconGeo, beaconMat);
+        beaconA.position.set(0, 2.75, 0);
+        const beaconB = new Mesh(beaconGeo, beaconMat);
+        beaconB.position.set(-12.5, 0.2, 0);
+        slew.add(beaconA, beaconB);
+
+        /* ---------- welding sparks at the active storey ---------- */
+        const SPARKS = 220;
+        const sparkPos = new Float32Array(SPARKS * 3);
+        const sparkCol = new Float32Array(SPARKS * 3);
+        const sparkVel = new Float32Array(SPARKS * 3);
+        const sparkLife = new Float32Array(SPARKS);
+        const sparkGeo = track(new BufferGeometry());
+        sparkGeo.setAttribute('position', new Float32BufferAttribute(sparkPos, 3));
+        sparkGeo.setAttribute('color', new Float32BufferAttribute(sparkCol, 3));
+        const sparkMat = track(new PointsMaterial({ size: 0.19, vertexColors: true, transparent: true, depthWrite: false, blending: AdditiveBlending }));
+        const sparks = new Points(sparkGeo, sparkMat);
+        building.add(sparks);
+        let emitter = { x: W, y: 0.3, z: 0 };
+        const respawn = (i: number) => {
+            sparkPos[i * 3] = emitter.x;
+            sparkPos[i * 3 + 1] = emitter.y;
+            sparkPos[i * 3 + 2] = emitter.z;
+            const a = Math.random() * Math.PI * 2;
+            const sp = 1.2 + Math.random() * 2.6;
+            sparkVel[i * 3] = Math.cos(a) * sp;
+            sparkVel[i * 3 + 1] = 1 + Math.random() * 2.5;
+            sparkVel[i * 3 + 2] = Math.sin(a) * sp;
+            sparkLife[i] = 0.4 + Math.random() * 0.9;
+        };
+        const pickEmitter = (y: number) => {
+            const onX = Math.random() < 0.5;
+            emitter = onX
+                ? { x: Math.round(Math.random() * NX) * BAY, y, z: Math.random() < 0.5 ? 0 : D }
+                : { x: Math.random() < 0.5 ? 0 : W, y, z: Math.round(Math.random() * NZ) * BAY };
+        };
+        let nextEmitterSwap = 0;
+        let lastT = 0;
+
         /* ---------- sizing ---------- */
         let width = 0;
         let height = 0;
@@ -303,6 +371,7 @@ export default function HeroScene({ onProgress }: HeroSceneProps) {
         let lastPct = -1;
         let built = false;
         const target = new Vector3(0, H * 0.46, 0);
+        const glowDir = new Vector3();
 
         function render(t: number) {
             // Build sequence.
@@ -314,8 +383,8 @@ export default function HeroScene({ onProgress }: HeroSceneProps) {
                 frame.instanceMatrix.needsUpdate = true;
                 for (const s of slabs) {
                     const k = easeOut((t - s.birth) / 0.5);
-                    s.mat.opacity = 0.1 * k;
-                    s.edgeMat.opacity = 0.42 * k;
+                    s.mat.opacity = 0.32 * k;
+                    s.edgeMat.opacity = 0.6 * k;
                 }
                 const raw = Math.min(t / (FLOORS * FLOOR_DUR + 0.5), 1);
                 const storey = Math.min(Math.floor(raw * FLOORS) + 1, FLOORS);
@@ -331,6 +400,38 @@ export default function HeroScene({ onProgress }: HeroSceneProps) {
                     level.visible = false;
                 }
             }
+
+            // Sparks: burst from a joint on the active storey, falling under gravity.
+            const dt = Math.min(Math.max(t - lastT, 0), 0.05);
+            lastT = t;
+            if (!reduceMotion) {
+                const activeY = built ? 0.3 + FLOORS * STOREY : level.position.y;
+                if (t > nextEmitterSwap) {
+                    pickEmitter(activeY);
+                    nextEmitterSwap = t + (built ? 1.6 + Math.random() * 2.4 : 0.35 + Math.random() * 0.4);
+                }
+                const emitting = !built || (t % 4) < 1.4;
+                for (let i = 0; i < SPARKS; i++) {
+                    sparkLife[i] -= dt;
+                    if (sparkLife[i] <= 0) {
+                        if (emitting && Math.random() < 0.35) respawn(i);
+                        else { sparkCol[i * 3] = sparkCol[i * 3 + 1] = sparkCol[i * 3 + 2] = 0; continue; }
+                    }
+                    sparkVel[i * 3 + 1] -= 9.8 * dt;
+                    sparkPos[i * 3] += sparkVel[i * 3] * dt;
+                    sparkPos[i * 3 + 1] += sparkVel[i * 3 + 1] * dt;
+                    sparkPos[i * 3 + 2] += sparkVel[i * 3 + 2] * dt;
+                    const k = Math.min(sparkLife[i] / 0.9, 1);
+                    sparkCol[i * 3] = 1 * k;
+                    sparkCol[i * 3 + 1] = (0.45 + 0.4 * k) * k;
+                    sparkCol[i * 3 + 2] = 0.15 * k;
+                }
+                sparkGeo.attributes.position.needsUpdate = true;
+                sparkGeo.attributes.color.needsUpdate = true;
+            }
+
+            // Beacons blink.
+            beaconMat.visible = reduceMotion || Math.sin(t * 4.5) > 0.2;
 
             // Crane: slow slew, trolley travelling along the jib, hoist bobbing.
             const ct = reduceMotion ? 2 : t;
@@ -348,10 +449,21 @@ export default function HeroScene({ onProgress }: HeroSceneProps) {
             pointer.y += (pointer.ty - pointer.y) * 0.04;
             const scroll = Math.min(window.scrollY / Math.max(height, 1), 1.2);
             const angle = 0.75 + (reduceMotion ? 0 : t * 0.035) + pointer.x * 0.18;
-            const radius = (width < 700 ? 58 : 47) - scroll * 6;
-            camera.position.set(Math.sin(angle) * radius, 12 + pointer.y * -2.2 + scroll * 7, Math.cos(angle) * radius);
+            // Cinematic intro: start high and far, settle in over ~3.5s.
+            const intro = reduceMotion ? 1 : easeOut(t / 3.5);
+            const radius = (width < 700 ? 58 : 47) - scroll * 6 + (1 - intro) * 22;
+            camera.position.set(
+                Math.sin(angle) * radius,
+                12 + pointer.y * -2.2 + scroll * 7 + (1 - intro) * 14,
+                Math.cos(angle) * radius,
+            );
             target.y = H * 0.62 + scroll * 2;
             camera.lookAt(target);
+
+            // Keep the sunset glow behind the building, facing the camera.
+            glowDir.copy(target).sub(camera.position).setY(0).normalize();
+            glow.position.set(target.x + glowDir.x * 60, 9, target.z + glowDir.z * 60);
+            glow.lookAt(camera.position.x, 9, camera.position.z);
 
             renderer.render(scene, camera);
         }
