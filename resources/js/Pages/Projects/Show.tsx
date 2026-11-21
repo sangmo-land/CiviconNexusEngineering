@@ -57,7 +57,7 @@ export default function ProjectShow({ meta, project }: ProjectShowProps) {
             <section ref={hero} className={`phero on-dark ${cover ? '' : 'phero-blank'}`} aria-labelledby="project-title">
                 {cover && (
                     <motion.img
-                        src={storageUrl(cover.image_path, 'hero')}
+                        src={storageUrl(cover.image_path)}
                         alt=""
                         className="phero-img"
                         style={{ y: imgY, scale: imgScale }}
@@ -116,7 +116,7 @@ export default function ProjectShow({ meta, project }: ProjectShowProps) {
                             {images.map((image, i) => (
                                 <Reveal key={image.id} delay={(i % 3) * 0.06}>
                                     <button type="button" className="gallery-item" onClick={() => setSelected(i)} aria-label={`Open image ${i + 1}${image.caption ? `: ${image.caption}` : ''}`}>
-                                        <img src={storageUrl(image.image_path, 'medium')} alt={image.caption || `${project.title} — image ${i + 1}`} loading="lazy" />
+                                        <img src={storageUrl(image.image_path)} alt={image.caption || `${project.title} — image ${i + 1}`} loading="lazy" />
                                         <span className="gallery-cap mono">{pad(i + 1)}{image.caption ? ` · ${image.caption}` : ''}</span>
                                     </button>
                                 </Reveal>

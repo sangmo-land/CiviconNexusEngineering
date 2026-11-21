@@ -50,7 +50,7 @@ export default function HousePlanShow({ meta, housePlan }: HousePlanShowProps) {
             <section className="plan-hero">
                 <div className="wrap plan-hero-grid">
                     <Reveal className="plan-hero-media">
-                        <Media src={storageUrl(housePlan.preview_image, 'large')} alt={housePlan.title} ratio="1 / 1" eager />
+                        <Media src={storageUrl(housePlan.preview_image)} alt={housePlan.title} ratio="1 / 1" eager />
                     </Reveal>
 
                     <div className="plan-hero-info">

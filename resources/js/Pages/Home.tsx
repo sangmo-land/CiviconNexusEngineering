@@ -187,7 +187,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
     const meta = [project.project_type, project.location].filter(Boolean).join(' · ');
     return (
         <Link href={`/projects/${project.slug}`} className="pcard">
-            <Media src={storageUrl(cover?.image_path, 'medium')} alt={cover?.caption ?? ''} ratio="4 / 5">
+            <Media src={storageUrl(cover?.image_path)} alt={cover?.caption ?? ''} ratio="4 / 5">
                 <span className="pcard-num mono">{pad(index + 1)}</span>
                 {project.is_ongoing && <span className="tag tag-dark pcard-live"><span className="live-dot" /> Ongoing</span>}
             </Media>

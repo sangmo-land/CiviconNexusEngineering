@@ -66,7 +66,7 @@ export default function ProjectsIndex({ meta, projects }: ProjectsIndexProps) {
                                             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                                         >
                                             <Link href={`/projects/${project.slug}`} className="pcard">
-                                                <Media src={storageUrl(cover?.image_path, 'medium')} alt={cover?.caption ?? ''} ratio="4 / 5">
+                                                <Media src={storageUrl(cover?.image_path)} alt={cover?.caption ?? ''} ratio="4 / 5">
                                                     <span className="pcard-num mono">{pad(n)}</span>
                                                     {project.is_ongoing && <span className="tag tag-dark pcard-live"><span className="live-dot" /> Ongoing</span>}
                                                 </Media>

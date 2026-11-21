@@ -31,7 +31,7 @@ export default function BlogIndex({ meta, posts }: BlogIndexProps) {
                     {feature && (
                         <Reveal>
                             <Link href={`/blog/${feature.slug}`} className="feature">
-                                <Media src={storageUrl(feature.featured_image, 'large')} alt="" ratio="16 / 10" eager />
+                                <Media src={storageUrl(feature.featured_image)} alt="" ratio="16 / 10" eager />
                                 <div className="feature-body">
                                     <span className="tag tag-signal">Latest</span>
                                     {feature.published_at && <time className="mono text-muted mt-6 block" dateTime={feature.published_at}>{formatDate(feature.published_at)}</time>}
@@ -54,7 +54,7 @@ export default function BlogIndex({ meta, posts }: BlogIndexProps) {
                                             <h2>{post.title}</h2>
                                             {post.excerpt && <p className="line-clamp-2">{post.excerpt}</p>}
                                         </div>
-                                        <Media src={storageUrl(post.featured_image, 'thumb')} alt="" ratio="4 / 3" className="post-thumb" />
+                                        <Media src={storageUrl(post.featured_image)} alt="" ratio="4 / 3" className="post-thumb" />
                                     </Link>
                                 </li>
                             ))}

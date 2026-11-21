@@ -2,7 +2,6 @@ import { Link } from '@inertiajs/react';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { useState, type ElementType, type ReactNode } from 'react';
 import type { PaginatedData } from '@/types';
-import { optimizedImageUrl, type ImagePreset } from '@/utils/image';
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -211,10 +210,14 @@ export function Pagination<T>({ data, label }: { data: PaginatedData<T>; label: 
 
 /* ---------------------------------------------------------------- media */
 
-export function storageUrl(path: string | null | undefined, preset?: ImagePreset) {
+/**
+ * Public URL for an uploaded file. Serves straight from /storage — the /img/{preset}
+ * resizer is not usable in production (Intervention Image isn't installed there).
+ */
+export function storageUrl(path: string | null | undefined) {
     if (!path) return '';
-    if (path.startsWith('http')) return path;
-    return optimizedImageUrl(path, preset);
+    if (path.startsWith('http') || path.startsWith('/')) return path;
+    return `/storage/${path}`;
 }
 
 /** Image that falls back to a blueprint placeholder when missing or broken. */

@@ -30,7 +30,7 @@ export default function HousePlansIndex({ meta, housePlans }: HousePlansIndexPro
                             {housePlans.data.map((plan, i) => (
                                 <Reveal key={plan.id} delay={(i % 3) * 0.08}>
                                     <Link href={`/plans/${plan.slug}`} className="card plan-card">
-                                        <Media src={storageUrl(plan.preview_image, 'medium')} alt={plan.title} ratio="4 / 3">
+                                        <Media src={storageUrl(plan.preview_image)} alt={plan.title} ratio="4 / 3">
                                             <span className="tag tag-signal plan-price">{formatPrice(plan.price)}</span>
                                             {plan.is_featured && <span className="tag tag-dark pcard-num">Featured</span>}
                                         </Media>

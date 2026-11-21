@@ -49,7 +49,7 @@ export default function BlogShow({ meta, post }: BlogShowProps) {
             {post.featured_image && (
                 <div className="wrap mt-[clamp(2rem,5vw,4rem)]">
                     <Reveal>
-                        <Media src={storageUrl(post.featured_image, 'hero')} alt={post.title} ratio="21 / 9" className="rounded-lg" eager />
+                        <Media src={storageUrl(post.featured_image)} alt={post.title} ratio="21 / 9" className="rounded-lg" eager />
                     </Reveal>
                 </div>
             )}
